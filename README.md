@@ -1,1 +1,6 @@
 # QueryKillers
+
+## samuele
+
+- condividere
+- rileggere
