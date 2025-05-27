@@ -1,0 +1,55 @@
+INSERT INTO defaultdb.books (isbn,title,author,genre,`year`,description) VALUES
+	 ('978-90-70882-591-3','Il Signore degli Anelli','J.R.R. Tolkien','Thriller',1993,'Un grande classico della letteratura mondiale.'),
+	 ('978-35-49578-861-1','1984','George Orwell','Fantascienza',1999,'Romanzo imperdibile per ogni appassionato.'),
+	 ('978-31-49488-181-6','Orgoglio e Pregiudizio','Jane Austen','Romanzo',1869,'Un viaggio attraverso emozioni e avventure.'),
+	 ('978-23-34707-376-1','Il Nome della Rosa','Umberto Eco','Romanzo',1880,'Opera densa di significato e introspezione.'),
+	 ('978-86-68028-259-9','Il Piccolo Principe','Antoine de Saint-Exupéry','Avventura',1915,'Storia coinvolgente che ha segnato un’epoca.'),
+	 ('978-11-98993-492-0','Harry Potter e la Pietra Filosofale','J.K. Rowling','Avventura',2000,'Racconto simbolico e profondo.'),
+	 ('978-26-92079-992-8','La Metamorfosi','Franz Kafka','Drammatico',1874,'Narrativa potente e intramontabile.'),
+	 ('978-54-55285-361-2','Il Gattopardo','Giuseppe Tomasi di Lampedusa','Avventura',1867,'Personaggi indimenticabili in un racconto unico.'),
+	 ('978-96-63873-205-5','Il Codice Da Vinci','Dan Brown','Drammatico',1896,'Un libro che lascia il segno nel lettore.'),
+	 ('978-25-38998-339-8','Il Processo','Franz Kafka','Fantasy',1917,'Capolavoro di stile e contenuto.');
+INSERT INTO defaultdb.books (isbn,title,author,genre,`year`,description) VALUES
+	 ('978-64-50840-882-0','Cime Tempestose','Emily Brontë','Drammatico',2002,'Un grande classico della letteratura mondiale.'),
+	 ('978-48-49341-707-3','I Promessi Sposi','Alessandro Manzoni','Storico',1982,'Romanzo imperdibile per ogni appassionato.'),
+	 ('978-47-28172-189-5','Delitto e Castigo','Fëdor Dostoevskij','Avventura',1874,'Un viaggio attraverso emozioni e avventure.'),
+	 ('978-92-44905-283-2','Moby Dick','Herman Melville','Thriller',1971,'Opera densa di significato e introspezione.'),
+	 ('978-11-52338-569-4','La coscienza di Zeno','Italo Svevo','Fantascienza',2004,'Storia coinvolgente che ha segnato un’epoca.'),
+	 ('978-29-98216-256-2','Uno, Nessuno e Centomila','Luigi Pirandello','Thriller',1950,'Racconto simbolico e profondo.'),
+	 ('978-66-70624-141-5','Il Maestro e Margherita','Michail Bulgakov','Drammatico',1855,'Narrativa potente e intramontabile.'),
+	 ('978-69-95869-159-0','Dracula','Bram Stoker','Thriller',1988,'Personaggi indimenticabili in un racconto unico.'),
+	 ('978-40-73340-615-7','Lo Hobbit','J.R.R. Tolkien','Avventura',1938,'Un libro che lascia il segno nel lettore.'),
+	 ('978-46-36339-168-1','Don Chisciotte','Miguel de Cervantes','Classico',1945,'Capolavoro di stile e contenuto.');
+INSERT INTO defaultdb.books (isbn,title,author,genre,`year`,description) VALUES
+	 ('978-41-72475-199-6','La Divina Commedia','Dante Alighieri','Fantascienza',1917,'Un grande classico della letteratura mondiale.'),
+	 ('978-27-56593-593-9','Guerra e Pace','Lev Tolstoj','Thriller',1977,'Romanzo imperdibile per ogni appassionato.'),
+	 ('978-50-71467-984-9','Anna Karenina','Lev Tolstoj','Storico',1943,'Un viaggio attraverso emozioni e avventure.'),
+	 ('978-34-45740-614-4','Il ritratto di Dorian Gray','Oscar Wilde','Fantascienza',1910,'Opera densa di significato e introspezione.'),
+	 ('978-44-84788-708-0','Frankenstein','Mary Shelley','Drammatico',1982,'Storia coinvolgente che ha segnato un’epoca.'),
+	 ('978-73-39242-847-3','Il Giovane Holden','J.D. Salinger','Fantasy',1850,'Racconto simbolico e profondo.'),
+	 ('978-32-54052-908-3','Furore','John Steinbeck','Romanzo',1933,'Narrativa potente e intramontabile.'),
+	 ('978-80-73777-275-9','Il Grande Gatsby','F. Scott Fitzgerald','Fantasy',1940,'Personaggi indimenticabili in un racconto unico.'),
+	 ('978-79-78341-509-1','Le Notti Bianche','Fëdor Dostoevskij','Romanzo',1943,'Un libro che lascia il segno nel lettore.'),
+	 ('978-79-13423-925-2','Siddharta','Hermann Hesse','Fantascienza',1977,'Capolavoro di stile e contenuto.');
+INSERT INTO defaultdb.books (isbn,title,author,genre,`year`,description) VALUES
+	 ('978-86-97313-709-6','Il Barone Rampante','Italo Calvino','Storico',1964,'Un grande classico della letteratura mondiale.'),
+	 ('978-42-98671-441-8','Il Fu Mattia Pascal','Luigi Pirandello','Romanzo',1854,'Romanzo imperdibile per ogni appassionato.'),
+	 ('978-98-66752-233-9','La Storia Infinita','Michael Ende','Avventura',1856,'Un viaggio attraverso emozioni e avventure.'),
+	 ('978-75-61320-303-8','L’Alchimista','Paulo Coelho','Fantascienza',1888,'Opera densa di significato e introspezione.'),
+	 ('978-66-86535-383-0','La solitudine dei numeri primi','Paolo Giordano','Thriller',1973,'Storia coinvolgente che ha segnato un’epoca.'),
+	 ('978-64-53811-580-3','Norwegian Wood','Haruki Murakami','Fantascienza',1942,'Racconto simbolico e profondo.'),
+	 ('978-52-33747-561-1','Il Giardino Segreto','Frances Hodgson Burnett','Fantascienza',1962,'Narrativa potente e intramontabile.'),
+	 ('978-69-97250-124-8','L’ombra del vento','Carlos Ruiz Zafón','Drammatico',1874,'Personaggi indimenticabili in un racconto unico.'),
+	 ('978-34-30248-320-9','Il Cacciatore di Aquiloni','Khaled Hosseini','Fantasy',1933,'Un libro che lascia il segno nel lettore.'),
+	 ('978-65-47414-342-3','Cent’anni di solitudine','Gabriel García Márquez','Avventura',1971,'Capolavoro di stile e contenuto.');
+INSERT INTO defaultdb.books (isbn,title,author,genre,`year`,description) VALUES
+	 ('978-69-41651-448-8','L’amica geniale','Elena Ferrante','Fantasy',1870,'Un grande classico della letteratura mondiale.'),
+	 ('978-51-96606-875-7','La casa degli spiriti','Isabel Allende','Fantascienza',1914,'Romanzo imperdibile per ogni appassionato.'),
+	 ('978-18-58192-191-9','Shining','Stephen King','Fantascienza',1996,'Un viaggio attraverso emozioni e avventure.'),
+	 ('978-57-66295-149-7','It','Stephen King','Romanzo',1953,'Opera densa di significato e introspezione.'),
+	 ('978-57-85456-972-7','Il miglio verde','Stephen King','Romanzo',1940,'Storia coinvolgente che ha segnato un’epoca.'),
+	 ('978-64-76689-793-4','Carrie','Stephen King','Thriller',1868,'Racconto simbolico e profondo.'),
+	 ('978-22-68684-426-4','Pet Sematary','Stephen King','Avventura',1938,'Narrativa potente e intramontabile.'),
+	 ('978-13-81510-144-2','Misery','Stephen King','Classico',1859,'Personaggi indimenticabili in un racconto unico.'),
+	 ('978-44-44315-309-8','Doctor Sleep','Stephen King','Drammatico',2009,'Un libro che lascia il segno nel lettore.'),
+	 ('978-92-38415-237-9','Revival','Stephen King','Drammatico',2003,'Capolavoro di stile e contenuto.');
