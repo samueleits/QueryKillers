@@ -15,7 +15,19 @@ public class UserService {
 
     
     
-
+    
+    /**
+     * Registers a new user with the given data.
+     *
+     * @param user The user to register. Must have a non-null and non-empty email and password that matches the given
+     *             pattern.
+     *
+     *             The password must be at least 12 characters long and must contain at least one uppercase letter and one
+     *             special character.
+     *
+     * @return true if the user was registered successfully, false if the email address is already in use or the password
+     *         does not match the given pattern.
+     */
     public boolean registerUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             return false;

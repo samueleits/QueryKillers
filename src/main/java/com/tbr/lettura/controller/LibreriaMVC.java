@@ -15,12 +15,24 @@ public class LibreriaMVC {
     @Autowired
     private LibroService libroService;
 
+    /**
+     * Pagina di benvenuto.
+     * 
+     * @param model il modello della pagina
+     * @return il nome della pagina da visualizzare, ovvero "index"
+     */
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("titolo", "Benvenuto nella libreria");
         return "index";
     }
 
+    /**
+     * Visualizza la pagina con la lista dei libri.
+     * 
+     * @param model il modello della pagina
+     * @return il nome della pagina da visualizzare, ovvero "vista_libri"
+     */
     @GetMapping("/libri")
     public String getLibri(Model model) {
         model.addAttribute("titolo", "I più grandi libri di sempre");
@@ -28,6 +40,13 @@ public class LibreriaMVC {
         return "vista_libri";
     }
 
+    /**
+     * Aggiunge un libro alla libreria.
+     * 
+     * @param libro il libro da aggiungere
+     * @param model il modello della pagina
+     * @return il nome della pagina da visualizzare, ovvero "vista_libri"
+     */
     @PostMapping("/libri")
     public String addLibro(@ModelAttribute Libro libro, Model model) {
         libroService.addLibro(libro);

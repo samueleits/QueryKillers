@@ -16,12 +16,26 @@ public class UserMVC {
     @Autowired
     private UserService userService;
 
+    /**
+     * Mostra il form per la registrazione di un nuovo utente.
+     * 
+     * @param model il modello che contiene l'oggetto User da popolare
+     * @return la view "register"
+     */
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User()); 
         return "register"; 
     }
 
+    /**
+     * Registra un nuovo utente e lo reindirizza alla pagina di login se la registrazione ha successo, altrimenti
+     * restituisce nuovamente la pagina di registrazione con un messaggio di errore.
+     * 
+     * @param user l'oggetto User contenente le informazioni dell'utente
+     * @param model il modello che contiene l'eventuale messaggio di errore
+     * @return la view "redirect:/login" o "register" in base all'esito della registrazione
+     */
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, Model model) {
        boolean success = userService.registerUser(user);

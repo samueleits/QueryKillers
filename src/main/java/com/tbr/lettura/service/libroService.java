@@ -34,7 +34,7 @@ public class LibroService {
      * @return a Libro object representing the book with the given id
      *         or null if there is no book in the repository with the given id
      */
-    public Libro getLibroById(Long id) {
+    public Libro getLibroById(int id) {
         for(Libro l : libroRepository.findAll()) {
             if(l.getId() == id) {
                 return l;
@@ -150,7 +150,7 @@ public class LibroService {
     /*metodo che cancella un libro /
      * method that deletes a book
     */
-     public void deleteLibro(Long id) {
+     public void deleteLibro(int id) {
         libroRepository.deleteById(id);
     }
 }
