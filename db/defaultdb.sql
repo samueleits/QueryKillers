@@ -59,6 +59,7 @@ CREATE TABLE "user_challenges" (
   "id" int NOT NULL AUTO_INCREMENT,
   "user_id" int NOT NULL,
   "challenge_id" int NOT NULL,
+  "score" int NOT NULL DEFAULT '0',
   PRIMARY KEY ("id"),
   UNIQUE KEY "uq_user_challenge" ("user_id","challenge_id"),
   KEY "fk_user_challenge_challenge" ("challenge_id"),
