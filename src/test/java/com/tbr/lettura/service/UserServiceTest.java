@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.tbr.lettura.model.User;
+import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,11 +23,11 @@ class UserServiceTest {
 
     @Test
     void testRegisterUserWithMock() {
-        User user = new User();
+        Users user = new Users();
         user.setEmail("mock@email.com");
         user.setPassword("PasswordSicura!1");
 
-        when(userRepository.save(any(User.class))).thenReturn(user);
+        when(userRepository.save(any(Users.class))).thenReturn(user);
 
         boolean result = userService.registerUser(user);
         assertTrue(result);

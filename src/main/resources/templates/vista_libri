@@ -4,9 +4,27 @@
     <title>Libri</title>
 </head>
 <body>
-    <h1 th:text="${titolo}"></h1>
-    <ul>
-        <li th:each="libro : ${libri}" th:text="${libro.titolo}"></li>
-    </ul>
+    <h1 th:text="${titolo}">Lista Libri</h1>
+    <form th:action="@{/libri}" th:object="${libro}" method="post">
+        <input type="text" th:field="*{title}" placeholder="Titolo" required />
+        <input type="text" th:field="*{author}" placeholder="Autore" required />
+        <input type="number" th:field="*{year}" placeholder="Anno" required />
+        <input type="text" th:field="*{isbn}" placeholder="ISBN" required  />
+        <button type="submit">Aggiungi libro</button>
+    </form>
+    <table border="1">
+        <tr>
+            <th>Titolo</th>
+            <th>Autore</th>
+            <th>Anno</th>
+            <th>ISBN</th>
+        </tr>
+        <tr th:each="libro : ${libri}">
+            <td th:text="${libro.title}">Titolo</td>
+            <td th:text="${libro.author}">Autore</td>
+            <td th:text="${libro.year}">Anno</td>
+            <td th:text="${libro.isbn}">ISBN</td>
+        </tr>
+    </table>
 </body>
 </html>

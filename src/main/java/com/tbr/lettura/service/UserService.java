@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.tbr.lettura.model.User;
+import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.UserRepository;
 
 @Service
@@ -28,7 +28,7 @@ public class UserService {
      * @return true if the user was registered successfully, false if the email address is already in use or the password
      *         does not match the given pattern.
      */
-    public boolean registerUser(User user) {
+    public boolean registerUser(Users user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             return false;
         }

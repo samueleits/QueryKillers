@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class Users {
     @Id
     private int id;
     private String email;
@@ -12,7 +12,7 @@ public class User {
     private String username;
 
 
-    public User() {
+    public Users() {
     }
     /*metodo che restituisce l'id dell'utente /
      * method that returns the id of the user

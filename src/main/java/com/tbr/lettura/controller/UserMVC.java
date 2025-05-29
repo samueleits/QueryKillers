@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.tbr.lettura.model.User;
+import com.tbr.lettura.model.Users;
 import com.tbr.lettura.service.UserService;
 
 @Controller
@@ -24,7 +24,7 @@ public class UserMVC {
      */
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User()); 
+        model.addAttribute("user", new Users()); 
         return "register"; 
     }
 
@@ -37,7 +37,7 @@ public class UserMVC {
      * @return la view "redirect:/login" o "register" in base all'esito della registrazione
      */
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user, Model model) {
+    public String registerUser(@ModelAttribute Users user, Model model) {
        boolean success = userService.registerUser(user);
 
        if (success){
