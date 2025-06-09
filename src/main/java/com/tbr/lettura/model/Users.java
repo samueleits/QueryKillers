@@ -8,7 +8,7 @@ public class Users {
     @Id
     private int id;
     private String email;
-    private String password;
+    private String password_hash;
     private String username;
 
 
@@ -72,8 +72,8 @@ public class Users {
     *
     * @return the password of the user.
     */
-    public String getPassword() {
-        return password;
+    public String getPassword_hash() {
+        return password_hash;
     }
     /*metodo che modifica la password dell'utente / 
      * method that modifies the password of the user
@@ -84,8 +84,8 @@ public class Users {
     *
     * @param password the new password of the user.
     */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword_hash(String password_hash) {
+        this.password_hash = password_hash;
     }
     /*metodo che restituisce il username dell'utente /
      * method that returns the username of the user

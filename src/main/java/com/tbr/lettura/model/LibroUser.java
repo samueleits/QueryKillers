@@ -1,6 +1,7 @@
 package com.tbr.lettura.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class LibroUser {
     private int userId;
     private int bookId;
     private boolean isRead;
-    private Date readDete;
+    private LocalDate read_date;
 
     /*metodo che restituisce l'id /
      * method that returns the id
@@ -126,8 +127,8 @@ public class LibroUser {
     * @return the date when the book was read
     */
 
-    public Date getReadDete() {
-        return readDete;
+    public LocalDate getRead_date() {
+        return read_date;
     }
 
     /*metodo che modifica la data in cui il libro e' stato letto / 
@@ -137,11 +138,10 @@ public class LibroUser {
     /**
      * Modifies the date when the book was read.
      * 
-     * @param readDete the new date when the book was read
+     * @param readDate the new date when the book was read
      */
-    public void setReadDete(Date readDete) {
-        this.readDete = readDete;
+    public void setRead_date(LocalDate read_date) {
+        this.read_date = read_date;
     }
 
-    
 }

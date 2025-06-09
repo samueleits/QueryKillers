@@ -25,7 +25,7 @@ class UserServiceTest {
     void testRegisterUserWithMock() {
         Users user = new Users();
         user.setEmail("mock@email.com");
-        user.setPassword("PasswordSicura!1");
+        user.setPassword_hash("PasswordSicura!1");
 
         when(userRepository.save(any(Users.class))).thenReturn(user);
 

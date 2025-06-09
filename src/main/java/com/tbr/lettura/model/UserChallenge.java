@@ -16,7 +16,7 @@ import jakarta.persistence.UniqueConstraint;
 public class UserChallenge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -26,17 +26,17 @@ public class UserChallenge {
     @JoinColumn(name = "challenge_id", nullable = false)
     private Challenge challenge;
 
-    private Integer score = 0;
+    private int score = 0;
 
     public UserChallenge() {}
 
-    
-    public UserChallenge(Users user, Challenge challenge, Integer score) {
+
+    public UserChallenge(Users user, Challenge challenge, int score) {
         this.user = user;
         this.challenge = challenge;
         this.score = score;
     }
-    public Long getId() {
+    public int getId() {
         return id;
     }
     public Users getUser() {

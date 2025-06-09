@@ -3,7 +3,6 @@ package com.tbr.lettura.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.tbr.lettura.model.Users;
 import org.springframework.stereotype.Service;
 
 import com.tbr.lettura.model.Challenge;
@@ -20,15 +19,15 @@ public class ChallengeService {
     @Autowired
     private ChallengeRepository challengeRepo;
 
-    public List<UserChallenge> getUserChallenges(Long userId) {
+    public List<UserChallenge> getUserChallenges(int userId) {
         return userChallengeRepo.findByUserId(userId);
     }
 
-    public void addChallengeToUser(Long userId, Long challengeId) {
+    public void addChallengeToUser(int userId, int challengeId) {
         if (userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId) == null) {
             UserChallenge uc = new UserChallenge();
             Users user = new Users();
-            user.setId(userId.intValue());
+            user.setId(userId);
             uc.setUser(user);
 
             Challenge challenge = challengeRepo.findById(challengeId).orElse(null);
@@ -42,7 +41,7 @@ public class ChallengeService {
         }
     }
 
-    public void incrementScore(Long userId, Long challengeId, int increment) {
+    public void incrementScore(int userId, int challengeId, int increment) {
         UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId);
         if (uc != null) {
             uc.setScore(uc.getScore() + increment);

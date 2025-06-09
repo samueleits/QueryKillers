@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 public class Challenge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String name;
 
@@ -25,7 +25,7 @@ public class Challenge {
        
     }
 
-    public Challenge(String name, LocalDate start_date, LocalDate end_date, Long id) {
+    public Challenge(String name, LocalDate start_date, LocalDate end_date, int id) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -33,7 +33,7 @@ public class Challenge {
     }
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

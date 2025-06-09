@@ -32,12 +32,12 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             return false;
         }
-        String password = user.getPassword();
+        String password_hash = user.getPassword_hash();
         String passwordPattern = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]).{12,}$";
-        if (password == null || !password.matches(passwordPattern)) {
+        if (password_hash == null || !password_hash.matches(passwordPattern)) {
             return false;
         }
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword_hash(passwordEncoder.encode(password_hash));
         userRepository.save(user);
         return true;
     }
