@@ -1,0 +1,178 @@
+/*----------------------------------------------------
+Stili specifici per la pagina di Login e Registrazione (login.html)
+-----------------------------------------------------*/
+
+/* Reset del padding-top del body per la pagina di login, dato che non c'è subheader */
+body {
+    padding-top: 80px; /* Altezza stimata solo per l'header */
+}
+
+/* Stile per il contenitore principale della pagina di login */
+.login-page-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px - 80px); /* Altezza viewport - header - footer (stimato) */
+    background-color: #f0f2f5;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenitore principale per i form di autenticazione */
+.auth-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+/* Toggle tra Login e Registrati */
+.form-toggle {
+    display: flex;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.form-toggle button {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background-color: #eee;
+    color: #555;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.form-toggle button.active {
+    background-color: #c70000;
+    color: white;
+}
+
+/* Stile comune per i form di autenticazione */
+.auth-form {
+    display: none; /* Nascosto di default, gestito da JS */
+    flex-direction: column;
+    gap: 20px;
+}
+
+.auth-form.active {
+    display: flex; /* Mostra il form attivo */
+}
+
+.auth-form h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Gruppi di input */
+.input-group {
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+    font-size: 14px;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"] {
+    width: calc(100% - 24px); /* Sottrae padding per width corretta */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding e border nel width */
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="email"]:focus,
+.input-group input[type="password"]:focus {
+    border-color: #c70000;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(199, 0, 0, 0.2);
+}
+
+/* Pulsante di submit */
+.submit-button {
+    background-color: #c70000;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.submit-button:hover {
+    background-color: #a00000;
+}
+
+/* Link "Hai dimenticato la password?" */
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    color: #c70000;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: #a00000;
+    text-decoration: underline;
+}
+
+/* Media Queries per la responsività */
+
+/* Smartphone */
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 25px;
+        margin: 15px;
+        width: calc(100% - 30px); /* Per dare un po' di margine sui lati */
+    }
+
+    .form-toggle button {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    .auth-form h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .input-group label {
+        font-size: 13px;
+    }
+
+    .input-group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .submit-button {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .forgot-password {
+        font-size: 13px;
+    }
+}

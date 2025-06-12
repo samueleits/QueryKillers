@@ -1,154 +1,143 @@
 package com.tbr.lettura.service;
 
-import com.tbr.lettura.model.Libro;
-import com.tbr.lettura.repository.LibroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tbr.lettura.model.Libro;
+import com.tbr.lettura.repository.LibroRepository;
+
+/**
+ * Service che gestisce la logica relativa ai libri.
+ * Fornisce metodi per ottenere, aggiungere e cancellare libri dal repository.
+ */
 @Service
 public class LibroService {
-     @Autowired
+    @Autowired
     private LibroRepository libroRepository;
-   
+
     /**
-     * metodo che restituisce tutti i libri / 
-    * Retrieves a list of all books from the repository.
-    *
-    * @return a List of Libro objects representing all the books available.
-    */
+     * Restituisce la lista di tutti i libri presenti nel repository.
+     *
+     * @return lista di tutti i libri
+     */
     public List<Libro> getLibri() {
         return libroRepository.findAll();
     }
-   
-    
-   
+
     /**
-     * metodo che restituisce un libro in base all'id /
-     * Retrieves a book from the repository by its id.
+     * Restituisce un libro in base all'id.
      *
-     * @param id the id of the book to be retrieved
-     * @return a Libro object representing the book with the given id
-     *         or null if there is no book in the repository with the given id
+     * @param id id del libro da cercare
+     * @return il libro con l'id specificato, oppure null se non trovato
      */
     public Libro getLibroById(int id) {
-        for(Libro l : libroRepository.findAll()) {
-            if(l.getId() == id) {
+        for (Libro l : libroRepository.findAll()) {
+            if (l.getId() == id) {
                 return l;
             }
         }
         return null;
     }
 
-   
-    
     /**
-     * metodo che restituisce tutti i libri in base all'autore / 
-    * Retrieves a list of books from the repository by the author's name.
-    *
-    * @param author the author's name to search for
-    * @return a List of Libro objects written by the specified author
-    */
-
-     public List<Libro> getLibroByAuthor(String author) {
+     * Restituisce la lista dei libri scritti da un autore specifico.
+     *
+     * @param author nome dell'autore
+     * @return lista di libri scritti dall'autore
+     */
+    public List<Libro> getLibroByAuthor(String author) {
         List<Libro> libriByAuthor = new ArrayList<>();
-        for(Libro l : libroRepository.findAll()) {
-            if(l.getAuthor().toLowerCase().equals(author.toLowerCase())) {
+        for (Libro l : libroRepository.findAll()) {
+            if (l.getAuthor().toLowerCase().equals(author.toLowerCase())) {
                 libriByAuthor.add(l);
             }
         }
         return libriByAuthor;
     }
-    
-    
+
     /**
-     * metodo che restituisce tutti i libri in base al titolo / 
-     * Retrieves a list of books from the repository by the book's title.
-     * 
-     * @param title the title of the book to search for
-     * @return a List of Libro objects with the given title
+     * Restituisce la lista dei libri con un titolo specifico.
+     *
+     * @param title titolo del libro
+     * @return lista di libri con il titolo specificato
      */
     public List<Libro> getLibroByTitle(String title) {
-        List<Libro> libriByTitle = new ArrayList<>();
-        for(Libro l : libroRepository.findAll()) {
-            if(l.getTitle().toLowerCase().equals(title.toLowerCase())) {
+        List<Libro> libriByTitle = new ArrayList<>(); // Inizializza una lista per i libri trovati
+        for (Libro l : libroRepository.findAll()) { // Itera su tutti i libri nel repository
+            if (l.getTitle().toLowerCase().equals(title.toLowerCase())) { // Confronta il titolo del libro in modo case-insensitive
                 libriByTitle.add(l);
             }
         }
         return libriByTitle;
     }
+
     /**
-     * metodo che restituisce tutti i libri in base al genere / 
-     * Retrieves a list of books from the repository by the book's genre.
-     * 
-     * @param genre the genre of the books to search for
-     * @return a List of Libro objects with the given genre
+     * Restituisce la lista dei libri di un determinato genere.
+     *
+     * @param genre genere del libro
+     * @return lista di libri del genere specificato
      */
-     public List<Libro> getLibroByGenre(String genre) {
-        List<Libro> libriByGenre = new ArrayList<>();
-        for(Libro l : libroRepository.findAll()) {
-            if(l.getGenre().toLowerCase().equals(genre.toLowerCase())) {
+    public List<Libro> getLibroByGenre(String genre) {
+        List<Libro> libriByGenre = new ArrayList<>(); 
+        for (Libro l : libroRepository.findAll()) { 
+            if (l.getGenre().toLowerCase().equals(genre.toLowerCase())) { 
                 libriByGenre.add(l);
             }
         }
         return libriByGenre;
     }
-    
+
     /**
-     * metodo che restituisce tutti i libri in base all'anno di pubblicazione /
-     * Retrieves a list of books from the repository by the book's year of publication.
-     * 
-     * @param year the year of publication of the books to search for
-     * @return a List of Libro objects with the given year of publication
+     * Restituisce la lista dei libri pubblicati in un determinato anno.
+     *
+     * @param year anno di pubblicazione
+     * @return lista di libri pubblicati nell'anno specificato
      */
-     public List<Libro> getLibroByYear(int year) {
+    public List<Libro> getLibroByYear(int year) {
         List<Libro> libriByYear = new ArrayList<>();
-        for(Libro l : libroRepository.findAll()) {
-            if(l.getYear() == year) {
+        for (Libro l : libroRepository.findAll()) {
+            if (l.getYear() == year) {
                 libriByYear.add(l);
             }
         }
         return libriByYear;
     }
-    
-    /**
-     * metodo che restituisce tutti i libri che sono stati pubblicati tra due anni /
-    * Retrieves a list of books from the repository that were published between 
-    * two specified years.
-    *
-    * @param firstYear the starting year of the publication range
-    * @param secondYear the ending year of the publication range
-    * @return a List of Libro objects representing books published between the given years
-    */
 
-      public List<Libro> getLibroByBetweenYear(int firstYear, int secondYear) {
+    /**
+     * Restituisce la lista dei libri pubblicati tra due anni specificati.
+     *
+     * @param firstYear anno di inizio intervallo
+     * @param secondYear anno di fine intervallo
+     * @return lista di libri pubblicati tra i due anni
+     */
+    public List<Libro> getLibroByBetweenYear(int firstYear, int secondYear) {
         List<Libro> libriByBetweenYear = new ArrayList<>();
-        for(Libro l : libroRepository.findAll()) {
-            if(l.getYear() >= firstYear && l.getYear() <= secondYear) {
+        for (Libro l : libroRepository.findAll()) {
+            if (l.getYear() >= firstYear && l.getYear() <= secondYear) {
                 libriByBetweenYear.add(l);
             }
         }
         return libriByBetweenYear;
     }
-    
+
     /**
-     * metodo che aggiunge un libro /
-     * Adds a book to the repository.
+     * Aggiunge un libro al repository.
      *
-     * @param libro the book to be added
+     * @param libro libro da aggiungere
      */
     public void addLibro(Libro libro) {
         libroRepository.save(libro);
     }
+
     /**
-     * metodo che cancella un libro /
-     * Deletes a book from the repository by its id.
-     * 
-     * @param id the id of the book to be deleted
+     * Cancella un libro dal repository tramite id.
+     *
+     * @param id id del libro da cancellare
      */
-     public void deleteLibro(int id) {
+    public void deleteLibro(int id) {
         libroRepository.deleteById(id);
     }
 }

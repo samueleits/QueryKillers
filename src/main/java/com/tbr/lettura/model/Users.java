@@ -3,115 +3,95 @@ package com.tbr.lettura.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
+/**
+ * Classe che rappresenta un utente.
+ * Un utente ha un id, un'email, una password e un username.
+ */
+@Entity // Indica che questa classe è un'entità JPA
 public class Users {
-    @Id
+    @Id // Indica che questo campo è la chiave primaria dell'entità
     private int id;
     private String email;
     private String password_hash;
     private String username;
 
-
+    /**
+     * Costruttore vuoto della classe Users.
+     */
     public Users() {
     }
-    /*metodo che restituisce l'id dell'utente /
-     * method that returns the id of the user
-     */
-    
+
     /**
-    * Retrieves the id of the user.
-    *
-    * @return the id of the user.
-    */
+     * Restituisce l'id dell'utente.
+     *
+     * @return id dell'utente
+     */
     public int getId() {
         return id;
-    }   
-    /*metodo che modifica l'id dell'utente / 
-     * method that modifies the id of the user
-    */
-    
+    }
+
     /**
-    * Modifies the id of the user.
-    *
-    * @param id the new id of the user.
-    */
+     * Modifica l'id dell'utente.
+     *
+     * @param id nuovo id dell'utente
+     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /*metodo che restituisce l'email dell'utente /
-     * method that returns the email of the user
-    */
-    
     /**
-    * Retrieves the email of the user.
-    *
-    * @return the email of the user.
-    */
+     * Restituisce l'email dell'utente.
+     *
+     * @return email dell'utente
+     */
     public String getEmail() {
         return email;
     }
-    /*metodo che modifica l'email dell'utente / 
-     * method that modifies the email of the user
-    */
 
     /**
-    * Modifies the email of the user.
-    *
-    * @param email the new email of the user.
-    */
+     * Modifica l'email dell'utente.
+     *
+     * @param email nuova email dell'utente
+     */
     public void setEmail(String email) {
         this.email = email;
     }
-    /*metodo che restituisce la password dell'utente /
-     * method that returns the password of the user
-    */
-    
+
     /**
-    * Retrieves the password of the user.
-    *
-    * @return the password of the user.
-    */
+     * Restituisce la password hash dell'utente.
+     *
+     * @return password hash dell'utente
+     */
     public String getPassword_hash() {
         return password_hash;
     }
-    /*metodo che modifica la password dell'utente / 
-     * method that modifies the password of the user
-    */
-    
+
     /**
-    * Modifies the password of the user.
-    *
-    * @param password the new password of the user.
-    */
+     * Modifica la password hash dell'utente.
+     *
+     * @param password_hash nuova password hash dell'utente
+     */
     public void setPassword_hash(String password_hash) {
         this.password_hash = password_hash;
     }
-    /*metodo che restituisce il username dell'utente /
-     * method that returns the username of the user
-    */
-    
+
     /**
-    * Retrieves the username of the user.
-    *
-    * @return the username of the user.
-    */
+     * Restituisce lo username dell'utente.
+     *
+     * @return username dell'utente
+     */
     public String getUsername() {
         return username;
     }
-    /*metodo che modifica il username dell'utente / 
-     * method that modifies the username of the user
-    */
-    
+
     /**
-    * Modifies the username of the user.
-    *
-    * @param username the new username of the user.
-    */
+     * Modifica lo username dell'utente.
+     *
+     * @param username nuovo username dell'utente
+     */
     public void setUsername(String username) {
         this.username = username;
     }
-
 
     // altri campi, getter, setter
 }
