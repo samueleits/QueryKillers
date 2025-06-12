@@ -7,17 +7,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const body = document.body;
 
     function adjustLayout() {
-        if (header && subheader && body) {
-            // Ottieni l'altezza effettiva dell'header, inclusi padding e border
+        // Verifica se gli elementi esistono per evitare errori su pagine senza subheader
+        if (header && body) {
             const headerHeight = header.offsetHeight;
-            // Ottieni l'altezza effettiva del subheader
-            const subheaderHeight = subheader.offsetHeight;
+            let totalOffset = headerHeight;
 
-            // Imposta la posizione 'top' del subheader subito sotto l'header
-            subheader.style.top = `${headerHeight}px`;
+            if (subheader && !subheader.classList.contains('hidden-on-login')) { // Controlla se il subheader non è nascosto
+                const subheaderHeight = subheader.offsetHeight;
+                subheader.style.top = `${headerHeight}px`;
+                totalOffset += subheaderHeight;
+            } else if (subheader) {
+                // Se il subheader è presente ma nascosto, assicurati che il top sia corretto per il mobile se appare
+                // Oppure non aggiungere la sua altezza
+                subheader.style.top = `${headerHeight}px`;
+            }
 
-            // Imposta il padding-top del body per compensare l'altezza combinata di header e subheader
-            body.style.paddingTop = `${headerHeight + subheaderHeight}px`;
+            body.style.paddingTop = `${totalOffset}px`;
         }
     }
 
@@ -25,6 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
     adjustLayout();
 
     // Esegui la funzione ogni volta che la finestra viene ridimensionata
-    // Questo è cruciale per la responsività, poiché l'altezza dell'header può cambiare
     window.addEventListener('resize', adjustLayout);
+
+    // Osserva le mutazioni del DOM per gestire cambiamenti dinamici (es. visibilità subheader)
+    const observer = new MutationObserver(adjustLayout);
+    if (subheader) {
+        observer.observe(subheader, { attributes: true, attributeFilter: ['style', 'class'] });
+    }
 });

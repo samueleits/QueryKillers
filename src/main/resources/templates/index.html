@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../static/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
+<body class="homepage">
     <header class="header">
         <div class="header-content-wrapper">
             <div class="logo">
@@ -26,18 +26,18 @@
                         <option value="narrativa">Narrativa</option>
                         <option value="horror">Horror</option>
                         <option value="fumetti">Fumetti</option>
-                        </select>
+                    </select>
                 </div>
             </div>
             <div class="user-actions">
                 <div class="language-dropdown">
-                    <span class="current-language">Italiano - IT <i class="fas fa-caret-down"></i></span>
+                    <span class="current-language" data-lang="it">Italiano - IT <i class="fas fa-caret-down"></i></span>
                     <div class="language-options">
-                        <a href="#" data-lang="it">Italiano</a>
-                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="en">English - EN</a>
+                        <a href="#" data-lang="es">Español - ES</a>
                     </div>
                 </div>
-                <a href="#" class="login-button">Login</a>
+                <a href="login.html" class="login-button">Login</a>
             </div>
         </div>
     </header>
@@ -45,7 +45,7 @@
     <div class="subheader">
         <div class="subheader-content-wrapper">
             <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-fire-alt"></i></div>
+                <div class="circle-icon"><i class="fas fa-fire"></i></div>
                 <span>Novità</span>
             </a>
             <a href="#" class="subheader-item">
@@ -57,11 +57,11 @@
                 <span>Challenge</span>
             </a>
             <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-book-reader"></i></div>
+                <div class="circle-icon"><i class="fas fa-book-open"></i></div>
                 <span>Recensioni</span>
             </a>
             <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-clipboard-list"></i></div>
+                <div class="circle-icon"><i class="fas fa-list"></i></div>
                 <span>Liste</span>
             </a>
         </div>
@@ -73,83 +73,131 @@
                 <h2>Lectio dat intellectum.</h2>
             </section>
 
-            <section class="books-section featured-books">
+            <section class="books-section">
                 <div class="section-header">
-                    <h3><i class="fas fa-bookmark icon"></i> In primo piano</h3>
-                    <a href="#" class="view-all">Vedi altro ></a>
+                    <h3><i class="fas fa-bookmark icon"></i>In primo piano</h3>
+                    <a href="#" class="view-all">Visualizza tutto</a>
                 </div>
                 <div class="books-grid">
                     <div class="book-card">
-                        <img src="https://picsum.photos/id/237/200/300" alt="Copertina Libro">
+                        <img src="https://picsum.photos/id/1/200/300" alt="Copertina del libro">
                         <div class="book-info">
-                            <p class="book-author">Antoine de Saint-Exupéry</p>
-                            <h4 class="book-title">IL PICCOLO PRINCIPE</h4>
-                            <span class="book-genre">Classici</span>
+                            <h4 class="book-title">Titolo del Libro 1</h4>
+                            <p class="book-author">Autore 1</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="https://picsum.photos/id/238/200/300" alt="Copertina Libro">
+                        <img src="https://picsum.photos/id/2/200/300" alt="Copertina del libro">
                         <div class="book-info">
-                            <p class="book-author">Carlo Collodi</p>
-                            <h4 class="book-title">PINOCCHIO</h4>
-                            <span class="book-genre">Classici</span>
+                            <h4 class="book-title">Titolo del Libro 2</h4>
+                            <p class="book-author">Autore 2</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="https://picsum.photos/id/239/200/300" alt="Copertina Libro">
+                        <img src="https://picsum.photos/id/3/200/300" alt="Copertina del libro">
                         <div class="book-info">
-                            <p class="book-author">Luigi Pirandello</p>
-                            <h4 class="book-title">IL FU MATTIA PASCAL</h4>
-                            <span class="book-genre">Letteratura</span>
+                            <h4 class="book-title">Titolo del Libro 3</h4>
+                            <p class="book-author">Autore 3</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="https://picsum.photos/id/240/200/300" alt="Copertina Libro">
+                        <img src="https://picsum.photos/id/4/200/300" alt="Copertina del libro">
                         <div class="book-info">
-                            <p class="book-author">Italo Svevo</p>
-                            <h4 class="book-title">LA COSCIENZA DI ZENO</h4>
-                            <span class="book-genre">Letteratura</span>
+                            <h4 class="book-title">Titolo del Libro 4</h4>
+                            <p class="book-author">Autore 4</p>
                         </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="https://picsum.photos/id/5/200/300" alt="Copertina del libro">
+                        <div class="book-info">
+                            <h4 class="book-title">Titolo del Libro 5</h4>
+                            <p class="book-author">Autore 5</p>
                         </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="https://picsum.photos/id/6/200/300" alt="Copertina del libro">
+                        <div class="book-info">
+                            <h4 class="book-title">Titolo del Libro 6</h4>
+                            <p class="book-author">Autore 6</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="https://picsum.photos/id/7/200/300" alt="Copertina del libro">
+                        <div class="book-info">
+                            <h4 class="book-title">Titolo del Libro 7</h4>
+                            <p class="book-author">Autore 7</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="https://picsum.photos/id/8/200/300" alt="Copertina del libro">
+                        <div class="book-info">
+                            <h4 class="book-title">Titolo del Libro 8</h4>
+                            <p class="book-author">Autore 8</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="books-section latest-releases">
+            <section class="books-section">
                 <div class="section-header">
-                    <h3><i class="fas fa-box-open icon"></i> Ultime uscite</h3>
-                    <a href="#" class="view-all">Vedi altro ></a>
+                    <h3><i class="fas fa-feather-alt icon"></i>Ultime uscite</h3>
+                    <a href="#" class="view-all">Visualizza tutto</a>
                 </div>
                 <div class="books-grid">
                     <div class="book-card">
-                        <img src="https://picsum.photos/id/241/200/300" alt="Copertina Libro">
+                        <img src="https://picsum.photos/id/9/200/300" alt="Copertina del libro">
                         <div class="book-info">
-                            <p class="book-author">Antoine de Saint-Exupéry</p>
-                            <h4 class="book-title">IL PICCOLO PRINCIPE</h4>
-                            <span class="book-genre">Classici</span>
+                            <h4 class="book-title">Titolo del Libro 9</h4>
+                            <p class="book-author">Autore 9</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="https://picsum.photos/id/242/200/300" alt="Copertina Libro">
+                        <img src="https://picsum.photos/id/10/200/300" alt="Copertina del libro">
                         <div class="book-info">
-                            <p class="book-author">Carlo Collodi</p>
-                            <h4 class="book-title">PINOCCHIO</h4>
-                            <span class="book-genre">Classici</span>
+                            <h4 class="book-title">Titolo del Libro 10</h4>
+                            <p class="book-author">Autore 10</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="https://picsum.photos/id/243/200/300" alt="Copertina Libro">
+                        <img src="https://picsum.photos/id/11/200/300" alt="Copertina del libro">
                         <div class="book-info">
-                            <p class="book-author">Luigi Pirandello</p>
-                            <h4 class="book-title">IL FU MATTIA PASCAL</h4>
-                            <span class="book-genre">Letteratura</span>
+                            <h4 class="book-title">Titolo del Libro 11</h4>
+                            <p class="book-author">Autore 11</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="https://picsum.photos/id/244/200/300" alt="Copertina Libro">
+                        <img src="https://picsum.photos/id/12/200/300" alt="Copertina del libro">
                         <div class="book-info">
-                            <p class="book-author">Italo Svevo</p>
-                            <h4 class="book-title">LA COSCIENZA DI ZENO</h4>
-                            <span class="book-genre">Letteratura</span>
+                            <h4 class="book-title">Titolo del Libro 12</h4>
+                            <p class="book-author">Autore 12</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="https://picsum.photos/id/13/200/300" alt="Copertina del libro">
+                        <div class="book-info">
+                            <h4 class="book-title">Titolo del Libro 13</h4>
+                            <p class="book-author">Autore 13</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="https://picsum.photos/id/14/200/300" alt="Copertina del libro">
+                        <div class="book-info">
+                            <h4 class="book-title">Titolo del Libro 14</h4>
+                            <p class="book-author">Autore 14</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="https://picsum.photos/id/15/200/300" alt="Copertina del libro">
+                        <div class="book-info">
+                            <h4 class="book-title">Titolo del Libro 15</h4>
+                            <p class="book-author">Autore 15</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <img src="https://picsum.photos/id/16/200/300" alt="Copertina del libro">
+                        <div class="book-info">
+                            <h4 class="book-title">Titolo del Libro 16</h4>
+                            <p class="book-author">Autore 16</p>
                         </div>
                     </div>
                 </div>
@@ -157,8 +205,8 @@
 
             <section class="categories-section">
                 <div class="section-header">
-                    <h3><i class="fas fa-tags icon"></i> Categorie</h3>
-                    <a href="#" class="view-all">Visualizza altre categorie ></a>
+                    <h3><i class="fas fa-tags icon"></i>Categorie</h3>
+                    <a href="#" class="view-all">Visualizza tutto</a>
                 </div>
                 <div class="categories-grid">
                     <div class="category-card thriller">
@@ -182,7 +230,9 @@
                 </div>
             </section>
         </main>
-    </div> <footer class="footer">
+    </div>
+
+    <footer class="footer">
         <div class="footer-content-wrapper">
             <div class="logo">
                 <h1>LOGO TBR</h1>

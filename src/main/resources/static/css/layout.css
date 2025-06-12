@@ -1,4 +1,4 @@
-/*-----------------------------------------------------
+/*----------------------------------------------------
 Stili globali per il layout del sito, inclusi body, header e footer.
 -----------------------------------------------------*/
 
@@ -11,7 +11,8 @@ body {
     color: #333;
     line-height: 1.6;
     overflow-x: hidden;
-    padding-top: 130px;
+    /* Padding-top di fallback. Sarà sovrascritto da JS per precisione. */
+    padding-top: 130px; /* Valore stimato */
 }
 
 /* Reset di base per tutti i titoli (h1-h6) e i link */
@@ -40,31 +41,33 @@ Modifiche per l'header, subheader, main content e footer.
 /* Padding laterale per i contenitori di header e footer */
 .header-content-wrapper,
 .footer-content-wrapper {
-    padding: 0 20px;
+    padding: 0 20px; /* Padding laterale per distanziare il contenuto dai bordi dello schermo */
 }
 
-/* Larghezza massima e centraggio orizzontale per subheader e main content */
+/* Il wrapper per il contenuto principale e il subheader
+   Questi manterranno il max-width e il margin: 0 auto per centrare il blocco.
+*/
 .subheader-content-wrapper,
 .main-content-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 1200px; /* Larghezza massima del contenuto centrato */
+    margin: 0 auto; /* Centra il blocco orizzontalmente */
+    padding: 0 20px; /* Padding laterale per schermi più piccoli, importante! */
 }
 
 
-/* Stile per l'header del sito */
+/* Stile per l'header del sito, comune a tutte le pagine */
 .header {
     background-color: #780000;
     padding: 15px 0;
     color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    position: fixed;
+    position: fixed; /* Rende l'header fisso */
     top: 0;
     width: 100%;
     z-index: 1000;
 }
 
-/* Stile del logo nell'header e nel footer */
+/* Stile del logo (momentaneo) nel header e nel footer */
 .logo h1 {
     margin: 0;
     font-size: 24px;
@@ -81,17 +84,21 @@ Modifiche per l'header, subheader, main content e footer.
 /* Contenitore per gli elementi nella parte superiore dell'header */
 .header-content-wrapper {
     display: flex;
+    /* Distribuisce gli elementi: logo a sinistra, barra al centro, azioni a destra.
+       Lo spazio si distribuisce tra loro.
+    */
     justify-content: space-between;
     align-items: center;
 }
 
-/* Contenitore per la barra di ricerca e la categoria */
+/* Contenitore per la barra di ricerca */
 .search-bar-and-category {
-    flex-grow: 1;
+    flex-grow: 1; /* Permette alla barra di ricerca di espandere e occupare lo spazio centrale */
     display: flex;
-    justify-content: center;
-    margin: 0 20px;
-    max-width: 600px;
+    justify-content: center; /* Centra la barra di ricerca all'interno del suo spazio flessibile */
+    margin: 0 20px; /* Spazio tra logo/azioni utente e la barra di ricerca */
+    /* Aggiungi una larghezza massima per la barra di ricerca per non farla diventare troppo grande */
+    max-width: 600px; /* Limita la larghezza della barra anche se flex-grow la espande */
 }
 
 /* Barra di ricerca */
@@ -101,14 +108,14 @@ Modifiche per l'header, subheader, main content e footer.
     background-color: rgb(255, 255, 255);
     border-radius: 50px;
     padding: 15px 20px;
-    width: 100%;
+    width: 100%; /* La barra occupa il 100% della larghezza disponibile nel suo contenitore .search-bar-and-category */
 }
 
 /* Icona lente di ingrandimento */
 .search-bar .search-icon {
     color: #7800007f;
     font-size: 18px;
-    margin-right: 10px;
+    margin-right: 10px; /* Spazio tra icona e input */
 }
 
 /* Input di ricerca */
@@ -120,14 +127,14 @@ Modifiche per l'header, subheader, main content e footer.
     font-weight: bolder;
     font-size: 16px;
     padding: 0;
-    flex-grow: 1;
-    
+    flex-grow: 1; /* Input si espande */
+    /* placeholder (Cerca libro...) */
     &::placeholder {
         color: #7800007f;
     }
 }
 
-/* Dropdown per le categorie */
+/* Dropdown per le categorie all'interno della barra di ricerca ("Tutte le categorie") */
 .search-bar .category-select {
     background-color: #d1d1d1;
     border: none;
@@ -137,20 +144,20 @@ Modifiche per l'header, subheader, main content e footer.
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-    appearance: none;
+    appearance: none; /* Rimuove lo stile di default del browser per il select */
     cursor: pointer;
-    outline: none;
+    outline: none; /* Rimuove il contorno quando selezioni */
     margin-left: 15px;
 }
 
-/* Opzioni del dropdown della categoria */
+/* dropdown della categoria */
 .search-bar .category-select option {
-    color: #780000;
+    color: #780000; /* Colore del testo delle opzioni quando il dropdown è aperto */
     font-weight: bold;
     background-color: white;
 }
 
-/* Sezione delle azioni utente */
+/* Sezione delle azioni utente (lingua e login) */
 .user-actions {
     display: flex;
     align-items: center;
@@ -171,17 +178,15 @@ Modifiche per l'header, subheader, main content e footer.
     align-items: center;
 }
 
-/* Icona del dropdown della lingua */
 .language-dropdown .current-language i {
     margin-left: 5px;
 }
 
-/* Opzioni del dropdown della lingua */
 .language-dropdown .language-options {
-    display: none;
+    display: none; /* Nascosto di default */
     position: absolute;
-    top: 100%;
-    right: 0;
+    top: 100%; /* Sotto il "current-language" */
+    right: 0; /* Allinea a destra del suo contenitore */
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -190,7 +195,6 @@ Modifiche per l'header, subheader, main content e footer.
     overflow: hidden;
 }
 
-/* Stile per i link delle opzioni di lingua */
 .language-dropdown .language-options a {
     display: block;
     padding: 10px 15px;
@@ -199,15 +203,13 @@ Modifiche per l'header, subheader, main content e footer.
     font-size: 14px;
 }
 
-/* Stile hover per i link delle opzioni di lingua */
 .language-dropdown .language-options a:hover {
     background-color: #f0f0f0;
-    text-decoration: none;
+    text-decoration: none; /* Rimuovi sottolineatura al hover */
 }
 
-/* Mostra le opzioni quando il dropdown è attivo */
 .language-dropdown.active .language-options {
-    display: block;
+    display: block; /* Mostra quando il dropdown è attivo */
 }
 
 /* Stile per il pulsante di login */
@@ -219,18 +221,39 @@ Modifiche per l'header, subheader, main content e footer.
     text-decoration: none;
     font-weight: bold;
     font-size: 15px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s; /* Transizione per hover */
 }
 
-/* Stile hover per il pulsante di login */
 .user-actions .login-button:hover {
     background-color: #eee;
 }
 
+/* Aggiungi stile per l'icona profilo "DM" */
+.profile-icon {
+    background-color: white;
+    color: #780000;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-left: 15px; /* Spazio dal dropdown lingua */
+}
+
+.profile-icon:hover {
+    background-color: #eee;
+}
+
+/* Nascondi il subheader nella pagina di login/registrazione */
+body:not(.homepage) .subheader {
+    display: none;
+}
+
 /* Sottobarra dell'header (Subheader) */
 .subheader {
-    background-color: #eee;
-    padding: 15px 0;
+    background-color: #c1121f; /* Colore rosso come da mockup */
+    padding: 5px 0;
     box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.05);
     position: fixed;
     width: 100%;
@@ -240,9 +263,9 @@ Modifiche per l'header, subheader, main content e footer.
 /* Contenitore del contenuto del subheader */
 .subheader-content-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: center; /* Centra gli elementi all'interno di questo wrapper */
     align-items: center;
-    gap: 10px;
+    gap: 50px; /* Spazio fisso tra gli elementi */
 }
 
 /* Elemento del subheader */
@@ -250,30 +273,29 @@ Modifiche per l'header, subheader, main content e footer.
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #333;
-    font-size: 14px;
+    color: white;
+    font-size: 10px;
     font-weight: bold;
     transition: color 0.3s;
     text-align: center;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Impedisce che gli elementi si restringano (importante per il responsive) */
 }
 
 /* Stile hover per l'elemento del subheader */
 .subheader-item:hover {
-    color: #c70000;
+    color: #ccc;
 }
 
 /* Icona circolare nel subheader */
 .subheader-item .circle-icon {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     color: #c70000;
     font-size: 22px;
     transition: background-color 0.3s, box-shadow 0.3s;
@@ -282,22 +304,23 @@ Modifiche per l'header, subheader, main content e footer.
 /* Stile hover per l'icona circolare nel subheader */
 .subheader-item:hover .circle-icon {
     background-color: #f0f0f0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Stile per il contenuto principale */
+
+
+/* Stile per il contenuto principale (main-content-wrapper) */
 .main-content-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    min-height: auto;
+    width: 100%; /* Occupa tutta la larghezza disponibile all'interno del .homepage-background-container */
+    max-width: 1200px; /* Mantiene la larghezza massima definita */
+    margin: 0 auto; /* Centra il blocco orizzontalmente */
+    padding: 0 20px; /* Mantieni il padding laterale */
+    min-height: auto; /* Reimpostiamo l'altezza minima, sarà il container a dettarla */
     position: relative;
-    z-index: 2;
-    padding-bottom: 20px;
+    z-index: 2; /* Assicura che il contenuto sia sopra l'overlay di sfondo */
+    padding-bottom: 20px; /* Padding sotto l'ultima sezione prima del footer */
 }
 
-/* Stile per le sezioni di libri e categorie */
+/* Stile per le sezioni dei contenuti (comune a tutte le sezioni di libri e categorie) */
 .books-section,
 .categories-section {
     background-color: white;
@@ -307,7 +330,7 @@ Modifiche per l'header, subheader, main content e footer.
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Intestazione di ogni sezione */
+/* Intestazione di ogni sezione (es. "In primo piano", "Ultime uscite", "Categorie") */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -317,7 +340,6 @@ Modifiche per l'header, subheader, main content e footer.
     padding-bottom: 15px;
 }
 
-/* Titolo dell'intestazione della sezione */
 .section-header h3 {
     font-size: 24px;
     color: #333;
@@ -327,14 +349,12 @@ Modifiche per l'header, subheader, main content e footer.
     font-weight: normal;
 }
 
-/* Icona nel titolo della sezione */
 .section-header h3 .icon {
     color: #c70000;
     margin-right: 10px;
     font-size: 20px;
 }
 
-/* Link "Visualizza tutto" */
 .section-header .view-all {
     color: #c70000;
     text-decoration: none;
@@ -343,28 +363,27 @@ Modifiche per l'header, subheader, main content e footer.
     transition: color 0.3s;
 }
 
-/* Stile hover per il link "Visualizza tutto" */
 .section-header .view-all:hover {
     color: #a00000;
 }
 
-/* Griglia per i libri e le categorie */
+/* Griglia per i libri e le categorie (stile di base) */
 .books-grid,
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 4 colonne circa, adattivo */
     gap: 25px;
 }
 
-/* Stile del footer */
+/* Stile del footer, comune a tutte le pagine */
 .footer {
-    background-color: #c70000;
+    background-color: #c70000; /* Rosso come da mockup */
     color: white;
-    padding: 20px 0;
+    padding: 20px 0; /* Padding verticale, orizzontale gestito dal wrapper */
     margin-top: 50px;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 10;
+    position: relative; /* Per z-index se necessario */
+    z-index: 10; /* Assicura che il footer sia in cima */
 }
 
 /* Contenitore per gli elementi del footer */
@@ -375,18 +394,15 @@ Modifiche per l'header, subheader, main content e footer.
     font-size: 14px;
 }
 
-/* Titolo del logo nel footer */
 .footer-content-wrapper .logo h1 {
     font-size: 20px;
     margin: 0;
 }
 
-/* Testo del copyright nel footer */
 .footer-content-wrapper .copyright p {
     margin: 0;
 }
 
-/* Icone social nel footer */
 .footer-content-wrapper .social-icons a {
     color: white;
     font-size: 20px;
@@ -395,81 +411,73 @@ Modifiche per l'header, subheader, main content e footer.
     transition: color 0.3s;
 }
 
-/* Stile hover per le icone social nel footer */
 .footer-content-wrapper .social-icons a:hover {
     color: #eee;
 }
 
-/*--- Media Queries per la responsività ---*/
+/* Media Queries per la responsività */
 
-/* Stili per tablet e schermi più piccoli */
+/* Tablet e schermi più piccoli di desktop */
 @media (max-width: 992px) {
-    /* Griglia libri e categorie */
     .books-grid,
     .categories-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Riduci dimensione min per 3-4 colonne */
     }
 
-    /* Dropdown categoria nella search bar */
     .search-bar .category-select {
         padding: 6px 12px;
         font-size: 13px;
     }
 
-    /* Icona circolare del subheader */
     .subheader-item .circle-icon {
         width: 45px;
         height: 45px;
         font-size: 20px;
     }
-
-    /* Testo del subheader */
     .subheader-item span {
         font-size: 13px;
     }
 
-    /* Layout header responsive per tablet: impilato */
+    /* ***************************************************
+       MODIFICHE PER IL LAYOUT HEADER RESPONSIVE (TABLET)
+       Impilato: Logo in alto, poi Search, poi Azioni Utente
+       *************************************************** */
     .header-content-wrapper {
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-wrap: wrap; /* Permette agli elementi di andare a capo */
+        justify-content: center; /* Centra gli elementi quando vanno a capo */
         padding-top: 5px;
         padding-bottom: 5px;
     }
 
-    /* Posizionamento logo nel layout tablet */
     .logo {
-        order: 1;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 10px;
+        order: 1; /* Logo in alto */
+        width: 100%; /* Occupano tutta la larghezza per centrarsi */
+        text-align: center; /* Centra il testo */
+        margin-bottom: 10px; /* Spazio sotto il logo */
     }
-    
-    /* Posizionamento search bar nel layout tablet */
+
     .search-bar-and-category {
-        order: 2;
-        width: 100%;
-        margin: 0;
-        padding: 0 10px;
+        order: 2; /* Barra di ricerca al centro */
+        width: 100%; /* Occupa tutta la larghezza disponibile */
+        margin: 0; /* Rimuovi margini orizzontali in modalità impilata */
+        padding: 0 10px; /* Padding per non attaccarsi ai bordi */
     }
 
-    /* Posizionamento azioni utente nel layout tablet */
     .user-actions {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        margin-top: 15px;
+        order: 3; /* Azioni utente in basso */
+        width: 100%; /* Occupano tutta la larghezza per centrarsi */
+        justify-content: center; /* Centra lingua e login */
+        margin-top: 15px; /* Spazio tra search bar e user actions */
     }
-
-    /* Margine dropdown lingua nel layout tablet */
+    /* Manteniamo il margin-right tra lingua e login */
     .language-dropdown {
         margin-right: 15px;
         margin-bottom: 0;
     }
 }
 
-/* Stili per smartphone in modalità landscape e tablet più piccoli */
+/* Smartphone in modalità landscape (orizzontale) e tablet più piccoli */
 @media (max-width: 768px) {
-    /* Contenitore header */
     .header-content-wrapper {
         flex-wrap: wrap;
         justify-content: center;
@@ -477,15 +485,13 @@ Modifiche per l'header, subheader, main content e footer.
         padding-bottom: 5px;
     }
 
-    /* Logo nel layout mobile */
     .logo {
         order: 1;
         width: 100%;
         text-align: center;
-        margin: 10px 0;
+        margin: 10px 0; /* Margine sopra/sotto */
     }
 
-    /* Search bar nel layout mobile */
     .search-bar-and-category {
         order: 2;
         margin: 0;
@@ -493,80 +499,63 @@ Modifiche per l'header, subheader, main content e footer.
         padding: 0 10px;
     }
 
-    /* Stile search bar mobile */
     .search-bar {
         max-width: 100%;
-        justify-content: flex-start;
+        justify-content: flex-start; /* Allinea a sinistra gli elementi interni */
         padding: 10px 15px;
     }
-
-    /* Input search bar mobile */
     .search-bar input {
         font-size: 14px;
     }
-
-    /* Dropdown categoria search bar mobile */
     .search-bar .category-select {
-        margin-left: auto;
+        margin-left: auto; /* Sposta il select a destra se c'è spazio */
         font-size: 12px;
         padding: 6px 10px;
     }
 
-    /* Azioni utente nel layout mobile */
     .user-actions {
         order: 3;
         width: 100%;
         justify-content: center;
         margin: 10px 0;
-        margin-top: 15px;
+        margin-top: 15px; /* Spazio sopra le azioni utente */
     }
-
-    /* Dropdown lingua nel layout mobile */
     .language-dropdown {
         margin-right: 15px;
         margin-bottom: 0;
     }
 
-    /* Contenitore subheader mobile */
+    /* Subheader mobile */
     .subheader-content-wrapper {
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px 10px;
         padding: 10px 0;
     }
-
-    /* Elemento subheader mobile */
     .subheader-item {
         flex-basis: 30%;
         max-width: 120px;
     }
-
-    /* Icona circolare subheader mobile */
     .subheader-item .circle-icon {
         width: 40px;
         height: 40px;
         font-size: 18px;
     }
-
-    /* Testo subheader mobile */
     .subheader-item span {
-        font-size: 12px;
+        font-size: 13px;
     }
 
-    /* Griglia libri e categorie mobile */
     .books-grid,
     .categories-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 2 o 3 colonne su schermi medi */
         gap: 15px;
     }
 
-    /* Contenitore footer mobile */
     .footer-content-wrapper {
         flex-direction: column;
         text-align: center;
     }
 
-    /* Elementi footer mobile */
     .footer-content-wrapper .logo,
     .footer-content-wrapper .copyright,
     .footer-content-wrapper .social-icons {
@@ -574,63 +563,55 @@ Modifiche per l'header, subheader, main content e footer.
     }
 }
 
-/* Stili per smartphone in modalità portrait (verticale) */
+/* Smartphone in modalità portrait (verticale) */
 @media (max-width: 480px) {
-    /* Header mobile */
     .header {
         padding: 10px 0;
     }
-
-    /* Padding generale ridotto */
     .header-content-wrapper,
-    .subheader-content-wrapper,
     .main-content-wrapper,
     .footer-content-wrapper {
+        padding: 0 10px; /* Riduci il padding generale sui lati */
+    }
+    .subheader-content-wrapper {
         padding: 0 10px;
+        flex-wrap: wrap; /* Assicura che vada a capo se non c'è spazio */
     }
 
-    /* Layout header responsive per smartphone: Logo, Azioni Utente (impilate), Search */
+    /* ***************************************************
+       MODIFICHE PER IL LAYOUT HEADER RESPONSIVE (SMARTPHONE)
+       Logo in alto, poi Azioni Utente (impilate), poi Search
+       Questo è un layout comune per ottimizzare lo spazio.
+       *************************************************** */
     .logo h1 {
         font-size: 20px;
     }
-    
-    /* Azioni utente impilate */
+
     .user-actions {
-        order: 3;
-        flex-direction: column;
-        align-items: center;
+        order: 3; /* Azioni utente sotto la search bar */
+        flex-direction: column; /* Impila lingua e login */
+        align-items: center; /* Centra gli elementi impilati */
         margin-bottom: 10px;
-        margin-top: 10px;
+        margin-top: 10px; /* Spazio sopra le azioni utente */
     }
-
-    /* Margine dropdown lingua quando impilati */
     .language-dropdown {
-        margin-right: 0;
-        margin-bottom: 10px;
+        margin-right: 0; /* Rimuovi margin-right tra lingua e login quando impilati */
+        margin-bottom: 10px; /* Spazio tra lingua e login */
     }
-
-    /* Pulsante login mobile */
     .user-actions .login-button {
         font-size: 14px;
         padding: 6px 12px;
     }
 
-    /* Barra di ricerca mobile */
     .search-bar {
-        padding: 8px 12px;
+        padding: 8px 12px; /* Ancora meno padding per la barra di ricerca */
     }
-
-    /* Input search bar mobile ridotto */
     .search-bar input {
         font-size: 13px;
     }
-
-    /* Icona search bar mobile */
     .search-bar .search-icon {
         font-size: 16px;
     }
-
-    /* Dropdown categoria search bar mobile ridotto */
     .search-bar .category-select {
         font-size: 11px;
         padding: 4px 8px;
@@ -639,103 +620,78 @@ Modifiche per l'header, subheader, main content e footer.
 
     /* Subheader due colonne */
     .subheader {
-        padding: 8px 0;
+        padding: 8px 0; /* Riduci padding verticale della sottobarra */
     }
-
-    /* Contenitore subheader mobile */
     .subheader-content-wrapper {
-        gap: 10px 5px;
+        gap: 10px 5px; /* Riduci il gap, eventualmente a 10px o 5px per schermi molto piccoli */
     }
-
-    /* Elemento subheader mobile (due per riga) */
     .subheader-item {
-        flex-basis: 48%;
-        max-width: 140px;
+        flex-basis: 48%; /* Due elementi per riga, con un piccolo gap */
+        max-width: 140px; /* Limita la larghezza */
     }
-
-    /* Icona circolare subheader mobile ridotta */
     .subheader-item .circle-icon {
         width: 35px;
         height: 35px;
         font-size: 16px;
     }
-
-    /* Testo subheader mobile con ellipsis */
     .subheader-item span {
         font-size: 10px;
-        white-space: nowrap;
+        white-space: nowrap; /* Evita che il testo vada a capo, preferendo l'overflow */
         overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
+        text-overflow: ellipsis; /* Aggiunge "..." se il testo è troppo lungo */
+        max-width: 100%; /* Assicura che l'ellipsis funzioni */
     }
 
-    /* Titolo hero section */
+
     .hero-section h2 {
         font-size: 1.8em;
-        padding: 40px 15px;
+        padding: 40px 15px; /* Riduci padding per hero section */
     }
-
-    /* Sezioni libri e categorie mobile */
     .books-section, .categories-section {
-        padding: 15px;
-        margin-bottom: 20px;
+        padding: 15px; /* Riduci padding delle sezioni */
+        margin-bottom: 20px; /* Riduci margine inferiore */
     }
-
-    /* Titolo sezione mobile */
     .section-header h3 {
         font-size: 20px;
     }
-
-    /* Link "Visualizza tutto" mobile */
     .section-header .view-all {
         font-size: 14px;
     }
 
-    /* Griglia libri e categorie (una colonna) */
     .books-grid,
     .categories-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Una colonna su schermi molto piccoli */
         gap: 15px;
     }
-
-    /* Immagine card libro mobile */
     .book-card img {
         width: 100px;
         height: 150px;
     }
-
-    /* Titolo libro mobile */
     .book-info .book-title {
         font-size: 1em;
     }
-
-    /* Autore libro mobile */
     .book-info .book-author {
         font-size: 0.85em;
     }
-
-    /* Card categoria mobile */
     .category-card {
         height: 100px;
         font-size: 1.2em;
     }
 
-    /* Testo copyright footer mobile */
-    .footer-content-wrapper .copyright p {
-        font-size: 12px;
+    .footer-content-wrapper {
+        flex-direction: column;
+        text-align: center;
     }
 
-    /* Icone social footer mobile */
     .footer-content-wrapper .social-icons a {
         font-size: 18px;
         margin: 0 8px;
     }
 }
 
-/* Orientamento orizzontale per smartphone */
+/* Orientamento orizzontale per smartphone (es. iPhone SE in landscape) */
 @media (max-width: 667px) and (orientation: landscape) {
-    /* Elemento subheader in landscape */
     .subheader-item {
-        flex-basis: 20%;
+        flex-basis: 20%; /* 4-5 elementi per riga */
     }
 }
