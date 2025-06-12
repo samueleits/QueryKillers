@@ -1,15 +1,21 @@
 package com.tbr.lettura.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "books")
+/**
+ * Classe che rappresenta un libro.
+ * Un libro ha un id, un titolo, un autore, un genere, un anno di pubblicazione e una descrizione.
+ * L'id viene generato automaticamente.
+ */
+@Entity // Indica che questa classe è un'entità JPA
+@Table(name = "books") // Specifica il nome della tabella nel database
 public class Libro {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Indica che questo campo è la chiave primaria dell'entità
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica che l'ID sarà generato automaticamente dal database
     private int id;
 
     private String title;
@@ -18,145 +24,116 @@ public class Libro {
     private Integer year;
     private String description;
 
-    public Libro() {}
-    /*metodo che restituisce l'id del libro / 
-     * method that returns the id of the book
+    /**
+     * Costruttore vuoto della classe Libro.
      */
+    public Libro() {}
 
     /**
-    * Retrieves the id of the book.
-    * 
-    * @return the id of the book.
-    */
-    public int getId() {
-         return id; 
-        }
-    /*metodo che modifica l'id del libro / 
-     * method that modifies the id of the book
+     * Restituisce l'id del libro.
+     *
+     * @return id del libro
      */
-    
+    public int getId() {
+        return id;
+    }
+
     /**
-     * Modifies the id of the book.
-     * 
-     * @param id the new id of the book
+     * Modifica l'id del libro.
+     *
+     * @param id nuovo id del libro
      */
     public void setId(int id) {
-         this.id = id; 
-        }
-    
-    /*metodo che restituisce il titolo del libro / 
-     * method that returns the title of the book
-    */ 
-       
-    /**
-    * Retrieves the title of the book.
-    * 
-    * @return the title of the book.
-    */
-    public String getTitle() { 
-        return title; 
+        this.id = id;
     }
-    /*metodo che modifica il titolo del libro / 
-     * method that modifies the title of the book
-    */
-    
+
     /**
-     * Modifies the title of the book.
-     * 
-     * @param title the new title of the book
+     * Restituisce il titolo del libro.
+     *
+     * @return titolo del libro
      */
-    public void setTitle(String title) { 
-        this.title = title; 
+    public String getTitle() {
+        return title;
     }
-    /*metodo che restituisce l'autore del libro / 
-     * method that returns the author of the book
-    */
-    
+
     /**
-     * Retrieves the author of the book.
-     * 
-     * @return the author of the book
+     * Modifica il titolo del libro.
+     *
+     * @param title nuovo titolo del libro
      */
-    public String getAuthor() { 
-        return author; 
+    public void setTitle(String title) {
+        this.title = title;
     }
-    /*metodo che modifica l'autore del libro / 
-     * method that modifies the author of the book
-    */
+
     /**
-     * Modifies the author of the book.
-     * 
-     * @param author the new author of the book
+     * Restituisce l'autore del libro.
+     *
+     * @return autore del libro
      */
-    public void setAuthor(String author) { 
-        this.author = author; 
+    public String getAuthor() {
+        return author;
     }
-    /*metodo che restituisce il genere del libro / 
-     * method that returns the genre of the book
-    */
+
     /**
-     * Retrieves the genre of the book.
-     * 
-     * @return the genre of the book
+     * Modifica l'autore del libro.
+     *
+     * @param author nuovo autore del libro
      */
-    public String getGenre() { 
-        return genre; 
+    public void setAuthor(String author) {
+        this.author = author;
     }
-    /*metodo che modifica il genere del libro / 
-     * method that modifies the genre of the book
-    */
+
     /**
-     * Modifies the genre of the book.
-     * 
-     * @param genre the new genre of the book
+     * Restituisce il genere del libro.
+     *
+     * @return genere del libro
      */
-    public void setGenre(String genre) { 
-        this.genre = genre; 
+    public String getGenre() {
+        return genre;
     }
-    /*metodo che restituisce l'anno di pubblicazione del libro / 
-     * method that returns the year of publication of the book
-    */
-    
+
     /**
-     * Retrieves the year of publication of the book.
-     * 
-     * @return the year of publication of the book
+     * Modifica il genere del libro.
+     *
+     * @param genre nuovo genere del libro
      */
-    public Integer getYear() { 
-        return year; 
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
-    /*metodo che modifica l'anno di pubblicazione del libro / 
-     * method that modifies the year of publication of the book
-    */
+
     /**
-     * Modifies the year of publication of the book.
-     * 
-     * @param year the new year of publication of the book
+     * Restituisce l'anno di pubblicazione del libro.
+     *
+     * @return anno di pubblicazione del libro
      */
-    public void setYear(Integer year) { 
-        this.year = year; 
+    public Integer getYear() {
+        return year;
     }
-    /*metodo che restituisce la descrizione del libro /
-     * method that returns the description of the book
-    */
-    
+
     /**
-     * Retrieves the description of the book.
-     * 
-     * @return the description of the book
+     * Modifica l'anno di pubblicazione del libro.
+     *
+     * @param year nuovo anno di pubblicazione del libro
      */
-    public String getDescription() { 
-        return description; 
+    public void setYear(Integer year) {
+        this.year = year;
     }
-    /*metodo che modifica la descrizione del libro / 
-     * method that modifies the description of the book
-    */
+
     /**
-     * Modifies the description of the book.
-     * 
-     * @param description the new description of the book
+     * Restituisce la descrizione del libro.
+     *
+     * @return descrizione del libro
      */
-    public void setDescription(String description) { 
-        this.description = description; 
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Modifica la descrizione del libro.
+     *
+     * @param description nuova descrizione del libro
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -8,140 +8,109 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "user_books")
+/**
+ * Classe che rappresenta l'associazione tra un utente e un libro.
+ * Contiene l'id dell'associazione, l'id dell'utente, l'id del libro,
+ * se il libro è stato letto e la data in cui è stato letto.
+ */
+@Entity // Indica che questa classe è un'entità JPA
+@Table(name = "user_books") // Specifica il nome della tabella nel database
 public class LibroUser {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Indica che questo campo è la chiave primaria dell'entità
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica che l'ID sarà generato automaticamente dal database
     private int id;
     private int userId;
     private int bookId;
     private boolean isRead;
     private LocalDate read_date;
 
-    /*metodo che restituisce l'id /
-     * method that returns the id
-     */
-    
     /**
-     * Retrieves the id of the UserBook object.
-     * 
-     * @return the id of the UserBook object
+     * Restituisce l'id dell'associazione.
+     *
+     * @return id dell'associazione
      */
     public int getId() {
         return id;
     }
 
-    /*metodo che modifica l'id / 
-     * method that modifies the id
-    */
-    
     /**
-     * Modifies the id of the UserBook object.
-     * 
-     * @param id the new id of the UserBook object
+     * Modifica l'id dell'associazione.
+     *
+     * @param id nuovo id dell'associazione
      */
     public void setId(int id) {
         this.id = id;
     }
 
-
-
-   /*metodo che restituisce l'id dell'utente /
-    * method that returns the id of the user
-    */
-    
     /**
-     * Retrieves the id of the user associated with the UserBook object.
-     * 
-     * @return the id of the user associated with the UserBook object
+     * Restituisce l'id dell'utente.
+     *
+     * @return id dell'utente
      */
     public int getUserId() {
         return userId;
     }
-    
-    /*metodo che modifica l'id dell'utente / 
-     * method that modifies the id of the user
-    */
-    
+
     /**
-     * Modifies the id of the user associated with the UserBook object.
-     * 
-     * @param userId the new id of the user associated with the UserBook object
+     * Modifica l'id dell'utente.
+     *
+     * @param userId nuovo id dell'utente
      */
     public void setUserId(int userId) {
         this.userId = userId;
     }
-    
-    /*metodo che restituisce l'id del libro / 
-     * method that returns the id of the book
-    */
-    
+
     /**
-     * Retrieves the id of the book associated with the UserBook object.
-     * 
-     * @return the id of the book associated with the UserBook object
-    */
+     * Restituisce l'id del libro.
+     *
+     * @return id del libro
+     */
     public int getBookId() {
         return bookId;
     }
-   
 
-
-
-
-
-    /*metodo che restituisce se il libro e' stato letto / 
-     * method that returns if the book has been read
-    */
-    
     /**
-     * Returns if the book has been read.
-     * 
-     * @return true if the book has been read, false otherwise
+     * Modifica l'id del libro.
+     *
+     * @param bookId nuovo id del libro
+     */
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    /**
+     * Restituisce true se il libro è stato letto, false altrimenti.
+     *
+     * @return true se il libro è stato letto, false altrimenti
      */
     public boolean isRead() {
         return isRead;
     }
 
-    /*metodo che modifica se il libro e' stato letto / 
-     * method that modifies if the book has been read
-    */
-    
     /**
-     * Modifies if the book has been read.
-     * 
-     * @param isRead true if the book has been read, false otherwise
+     * Modifica lo stato di lettura del libro.
+     *
+     * @param isRead true se il libro è stato letto, false altrimenti
      */
     public void setRead(boolean isRead) {
         this.isRead = isRead;
     }
 
-    /*metodo che restituisce la data in cui il libro e' stato letto / 
-     * method that returns the date when the book was read
-    */
-    
     /**
-    * Retrieves the date when the book was read.
-    * 
-    * @return the date when the book was read
-    */
-
+     * Restituisce la data in cui il libro è stato letto.
+     *
+     * @return data di lettura del libro
+     */
     public LocalDate getRead_date() {
         return read_date;
     }
 
-    /*metodo che modifica la data in cui il libro e' stato letto / 
-     * method that modifies the date when the book was read
-    */
-    
     /**
-     * Modifies the date when the book was read.
-     * 
-     * @param readDate the new date when the book was read
+     * Modifica la data in cui il libro è stato letto.
+     *
+     * @param read_date nuova data di lettura del libro
      */
     public void setRead_date(LocalDate read_date) {
         this.read_date = read_date;
     }
-
 }

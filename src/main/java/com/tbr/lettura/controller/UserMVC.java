@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.tbr.lettura.model.Users;
 import com.tbr.lettura.service.UserService;
 
+/**
+ * Controller MVC per la gestione degli utenti.
+ * Gestisce la registrazione di nuovi utenti e la visualizzazione del form di registrazione.
+ */
 @Controller
 public class UserMVC {
 
@@ -29,8 +33,8 @@ public class UserMVC {
     }
 
     /**
-     * Registra un nuovo utente e lo reindirizza alla pagina di login se la registrazione ha successo, altrimenti
-     * restituisce nuovamente la pagina di registrazione con un messaggio di errore.
+     * Registra un nuovo utente e lo reindirizza alla pagina di login se la registrazione ha successo,
+     * altrimenti restituisce nuovamente la pagina di registrazione con un messaggio di errore.
      * 
      * @param user l'oggetto User contenente le informazioni dell'utente
      * @param model il modello che contiene l'eventuale messaggio di errore
@@ -47,8 +51,5 @@ public class UserMVC {
           model.addAttribute("error", "Email già in uso o password non valida (12 caratteri, almeno una maiuscola e un carattere speciale)");
           return "register"; 
          }
-
     }
-
-
 }
