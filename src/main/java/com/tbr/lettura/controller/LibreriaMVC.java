@@ -41,7 +41,7 @@ public class LibreriaMVC {
     public String getLibri(Model model) {
         model.addAttribute("titolo", "I più grandi libri di sempre");
         model.addAttribute("libri", libroService.getLibri());
-        return "principale-login";
+        return "index";
     }
 
     /**
@@ -56,6 +56,6 @@ public class LibreriaMVC {
         libroService.addLibro(libro);
         model.addAttribute("titolo", "I più grandi libri di sempre");
         model.addAttribute("libri", libroService.getLibri());
-        return "principale-login";
+        return "index";
     }
 }
