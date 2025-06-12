@@ -32,93 +32,24 @@ public class LibroUser {
     private boolean isRead;
     private LocalDate read_date;
 
-    /**
-     * Restituisce l'id dell'associazione.
-     *
-     * @return id dell'associazione
-     */
-    public int getId() {
-        return id;
-    }
+   public LibroUser() {}
 
-    /**
-     * Modifica l'id dell'associazione.
-     *
-     * @param id nuovo id dell'associazione
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Restituisce l'id dell'utente.
-     *
-     * @return id dell'utente
-     */
-    public int getUserId() {
-        return userId;
-    }
-
-    /**
-     * Modifica l'id dell'utente.
-     *
-     * @param userId nuovo id dell'utente
-     */
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    /**
-     * Restituisce l'id del libro.
-     *
-     * @return id del libro
-     */
-    public int getBookId() {
-        return bookId;
-    }
-
-    /**
-     * Modifica l'id del libro.
-     *
-     * @param bookId nuovo id del libro
-     */
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
-
-    /**
-     * Restituisce true se il libro è stato letto, false altrimenti.
-     *
-     * @return true se il libro è stato letto, false altrimenti
-     */
-    public boolean isRead() {
-        return isRead;
-    }
-
-    /**
-     * Modifica lo stato di lettura del libro.
-     *
-     * @param isRead true se il libro è stato letto, false altrimenti
-     */
-    public void setRead(boolean isRead) {
+    public LibroUser(Users user, Libro book, boolean isRead, LocalDate read_date) {
+        this.user = user;
+        this.book = book;
         this.isRead = isRead;
-    }
-
-    /**
-     * Restituisce la data in cui il libro è stato letto.
-     *
-     * @return data di lettura del libro
-     */
-    public LocalDate getRead_date() {
-        return read_date;
-    }
-
-    /**
-     * Modifica la data in cui il libro è stato letto.
-     *
-     * @param read_date nuova data di lettura del libro
-     */
-    public void setRead_date(LocalDate read_date) {
         this.read_date = read_date;
     }
+
+    // Getter e Setter
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public Users getUser() { return user; }
+    public void setUser(Users user) { this.user = user; }
+    public Libro getBook() { return book; }
+    public void setBook(Libro book) { this.book = book; }
+    public boolean isRead() { return isRead; } // Convenzione per boolean
+    public void setRead(boolean isRead) { this.isRead = isRead; }
+    public LocalDate getRead_date() { return read_date; }
+    public void setRead_date(LocalDate read_date) { this.read_date = read_date; }
 }
