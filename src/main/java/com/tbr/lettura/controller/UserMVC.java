@@ -29,7 +29,7 @@ public class UserMVC {
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new Users()); 
-        return "register"; 
+        return "index"; 
     }
 
     /**
@@ -49,7 +49,7 @@ public class UserMVC {
        }
          else {
           model.addAttribute("error", "Email già in uso o password non valida (12 caratteri, almeno una maiuscola e un carattere speciale)");
-          return "register"; 
+          return "index"; 
          }
     }
 }
