@@ -19,11 +19,10 @@ public class Libro {
     private String description;
 
     public Libro() {}
-    /*metodo che restituisce l'id del libro / 
-     * method that returns the id of the book
-     */
+    
 
     /**
+     * metodo che restituisce l'id del libro / 
     * Retrieves the id of the book.
     * 
     * @return the id of the book.
@@ -31,11 +30,10 @@ public class Libro {
     public int getId() {
          return id; 
         }
-    /*metodo che modifica l'id del libro / 
-     * method that modifies the id of the book
-     */
+    
     
     /**
+     * metodo che modifica l'id del libro / 
      * Modifies the id of the book.
      * 
      * @param id the new id of the book
@@ -44,11 +42,10 @@ public class Libro {
          this.id = id; 
         }
     
-    /*metodo che restituisce il titolo del libro / 
-     * method that returns the title of the book
-    */ 
+    
        
     /**
+     * metodo che restituisce il titolo del libro / 
     * Retrieves the title of the book.
     * 
     * @return the title of the book.
@@ -56,11 +53,10 @@ public class Libro {
     public String getTitle() { 
         return title; 
     }
-    /*metodo che modifica il titolo del libro / 
-     * method that modifies the title of the book
-    */
+   
     
     /**
+     * metodo che modifica il titolo del libro / 
      * Modifies the title of the book.
      * 
      * @param title the new title of the book
@@ -68,11 +64,10 @@ public class Libro {
     public void setTitle(String title) { 
         this.title = title; 
     }
-    /*metodo che restituisce l'autore del libro / 
-     * method that returns the author of the book
-    */
+    
     
     /**
+     * metodo che restituisce l'autore del libro / 
      * Retrieves the author of the book.
      * 
      * @return the author of the book
@@ -80,10 +75,9 @@ public class Libro {
     public String getAuthor() { 
         return author; 
     }
-    /*metodo che modifica l'autore del libro / 
-     * method that modifies the author of the book
-    */
+   
     /**
+     * metodo che modifica l'autore del libro / 
      * Modifies the author of the book.
      * 
      * @param author the new author of the book
@@ -91,10 +85,9 @@ public class Libro {
     public void setAuthor(String author) { 
         this.author = author; 
     }
-    /*metodo che restituisce il genere del libro / 
-     * method that returns the genre of the book
-    */
+    
     /**
+     * metodo che restituisce il genere del libro /
      * Retrieves the genre of the book.
      * 
      * @return the genre of the book
@@ -102,10 +95,9 @@ public class Libro {
     public String getGenre() { 
         return genre; 
     }
-    /*metodo che modifica il genere del libro / 
-     * method that modifies the genre of the book
-    */
+    
     /**
+     * metodo che modifica il genere del libro / 
      * Modifies the genre of the book.
      * 
      * @param genre the new genre of the book
@@ -113,11 +105,10 @@ public class Libro {
     public void setGenre(String genre) { 
         this.genre = genre; 
     }
-    /*metodo che restituisce l'anno di pubblicazione del libro / 
-     * method that returns the year of publication of the book
-    */
+    
     
     /**
+     * metodo che restituisce l'anno di pubblicazione del libro / 
      * Retrieves the year of publication of the book.
      * 
      * @return the year of publication of the book
@@ -125,10 +116,9 @@ public class Libro {
     public Integer getYear() { 
         return year; 
     }
-    /*metodo che modifica l'anno di pubblicazione del libro / 
-     * method that modifies the year of publication of the book
-    */
+   
     /**
+     * metodo che modifica l'anno di pubblicazione del libro / 
      * Modifies the year of publication of the book.
      * 
      * @param year the new year of publication of the book
@@ -136,11 +126,10 @@ public class Libro {
     public void setYear(Integer year) { 
         this.year = year; 
     }
-    /*metodo che restituisce la descrizione del libro /
-     * method that returns the description of the book
-    */
+   
     
     /**
+     * metodo che restituisce la descrizione del libro /
      * Retrieves the description of the book.
      * 
      * @return the description of the book
@@ -148,10 +137,9 @@ public class Libro {
     public String getDescription() { 
         return description; 
     }
-    /*metodo che modifica la descrizione del libro / 
-     * method that modifies the description of the book
-    */
+    
     /**
+     * metodo che modifica la descrizione del libro / 
      * Modifies the description of the book.
      * 
      * @param description the new description of the book

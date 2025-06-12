@@ -12,9 +12,9 @@ import java.util.List;
 public class LibroService {
      @Autowired
     private LibroRepository libroRepository;
-    /*metodo che restituisce tutti i libri / 
-    method that returns all books */
+   
     /**
+     * metodo che restituisce tutti i libri / 
     * Retrieves a list of all books from the repository.
     *
     * @return a List of Libro objects representing all the books available.
@@ -22,12 +22,11 @@ public class LibroService {
     public List<Libro> getLibri() {
         return libroRepository.findAll();
     }
-    /*metodo che restituisce un libro in base all'id /
-     * method that returns a book based on its id
-     */
+   
     
    
     /**
+     * metodo che restituisce un libro in base all'id /
      * Retrieves a book from the repository by its id.
      *
      * @param id the id of the book to be retrieved
@@ -43,11 +42,10 @@ public class LibroService {
         return null;
     }
 
-    /*metodo che restituisce tutti i libri in base all'autore / 
-     * method that returns all books based on the author
-    */
+   
     
     /**
+     * metodo che restituisce tutti i libri in base all'autore / 
     * Retrieves a list of books from the repository by the author's name.
     *
     * @param author the author's name to search for
@@ -63,11 +61,10 @@ public class LibroService {
         }
         return libriByAuthor;
     }
-    /*metodo che restituisce tutti i libri in base al titolo / 
-     * method that returns all books based on the title
-    */
+    
     
     /**
+     * metodo che restituisce tutti i libri in base al titolo / 
      * Retrieves a list of books from the repository by the book's title.
      * 
      * @param title the title of the book to search for
@@ -82,9 +79,13 @@ public class LibroService {
         }
         return libriByTitle;
     }
-    /*metodo che restituisce tutti i libri in base al genere / 
-     * method that returns all books based on the genre
-    */
+    /**
+     * metodo che restituisce tutti i libri in base al genere / 
+     * Retrieves a list of books from the repository by the book's genre.
+     * 
+     * @param genre the genre of the books to search for
+     * @return a List of Libro objects with the given genre
+     */
      public List<Libro> getLibroByGenre(String genre) {
         List<Libro> libriByGenre = new ArrayList<>();
         for(Libro l : libroRepository.findAll()) {
@@ -94,11 +95,9 @@ public class LibroService {
         }
         return libriByGenre;
     }
-    /*metodo che restituisce tutti i libri in base all'anno di pubblicazione / 
-     * method that returns all books based on the publication year
-    */
     
     /**
+     * metodo che restituisce tutti i libri in base all'anno di pubblicazione /
      * Retrieves a list of books from the repository by the book's year of publication.
      * 
      * @param year the year of publication of the books to search for
@@ -113,12 +112,11 @@ public class LibroService {
         }
         return libriByYear;
     }
-    /*metodo che restituisce tutti i libri che sono stati pubblicati tra due anni / 
-     * method that returns all books published between two years
-    */
     
     /**
-    * Retrieves a list of books from the repository that were published between two specified years.
+     * metodo che restituisce tutti i libri che sono stati pubblicati tra due anni /
+    * Retrieves a list of books from the repository that were published between 
+    * two specified years.
     *
     * @param firstYear the starting year of the publication range
     * @param secondYear the ending year of the publication range
@@ -134,12 +132,9 @@ public class LibroService {
         }
         return libriByBetweenYear;
     }
-
-    /*metodo che aggiunge un libro /
-     * method that adds a book
-     */
     
     /**
+     * metodo che aggiunge un libro /
      * Adds a book to the repository.
      *
      * @param libro the book to be added
@@ -147,9 +142,12 @@ public class LibroService {
     public void addLibro(Libro libro) {
         libroRepository.save(libro);
     }
-    /*metodo che cancella un libro /
-     * method that deletes a book
-    */
+    /**
+     * metodo che cancella un libro /
+     * Deletes a book from the repository by its id.
+     * 
+     * @param id the id of the book to be deleted
+     */
      public void deleteLibro(int id) {
         libroRepository.deleteById(id);
     }
