@@ -1,0 +1,233 @@
+/*-----------------------------------------------------
+Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage
+-----------------------------------------------------*/
+
+/* Contenitore per lo sfondo homepage */
+.homepage-background-container {
+  background-image: url("../img/Sfondo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 60vw;
+  min-height: 90vh;
+  border-radius: 10px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 1;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Wrapper contenuto principale */
+.main-content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+  padding: 0 20px;
+  min-height: auto;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 20px;
+}
+
+/* Sezione hero (banner) */
+.hero-section {
+  background: linear-gradient(to right, #e2e2e2, #f5f5f5);
+  border-radius: 10px;
+  padding: 60px 40px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titolo sezione hero */
+.hero-section h2 {
+  font-size: 4em;
+  color: #c70000;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Stile card libro */
+.book-card {
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Hover card libro */
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Immagine card libro */
+.book-card img {
+  width: 150px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Info card libro */
+.book-info {
+  width: 100%;
+}
+
+/* Autore card libro */
+.book-info .book-author {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+/* Titolo card libro */
+.book-info .book-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+/* Genere card libro */
+.book-info .book-genre {
+  font-size: 0.8em;
+  color: #c70000;
+  background-color: rgba(199, 0, 0, 0.1);
+  padding: 3px 8px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* Stile card categoria */
+.category-card {
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Hover card categoria */
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Sfondo categoria Thriller */
+.category-card.thriller {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("https://picsum.photos/id/1018/300/120");
+}
+/* Sfondo categoria Letteratura */
+.category-card.letteratura {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("https://picsum.photos/id/1019/300/120");
+}
+/* Sfondo categoria Fumetti */
+.category-card.fumetti {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("https://picsum.photos/id/1020/300/120");
+}
+/* Sfondo categoria Fantasy */
+.category-card.fantasy {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("https://picsum.photos/id/1021/300/120");
+}
+/* Sfondo categoria Narrativa */
+.category-card.narrativa {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("https://picsum.photos/id/1022/300/120");
+}
+/* Sfondo categoria Horror */
+.category-card.horror {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("https://picsum.photos/id/1023/300/120");
+}
+
+/*-----------------------------------------------------
+Modifiche per rendere responsive l'homepage
+-----------------------------------------------------*/
+
+/* Media per tablet e schermi più piccoli */
+@media (max-width: 992px) {
+  .homepage-background-container {
+    width: 80vw;
+    min-height: 85vh;
+    padding: 25px;
+  }
+}
+
+/* Media per smartphone landscape e tablet */
+@media (max-width: 768px) {
+  .homepage-background-container {
+    width: 95vw;
+    min-height: auto;
+    padding: 20px 15px;
+    margin: 15px auto;
+    border-radius: 8px;
+  }
+  .hero-section h2 {
+    font-size: 2.5em;
+    padding: 30px 20px;
+  }
+  .book-card img {
+    width: 120px;
+    height: 180px;
+  }
+}
+
+/* Media per smartphone portrait */
+@media (max-width: 480px) {
+  .homepage-background-container {
+    width: 100%;
+    min-height: auto;
+    padding: 15px 10px;
+    margin: 10px 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .hero-section h2 {
+    font-size: 2em;
+    padding: 25px 10px;
+  }
+  .book-card,
+  .category-card {
+    max-width: none;
+    margin: 0 auto;
+  }
+  .book-card img {
+    width: 100%;
+    max-width: 140px;
+    height: auto;
+  }
+  .category-card {
+    height: 90px;
+    font-size: 1.1em;
+  }
+}

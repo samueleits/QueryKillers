@@ -1,0 +1,741 @@
+/*-----------------------------------------------------
+Stili globali per il layout del sito, inclusi body, header e footer.
+-----------------------------------------------------*/
+
+/* Stile di base per l'intera pagina */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 130px;
+}
+
+/* Reset di base per tutti i titoli (h1-h6) e i link */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+/* Stile di base per tutti i link */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Rimuove la sottolineatura dai link quando ci si passa sopra con il mouse (hover) */
+a:hover {
+    text-decoration: none;
+}
+
+
+/*-----------------------------------------------------
+Modifiche per l'header, subheader, main content e footer.
+-----------------------------------------------------*/
+
+/* Padding laterale per i contenitori di header e footer */
+.header-content-wrapper,
+.footer-content-wrapper {
+    padding: 0 20px;
+}
+
+/* Larghezza massima e centraggio orizzontale per subheader e main content */
+.subheader-content-wrapper,
+.main-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+/* Stile per l'header del sito */
+.header {
+    background-color: #780000;
+    padding: 15px 0;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Stile del logo nell'header e nel footer */
+.logo h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Rimuove sottolineatura dal link del logo */
+.logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Contenitore per gli elementi nella parte superiore dell'header */
+.header-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contenitore per la barra di ricerca e la categoria */
+.search-bar-and-category {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+    max-width: 600px;
+}
+
+/* Barra di ricerca */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+/* Icona lente di ingrandimento */
+.search-bar .search-icon {
+    color: #7800007f;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* Input di ricerca */
+.search-bar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: #780000;
+    font-weight: bolder;
+    font-size: 16px;
+    padding: 0;
+    flex-grow: 1;
+    
+    &::placeholder {
+        color: #7800007f;
+    }
+}
+
+/* Dropdown per le categorie */
+.search-bar .category-select {
+    background-color: #d1d1d1;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    color: #780000;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+    margin-left: 15px;
+}
+
+/* Opzioni del dropdown della categoria */
+.search-bar .category-select option {
+    color: #780000;
+    font-weight: bold;
+    background-color: white;
+}
+
+/* Sezione delle azioni utente */
+.user-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* Stile per il dropdown della lingua */
+.language-dropdown {
+    position: relative;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+/* Stile per il testo della lingua corrente */
+.language-dropdown .current-language {
+    color: white;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* Icona del dropdown della lingua */
+.language-dropdown .current-language i {
+    margin-left: 5px;
+}
+
+/* Opzioni del dropdown della lingua */
+.language-dropdown .language-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    min-width: 120px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Stile per i link delle opzioni di lingua */
+.language-dropdown .language-options a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Stile hover per i link delle opzioni di lingua */
+.language-dropdown .language-options a:hover {
+    background-color: #f0f0f0;
+    text-decoration: none;
+}
+
+/* Mostra le opzioni quando il dropdown è attivo */
+.language-dropdown.active .language-options {
+    display: block;
+}
+
+/* Stile per il pulsante di login */
+.user-actions .login-button {
+    background-color: white;
+    color: #780000;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Stile hover per il pulsante di login */
+.user-actions .login-button:hover {
+    background-color: #eee;
+}
+
+/* Sottobarra dell'header (Subheader) */
+.subheader {
+    background-color: #eee;
+    padding: 15px 0;
+    box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+
+/* Contenitore del contenuto del subheader */
+.subheader-content-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Elemento del subheader */
+.subheader-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    transition: color 0.3s;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Stile hover per l'elemento del subheader */
+.subheader-item:hover {
+    color: #c70000;
+}
+
+/* Icona circolare nel subheader */
+.subheader-item .circle-icon {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #c70000;
+    font-size: 22px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Stile hover per l'icona circolare nel subheader */
+.subheader-item:hover .circle-icon {
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Stile per il contenuto principale */
+.main-content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: auto;
+    position: relative;
+    z-index: 2;
+    padding-bottom: 20px;
+}
+
+/* Stile per le sezioni di libri e categorie */
+.books-section,
+.categories-section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Intestazione di ogni sezione */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+/* Titolo dell'intestazione della sezione */
+.section-header h3 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+}
+
+/* Icona nel titolo della sezione */
+.section-header h3 .icon {
+    color: #c70000;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+/* Link "Visualizza tutto" */
+.section-header .view-all {
+    color: #c70000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+/* Stile hover per il link "Visualizza tutto" */
+.section-header .view-all:hover {
+    color: #a00000;
+}
+
+/* Griglia per i libri e le categorie */
+.books-grid,
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+/* Stile del footer */
+.footer {
+    background-color: #c70000;
+    color: white;
+    padding: 20px 0;
+    margin-top: 50px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+/* Contenitore per gli elementi del footer */
+.footer-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+/* Titolo del logo nel footer */
+.footer-content-wrapper .logo h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+/* Testo del copyright nel footer */
+.footer-content-wrapper .copyright p {
+    margin: 0;
+}
+
+/* Icone social nel footer */
+.footer-content-wrapper .social-icons a {
+    color: white;
+    font-size: 20px;
+    margin-left: 15px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Stile hover per le icone social nel footer */
+.footer-content-wrapper .social-icons a:hover {
+    color: #eee;
+}
+
+/*--- Media Queries per la responsività ---*/
+
+/* Stili per tablet e schermi più piccoli */
+@media (max-width: 992px) {
+    /* Griglia libri e categorie */
+    .books-grid,
+    .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    /* Dropdown categoria nella search bar */
+    .search-bar .category-select {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    /* Icona circolare del subheader */
+    .subheader-item .circle-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    /* Testo del subheader */
+    .subheader-item span {
+        font-size: 13px;
+    }
+
+    /* Layout header responsive per tablet: impilato */
+    .header-content-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    /* Posizionamento logo nel layout tablet */
+    .logo {
+        order: 1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    /* Posizionamento search bar nel layout tablet */
+    .search-bar-and-category {
+        order: 2;
+        width: 100%;
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    /* Posizionamento azioni utente nel layout tablet */
+    .user-actions {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    /* Margine dropdown lingua nel layout tablet */
+    .language-dropdown {
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+}
+
+/* Stili per smartphone in modalità landscape e tablet più piccoli */
+@media (max-width: 768px) {
+    /* Contenitore header */
+    .header-content-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    /* Logo nel layout mobile */
+    .logo {
+        order: 1;
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    /* Search bar nel layout mobile */
+    .search-bar-and-category {
+        order: 2;
+        margin: 0;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    /* Stile search bar mobile */
+    .search-bar {
+        max-width: 100%;
+        justify-content: flex-start;
+        padding: 10px 15px;
+    }
+
+    /* Input search bar mobile */
+    .search-bar input {
+        font-size: 14px;
+    }
+
+    /* Dropdown categoria search bar mobile */
+    .search-bar .category-select {
+        margin-left: auto;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    /* Azioni utente nel layout mobile */
+    .user-actions {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin: 10px 0;
+        margin-top: 15px;
+    }
+
+    /* Dropdown lingua nel layout mobile */
+    .language-dropdown {
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+
+    /* Contenitore subheader mobile */
+    .subheader-content-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px 10px;
+        padding: 10px 0;
+    }
+
+    /* Elemento subheader mobile */
+    .subheader-item {
+        flex-basis: 30%;
+        max-width: 120px;
+    }
+
+    /* Icona circolare subheader mobile */
+    .subheader-item .circle-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    /* Testo subheader mobile */
+    .subheader-item span {
+        font-size: 12px;
+    }
+
+    /* Griglia libri e categorie mobile */
+    .books-grid,
+    .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    /* Contenitore footer mobile */
+    .footer-content-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Elementi footer mobile */
+    .footer-content-wrapper .logo,
+    .footer-content-wrapper .copyright,
+    .footer-content-wrapper .social-icons {
+        margin-bottom: 10px;
+    }
+}
+
+/* Stili per smartphone in modalità portrait (verticale) */
+@media (max-width: 480px) {
+    /* Header mobile */
+    .header {
+        padding: 10px 0;
+    }
+
+    /* Padding generale ridotto */
+    .header-content-wrapper,
+    .subheader-content-wrapper,
+    .main-content-wrapper,
+    .footer-content-wrapper {
+        padding: 0 10px;
+    }
+
+    /* Layout header responsive per smartphone: Logo, Azioni Utente (impilate), Search */
+    .logo h1 {
+        font-size: 20px;
+    }
+    
+    /* Azioni utente impilate */
+    .user-actions {
+        order: 3;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    /* Margine dropdown lingua quando impilati */
+    .language-dropdown {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    /* Pulsante login mobile */
+    .user-actions .login-button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    /* Barra di ricerca mobile */
+    .search-bar {
+        padding: 8px 12px;
+    }
+
+    /* Input search bar mobile ridotto */
+    .search-bar input {
+        font-size: 13px;
+    }
+
+    /* Icona search bar mobile */
+    .search-bar .search-icon {
+        font-size: 16px;
+    }
+
+    /* Dropdown categoria search bar mobile ridotto */
+    .search-bar .category-select {
+        font-size: 11px;
+        padding: 4px 8px;
+        margin-left: 10px;
+    }
+
+    /* Subheader due colonne */
+    .subheader {
+        padding: 8px 0;
+    }
+
+    /* Contenitore subheader mobile */
+    .subheader-content-wrapper {
+        gap: 10px 5px;
+    }
+
+    /* Elemento subheader mobile (due per riga) */
+    .subheader-item {
+        flex-basis: 48%;
+        max-width: 140px;
+    }
+
+    /* Icona circolare subheader mobile ridotta */
+    .subheader-item .circle-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    /* Testo subheader mobile con ellipsis */
+    .subheader-item span {
+        font-size: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    /* Titolo hero section */
+    .hero-section h2 {
+        font-size: 1.8em;
+        padding: 40px 15px;
+    }
+
+    /* Sezioni libri e categorie mobile */
+    .books-section, .categories-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    /* Titolo sezione mobile */
+    .section-header h3 {
+        font-size: 20px;
+    }
+
+    /* Link "Visualizza tutto" mobile */
+    .section-header .view-all {
+        font-size: 14px;
+    }
+
+    /* Griglia libri e categorie (una colonna) */
+    .books-grid,
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Immagine card libro mobile */
+    .book-card img {
+        width: 100px;
+        height: 150px;
+    }
+
+    /* Titolo libro mobile */
+    .book-info .book-title {
+        font-size: 1em;
+    }
+
+    /* Autore libro mobile */
+    .book-info .book-author {
+        font-size: 0.85em;
+    }
+
+    /* Card categoria mobile */
+    .category-card {
+        height: 100px;
+        font-size: 1.2em;
+    }
+
+    /* Testo copyright footer mobile */
+    .footer-content-wrapper .copyright p {
+        font-size: 12px;
+    }
+
+    /* Icone social footer mobile */
+    .footer-content-wrapper .social-icons a {
+        font-size: 18px;
+        margin: 0 8px;
+    }
+}
+
+/* Orientamento orizzontale per smartphone */
+@media (max-width: 667px) and (orientation: landscape) {
+    /* Elemento subheader in landscape */
+    .subheader-item {
+        flex-basis: 20%;
+    }
+}
