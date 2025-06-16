@@ -55,6 +55,40 @@ body {
     color: white;
 }
 
+.global-error-banner {
+    background: #c70000;
+    color: #fff;
+    padding: 16px 0;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.close-error-banner {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+    line-height: 1;
+}
+body {
+    padding-top: 60px; /* per non coprire il contenuto */
+}
+.info-message {
+    color: #1976d2;
+    font-size: 0.95em;
+    margin-top: 5px;
+}
+
 /* Stile comune per i form di autenticazione */
 .auth-form {
     display: none; /* Nascosto di default, gestito da JS */

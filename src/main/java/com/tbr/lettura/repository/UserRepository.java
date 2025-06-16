@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
      * @return true se esiste un utente con quell'email, false altrimenti
      */
     boolean existsByEmail(String email);
+    Users findByEmail(String email);
+    Users findByUsername(String username);
 }

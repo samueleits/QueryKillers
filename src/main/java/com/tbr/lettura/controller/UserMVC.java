@@ -29,7 +29,13 @@ public class UserMVC {
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new Users()); 
-        return "index"; 
+        return "login"; 
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("user", new Users());
+        return "login";
     }
 
     /**
@@ -42,14 +48,34 @@ public class UserMVC {
      */
     @PostMapping("/register")
     public String registerUser(@ModelAttribute Users user, Model model) {
-       boolean success = userService.registerUser(user);
-
-       if (success){
-        return "redirect:/login"; 
-       }
-         else {
-          model.addAttribute("error", "Email già in uso o password non valida (12 caratteri, almeno una maiuscola e un carattere speciale)");
-          return "index"; 
-         }
+        if (userService.emailExists(user.getEmail())) {
+            model.addAttribute("registerError", "Email già in uso.");
+            model.addAttribute("showRegister", true); // Attiva il form di registrazione
+            return "login";
+        }
+        if (!userService.isPasswordValid(user.getPassword_hash())) {
+            model.addAttribute("registerError", "Password non valida: almeno 12 caratteri, una maiuscola e un carattere speciale.");
+            model.addAttribute("showRegister", true); // Attiva il form di registrazione
+            return "login";
+        }
+        userService.registerUser(user);
+        model.addAttribute("registerSuccess", "Registrazione avvenuta con successo! Ora puoi accedere.");
+        return "login";
     }
+
+    @PostMapping("/login")
+        public String loginUser(@ModelAttribute("user") Users user, Model model) {
+            Users dbUser = userService.findByEmail(user.getEmail());
+            if (dbUser == null) {
+                model.addAttribute("loginError", "Email non trovata.");
+                model.addAttribute("showRegister", false); // Attiva il form di login
+                return "login";
+            }
+            if (!dbUser.getPassword_hash().equals(user.getPassword_hash())) {
+                model.addAttribute("loginError", "Password errata.");
+                model.addAttribute("showRegister", false); // Attiva il form di login
+                return "login";
+            }
+            return "redirect:/";
+        }
 }
