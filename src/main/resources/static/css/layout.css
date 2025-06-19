@@ -19,7 +19,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0.5em;
-    color: #333;
+    color: #003049;
 }
 
 /* Stile di base per tutti i link */
@@ -59,7 +59,6 @@ Modifiche per l'header, subheader, main content e footer.
 .header {
     background-color: #780000;
     padding: 15px 0;
-    color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: fixed; /* Rende l'header fisso */
     top: 0;
@@ -105,7 +104,7 @@ Modifiche per l'header, subheader, main content e footer.
 .search-bar {
     display: flex;
     align-items: center;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     border-radius: 50px;
     padding: 15px 20px;
     width: 100%; /* La barra occupa il 100% della larghezza disponibile nel suo contenitore .search-bar-and-category */
@@ -132,29 +131,6 @@ Modifiche per l'header, subheader, main content e footer.
     &::placeholder {
         color: #7800007f;
     }
-}
-
-/* Dropdown per le categorie all'interno della barra di ricerca ("Tutte le categorie") */
-.search-bar .category-select {
-    background-color: #d1d1d1;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 15px;
-    color: #780000;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    appearance: none; /* Rimuove lo stile di default del browser per il select */
-    cursor: pointer;
-    outline: none; /* Rimuove il contorno quando selezioni */
-    margin-left: 15px;
-}
-
-/* dropdown della categoria */
-.search-bar .category-select option {
-    color: #780000; /* Colore del testo delle opzioni quando il dropdown è aperto */
-    font-weight: bold;
-    background-color: white;
 }
 
 /* Sezione delle azioni utente (lingua e login) */
@@ -214,7 +190,7 @@ Modifiche per l'header, subheader, main content e footer.
 
 /* Stile per il pulsante di login */
 .user-actions .login-button {
-    background-color: white;
+    background-color: white; /* Colore giallo chiaro come da mockup */
     color: #780000;
     padding: 8px 15px;
     border-radius: 20px;
@@ -225,10 +201,10 @@ Modifiche per l'header, subheader, main content e footer.
 }
 
 .user-actions .login-button:hover {
-    background-color: #eee;
+    background-color: #fdf0d5b4;
 }
 
-/* Aggiungi stile per l'icona profilo "DM" */
+/* Aggiungi stile per l'icona profilo */
 .profile-icon {
     background-color: white;
     color: #780000;
@@ -273,7 +249,7 @@ body:not(.homepage) .subheader {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
+    color: #fdf0d5;
     font-size: 10px;
     font-weight: bold;
     transition: color 0.3s;
@@ -283,14 +259,14 @@ body:not(.homepage) .subheader {
 
 /* Stile hover per l'elemento del subheader */
 .subheader-item:hover {
-    color: #ccc;
+    color: #fdf0d5b4;
 }
 
 /* Icona circolare nel subheader */
 .subheader-item .circle-icon {
     width: 40px;
     height: 40px;
-    background-color: white;
+    background-color: #fdf0d5;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -298,12 +274,11 @@ body:not(.homepage) .subheader {
     margin-bottom: 5px;
     color: #c70000;
     font-size: 22px;
-    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 /* Stile hover per l'icona circolare nel subheader */
 .subheader-item:hover .circle-icon {
-    background-color: #f0f0f0;
+    background-color: #fdf0d5b4;
 }
 
 
@@ -324,7 +299,7 @@ body:not(.homepage) .subheader {
 .books-section,
 .categories-section {
     background-color: white;
-    border-radius: 10px;
+    border-radius:20px;
     padding: 25px;
     margin-bottom: 30px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -335,36 +310,35 @@ body:not(.homepage) .subheader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
 }
 
 .section-header h3 {
-    font-size: 24px;
-    color: #333;
-    margin: 0;
+    font-size: 150%;
+    color: #003049;
+    font-weight: bold;
     display: flex;
     align-items: center;
     font-weight: normal;
 }
 
 .section-header h3 .icon {
-    color: #c70000;
+    color: #003049;
     margin-right: 10px;
     font-size: 20px;
 }
 
 .section-header .view-all {
-    color: #c70000;
-    text-decoration: none;
+    color: #003049;
     font-weight: bold;
-    font-size: 16px;
-    transition: color 0.3s;
+    font-size: 100%;
+    transition: color 0.2s;
 }
 
 .section-header .view-all:hover {
-    color: #a00000;
+    color: #002f4960;
 }
 
 /* Griglia per i libri e le categorie (stile di base) */
@@ -377,11 +351,10 @@ body:not(.homepage) .subheader {
 
 /* Stile del footer, comune a tutte le pagine */
 .footer {
-    background-color: #c70000; /* Rosso come da mockup */
+    background-color: #780000; /* Rosso come da mockup */
     color: white;
     padding: 20px 0; /* Padding verticale, orizzontale gestito dal wrapper */
-    margin-top: 50px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
     position: relative; /* Per z-index se necessario */
     z-index: 10; /* Assicura che il footer sia in cima */
 }
@@ -642,11 +615,7 @@ body:not(.homepage) .subheader {
         max-width: 100%; /* Assicura che l'ellipsis funzioni */
     }
 
-
-    .hero-section h2 {
-        font-size: 1.8em;
-        padding: 40px 15px; /* Riduci padding per hero section */
-    }
+    /* Sezioni dei libri e delle categorie */
     .books-section, .categories-section {
         padding: 15px; /* Riduci padding delle sezioni */
         margin-bottom: 20px; /* Riduci margine inferiore */
@@ -694,4 +663,66 @@ body:not(.homepage) .subheader {
     .subheader-item {
         flex-basis: 20%; /* 4-5 elementi per riga */
     }
+}
+
+
+/* ------------------------------------------------------
+Stili per la sezione delle categorie
+------------------------------------------------------ */
+
+/* Stile per le card delle categorie */
+.category-card {
+  border-radius: 15px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
+
+/* Effetto hover per le card delle categorie */
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Titolo della categoria */
+.category-card h4 {
+font-weight: bold;
+  color: white;
+  margin: 0;
+  z-index: 2; /* Assicura che il testo sia sopra l'overlay */
+}
+
+/* Sfondo categoria Thriller */
+.category-card.thriller {
+  background-image: url(../../static/img/thriller.png);
+}
+/* Sfondo categoria Letteratura */
+.category-card.letteratura {
+  background-image: url(../../static/img/letteratura.png);
+}
+/* Sfondo categoria Avventura */
+.category-card.avventura {
+  background-image: url(../../static/img/avventura.png);
+}
+/* Sfondo categoria Fantasy */
+.category-card.fantasy {
+  background-image: url(../../static/img/fantascienza.png);
+}
+/* Sfondo categoria Classico */
+.category-card.classico {
+ background-image: url(../../static/img/classico.png);
+}
+/* Sfondo categoria Romanzo */
+.category-card.romanzo {
+ background-image: url(../../static/img/romanzo.png);
 }
