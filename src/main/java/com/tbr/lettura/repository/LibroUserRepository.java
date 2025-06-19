@@ -16,6 +16,7 @@ import com.tbr.lettura.model.Users;
  */
 public interface LibroUserRepository extends JpaRepository<LibroUser, Integer> {
     Optional<LibroUser> findByUserAndBook(Users user, Libro book);
+    List<LibroUser> findByUser(Users user);
     List<LibroUser> findByUserAndIsRead(Users user, boolean isRead);
 }
 

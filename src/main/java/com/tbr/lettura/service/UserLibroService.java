@@ -3,6 +3,7 @@ package com.tbr.lettura.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.LibroRepository;
 import com.tbr.lettura.repository.LibroUserRepository;
 import com.tbr.lettura.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 /**
  * Service che gestisce la logica relativa alle associazioni tra utenti e libri.
@@ -161,5 +164,198 @@ public boolean getStatoLetturaLibro(int userId, int libroId) {
                                   .map(LibroUser::getBook)
                                   .collect(Collectors.toList());
     }
+
+/**
+ * mostra un elenco di tutti i libri letti da un utente, filtrati per genere
+ * /
+ * Retrieves book recommendations for a specific user based on their reading history.
+ *
+ * This method first verifies that the user exists. It then collects the genres
+ * of books that the user has already read and uses these genres to filter out
+ * unread books from the entire catalog. Books are recommended if they have not
+ * been read by the user and belong to a genre that the user has previously read.
+ *
+ * If no genres can be extracted from the user's reading history, an empty list
+ * is returned, indicating that no genre-based recommendations can be made.
+ *
+ * @param userId the id of the user for whom recommendations are to be retrieved
+ * @return a List of Libro objects that are recommended for the specified user
+ * @throws RuntimeException if the user with the given id is not found
+ */
+
+ public List<Libro> getRaccomandazioniPerUtente(int userId) {
+        // 1. Verifica che l'utente esista.
+         userRepository.findById(userId)
+                                  .orElseThrow(() -> new RuntimeException("Utente non trovato con ID: " + userId));
+
+        // 2. Ottieni i generi dei libri che l'utente ha già letto.
+        // Riutilizziamo getLibriLettiDaUtente per ottenere la lista di Libri letti.
+        List<Libro> libriLetti = getLibriLettiDaUtente(userId);
+
+        Set<String> generiLetti = libriLetti.stream()
+                                            .map(Libro::getGenre) // Ottieni il genere di ogni libro letto
+                                            .filter(genre -> genre != null && !genre.trim().isEmpty()) // Filtra generi null/vuoti
+                                            .collect(Collectors.toSet()); // Raccogli in un Set per evitare duplicati
+
+        // Se l'utente non ha letto alcun libro o non ci sono generi validi, non possiamo fare raccomandazioni basate sul genere.
+        // In questo caso, potremmo restituire tutti i libri non letti o una lista vuota.
+        // Per semplicità, qui restituiamo una lista vuota se non ci sono generi.
+        if (generiLetti.isEmpty()) {
+            return List.of(); // Restituisce una lista immutabile vuota (Java 9+)
+        }
+
+        // 3. Ottieni tutti i libri che non sono stati letti dall'utente.
+        // Riutilizziamo getLibriNonLettiDaUtente.
+        // ATTENZIONE: Questo usa la versione RIVEDUTA di getLibriNonLettiDaUtente,
+        // che restituisce libri *nella sua libreria* marcati come false.
+        // Per le raccomandazioni, VOGLIAMO TUTTI I LIBRI NON LETTI DAL CATALOGO.
+        // Quindi, dobbiamo riutilizzare o reimplementare la logica originale
+        // di "libri non presenti tra i letti".
+
+        // APPROCCIO MIGLIORE PER QUESTO METODO:
+        // a) Ottieni tutti i libri nel catalogo.
+        List<Libro> allLibri = libroRepository.findAll();
+
+        // b) Ottieni gli ID dei libri che l'utente ha letto.
+        Set<Integer> libriLettiIds = libriLetti.stream()
+                                               .map(Libro::getId)
+                                               .collect(Collectors.toSet());
+
+        // c) Filtra i libri del catalogo che non sono stati letti e che corrispondono ai generi.
+        List<Libro> raccomandazioni = allLibri.stream()
+            .filter(libro -> !libriLettiIds.contains(libro.getId())) // Il libro non è tra quelli già letti
+            .filter(libro -> libro.getGenre() != null && generiLetti.contains(libro.getGenre())) // Il genere del libro è tra quelli di interesse
+            .collect(Collectors.toList());
+
+        return raccomandazioni;
+    }
+
+/**
+ * cerca libri in una libreria di un utente
+ * /
+ * Searches for books in a user's library based on a specified criterion and query.
+ *
+ * This method first verifies that the specified user exists. It then retrieves all
+ * book-user relationships for the user and extracts the book objects. The books are
+ * filtered in-memory according to the given criterion and query. Supported criteria
+ * are title, author, and genre.
+ *
+ * @param userId the id of the user whose library is to be searched
+ * @param criterio the criterion by which to search (e.g., "titolo", "autore", "genere")
+ * @param query the search query string
+ * @return a List of Libro objects that match the search criteria
+ * @throws RuntimeException if the user with the given id is not found
+ */
+
+   public List<Libro> cercaLibriNellaLibreria(int userId, String criterio, String query) {
+        // 1. Verifica che l'utente esista.
+        Users user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new RuntimeException("Utente non trovato con ID: " + userId));
+
+        // 2. Recupera TUTTE le relazioni LibroUser per questo utente.
+        List<LibroUser> userBooks = libroUserRepository.findByUser(user);
+
+        // 3. Estrai gli oggetti Libro da queste relazioni.
+        List<Libro> libriNellaLibreria = userBooks.stream()
+                                                .map(LibroUser::getBook) // Estrai l'oggetto Libro
+                                                .collect(Collectors.toList());
+
+        // 4. Applica il filtro in memoria.
+        String lowerCaseQuery = query.toLowerCase(); // Converti la query in minuscolo una volta sola
+
+        return libriNellaLibreria.stream()
+            .filter(libro -> {
+                if (libro == null) return false; // Salta libri null se per qualche ragione ci fossero
+                switch (criterio.toLowerCase()) {
+                    case "titolo":
+                        return libro.getTitle() != null && libro.getTitle().toLowerCase().contains(lowerCaseQuery);
+                    case "autore":
+                        return libro.getAuthor() != null && libro.getAuthor().toLowerCase().contains(lowerCaseQuery);
+                    case "genere":
+                        return libro.getGenre() != null && libro.getGenre().toLowerCase().contains(lowerCaseQuery);
+                    default:
+                        return false; // Se il criterio non è valido, non includere il libro
+                }
+            })
+            .collect(Collectors.toList());
+    }
+
+    
+        /**
+         * Aggiunge un libro alla libreria di un utente.
+         * Crea una nuova relazione LibroUser tra l'utente e il libro,
+         * impostando isRead su false e read_date su null.
+         * Se il libro è già nella libreria dell'utente, lancia un'eccezione.
+         * /
+         * Adds a book to a user's library.
+         * Creates a new LibroUser relationship between the user and the book,
+         * setting isRead to false and read_date to null.
+         * @param userId the id of the user
+         * @param libroId the id of the book
+         * @return the newly created LibroUser object
+         * @throws RuntimeException if the user or book is not found
+         * @throws RuntimeException if the book is already in the user's library
+         */
+     @Transactional // Assicura che l'operazione sia atomica
+    public LibroUser aggiungiLibroAllaLibreria(int userId, int libroId) {
+        // 1. Recupera Utente e Libro
+        Users user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new RuntimeException("Utente non trovato con ID: " + userId));
+        Libro libro = libroRepository.findById(libroId)
+                                   .orElseThrow(() -> new RuntimeException("Libro non trovato con ID: " + libroId));
+
+        // 2. Controlla se il libro è già nella libreria dell'utente
+        Optional<LibroUser> existingLibroUser = libroUserRepository.findByUserAndBook(user, libro);
+
+        if (existingLibroUser.isPresent()) {
+            throw new RuntimeException("Il libro è già nella libreria dell'utente.");
+        }
+
+        // 3. Crea una nuova relazione LibroUser (inizialmente non letto, o potresti volerlo impostare come letto)
+        LibroUser newLibroUser = new LibroUser();
+        newLibroUser.setUser(user);
+        newLibroUser.setBook(libro);
+        newLibroUser.setRead(false); // Inizialmente non letto
+        newLibroUser.setRead_date(null); // Nessuna data di lettura iniziale
+
+        // 4. Salva la nuova relazione nel database
+        return libroUserRepository.save(newLibroUser);
+    }
+
+
+/**
+ * Rimuove un libro dalla libreria di un utente.
+ *
+ * Questo metodo elimina la relazione LibroUser tra l'utente e il libro specificato.
+ * Prima verifica che l'utente e il libro esistano e che la relazione tra
+ * l'utente e il libro sia presente. Se la relazione non esiste, lancia un'eccezione.
+ * /
+ * Removes a book from a user's library.
+ *
+ * @param userId l'id dell'utente da cui rimuovere il libro
+ * @param libroId l'id del libro da rimuovere dalla libreria dell'utente
+ * @throws RuntimeException se l'utente o il libro non viene trovato
+ * @throws RuntimeException se il libro non è presente nella libreria dell'utente
+ */
+    @Transactional
+    public void rimuoviLibroDallaLibreria(int userId, int libroId) {
+        // 1. Recupera Utente e Libro
+        Users user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new RuntimeException("Utente non trovato con ID: " + userId));
+        Libro libro = libroRepository.findById(libroId)
+                                   .orElseThrow(() -> new RuntimeException("Libro non trovato con ID: " + libroId));
+
+        // 2. Trova la relazione LibroUser specifica
+        Optional<LibroUser> existingLibroUser = libroUserRepository.findByUserAndBook(user, libro);
+
+        if (existingLibroUser.isEmpty()) {
+            throw new RuntimeException("Il libro non è presente nella libreria dell'utente.");
+        }
+
+        // 3. Elimina la relazione
+        libroUserRepository.delete(existingLibroUser.get());
+    }
+
+
 }
    
