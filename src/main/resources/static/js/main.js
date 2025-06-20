@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
                      }
                 }
 
-                // Crea e aggiungi l'icona profilo "DM"
                 const profileIcon = document.createElement('a');
                 profileIcon.href = 'profile.html'; // In futuro, punterà alla pagina profilo
                 profileIcon.classList.add('profile-icon');

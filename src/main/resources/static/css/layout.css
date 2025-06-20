@@ -49,9 +49,7 @@ Modifiche per l'header, subheader, main content e footer.
 */
 .subheader-content-wrapper,
 .main-content-wrapper {
-    max-width: 1200px; /* Larghezza massima del contenuto centrato */
-    margin: 0 auto; /* Centra il blocco orizzontalmente */
-    padding: 0 20px; /* Padding laterale per schermi più piccoli, importante! */
+    max-width: 100%; /* Larghezza massima del contenuto centrato */
 }
 
 
@@ -82,32 +80,27 @@ Modifiche per l'header, subheader, main content e footer.
 
 /* Contenitore per gli elementi nella parte superiore dell'header */
 .header-content-wrapper {
-    display: flex;
-    /* Distribuisce gli elementi: logo a sinistra, barra al centro, azioni a destra.
-       Lo spazio si distribuisce tra loro.
-    */
-    justify-content: space-between;
+    position: relative; /* Importante: il genitore deve essere posizionato per il posizionamento assoluto del figlio */
+    display: flex; /* Mantiene flex per gli altri elementi, o usa display: block; e float */
+    justify-content: space-between; /* Mantiene logo e user actions ai lati */
     align-items: center;
+    padding: 0 20px;
 }
 
-/* Contenitore per la barra di ricerca */
-.search-bar-and-category {
-    flex-grow: 1; /* Permette alla barra di ricerca di espandere e occupare lo spazio centrale */
-    display: flex;
-    justify-content: center; /* Centra la barra di ricerca all'interno del suo spazio flessibile */
-    margin: 0 20px; /* Spazio tra logo/azioni utente e la barra di ricerca */
-    /* Aggiungi una larghezza massima per la barra di ricerca per non farla diventare troppo grande */
-    max-width: 600px; /* Limita la larghezza della barra anche se flex-grow la espande */
-}
 
 /* Barra di ricerca */
 .search-bar {
+    position: absolute; /* Rimuove l'elemento dal flusso normale del documento */
+    left: 50%; /* Sposta il bordo sinistro al 50% del genitore */
+    transform: translateX(-50%); /* Sposta l'elemento indietro del 50% della sua larghezza, centrando */
+    width: 40%; /* Assicura che la trasformazione funzioni bene con max-width */
+    max-width: 600px; /* Limita la larghezza massima della barra di ricerca */
     display: flex;
     align-items: center;
     background-color: white;
     border-radius: 50px;
     padding: 15px 20px;
-    width: 100%; /* La barra occupa il 100% della larghezza disponibile nel suo contenitore .search-bar-and-category */
+    z-index: 100;
 }
 
 /* Icona lente di ingrandimento */
@@ -133,7 +126,7 @@ Modifiche per l'header, subheader, main content e footer.
     }
 }
 
-/* Sezione delle azioni utente (lingua e login) */
+/* Sezione delle azioni utente (lingua, login e profilo) */
 .user-actions {
     display: flex;
     align-items: center;
@@ -174,7 +167,7 @@ Modifiche per l'header, subheader, main content e footer.
 .language-dropdown .language-options a {
     display: block;
     padding: 10px 15px;
-    color: #333;
+    color: #780000;
     text-decoration: none;
     font-size: 14px;
 }
@@ -205,19 +198,18 @@ Modifiche per l'header, subheader, main content e footer.
 }
 
 /* Aggiungi stile per l'icona profilo */
-.profile-icon {
-    background-color: white;
+.user-actions .profile-icon {
+    background-color: white; /* Colore giallo chiaro come da mockup */
     color: #780000;
     padding: 8px 15px;
     border-radius: 20px;
     text-decoration: none;
     font-weight: bold;
     font-size: 15px;
-    transition: background-color 0.3s, color 0.3s;
-    margin-left: 15px; /* Spazio dal dropdown lingua */
+    transition: background-color 0.3s, color 0.3s; /* Transizione per hover */
 }
 
-.profile-icon:hover {
+.user-actions .profile-icon:hover {
     background-color: #eee;
 }
 
@@ -282,7 +274,6 @@ body:not(.homepage) .subheader {
 }
 
 
-
 /* Stile per il contenuto principale (main-content-wrapper) */
 .main-content-wrapper {
     width: 100%; /* Occupa tutta la larghezza disponibile all'interno del .homepage-background-container */
@@ -293,6 +284,29 @@ body:not(.homepage) .subheader {
     position: relative;
     z-index: 2; /* Assicura che il contenuto sia sopra l'overlay di sfondo */
     padding-bottom: 20px; /* Padding sotto l'ultima sezione prima del footer */
+}
+
+/* Sezione hero (cambiato in frasi in latino) */
+.hero-section {
+  text-align: left;
+  width: 65%;
+  padding-left: 2px;
+}
+
+/* Titolo della sezione hero */
+.hero-section h2 {
+  color: white;
+  font-size: 3.8vw;
+}
+
+/* ------------------------------------------------------
+Stili per la sezione profilo
+----------------------------------------------------- */
+.profile-section {
+  display: flex;
+  background-color: white;
+  width: 50%;
+  height: 50%;
 }
 
 /* Stile per le sezioni dei contenuti (comune a tutte le sezioni di libri e categorie) */
@@ -388,18 +402,88 @@ body:not(.homepage) .subheader {
     color: #eee;
 }
 
-/* Media Queries per la responsività */
+/* ------------------------------------------------------
+Stili per la sezione delle categorie
+------------------------------------------------------ */
+
+/* Stile per le card delle categorie */
+.category-card {
+  border-radius: 15px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
+
+/* Effetto hover per le card delle categorie */
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Titolo della categoria */
+.category-card h4 {
+font-weight: bold;
+  color: white;
+  margin: 0;
+  z-index: 2; /* Assicura che il testo sia sopra l'overlay */
+}
+
+/* Sfondo categoria Thriller */
+.category-card.thriller {
+  background-image: url(../../static/img/thriller.png);
+}
+/* Sfondo categoria Letteratura */
+.category-card.letteratura {
+  background-image: url(../../static/img/letteratura.png);
+}
+/* Sfondo categoria Avventura */
+.category-card.avventura {
+  background-image: url(../../static/img/avventura.png);
+}
+/* Sfondo categoria Fantasy */
+.category-card.fantasy {
+  background-image: url(../../static/img/fantascienza.png);
+}
+/* Sfondo categoria Classico */
+.category-card.classico {
+ background-image: url(../../static/img/classico.png);
+}
+/* Sfondo categoria Romanzo */
+.category-card.romanzo {
+ background-image: url(../../static/img/romanzo.png);
+}
+
+.category-card.drammatico {
+ background-image: url(../../static/img/drammatico.png);
+}
+
+.category-card.storico {
+ background-image: url(../../static/img/storico.png);
+}
+
+
+
+
+
+/*------------------------------------------------------
+Responsive Design
+------------------------------------------------------*/
 
 /* Tablet e schermi più piccoli di desktop */
 @media (max-width: 992px) {
     .books-grid,
     .categories-grid {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Riduci dimensione min per 3-4 colonne */
-    }
-
-    .search-bar .category-select {
-        padding: 6px 12px;
-        font-size: 13px;
     }
 
     .subheader-item .circle-icon {
@@ -429,12 +513,6 @@ body:not(.homepage) .subheader {
         margin-bottom: 10px; /* Spazio sotto il logo */
     }
 
-    .search-bar-and-category {
-        order: 2; /* Barra di ricerca al centro */
-        width: 100%; /* Occupa tutta la larghezza disponibile */
-        margin: 0; /* Rimuovi margini orizzontali in modalità impilata */
-        padding: 0 10px; /* Padding per non attaccarsi ai bordi */
-    }
 
     .user-actions {
         order: 3; /* Azioni utente in basso */
@@ -446,6 +524,15 @@ body:not(.homepage) .subheader {
     .language-dropdown {
         margin-right: 15px;
         margin-bottom: 0;
+    }
+
+    .search-bar {
+        max-width: 100%;
+        justify-content: flex-start; /* Allinea a sinistra gli elementi interni */
+        padding: 10px 15px;
+    }
+    .search-bar input {
+        font-size: 14px;
     }
 }
 
@@ -465,13 +552,6 @@ body:not(.homepage) .subheader {
         margin: 10px 0; /* Margine sopra/sotto */
     }
 
-    .search-bar-and-category {
-        order: 2;
-        margin: 0;
-        width: 100%;
-        padding: 0 10px;
-    }
-
     .search-bar {
         max-width: 100%;
         justify-content: flex-start; /* Allinea a sinistra gli elementi interni */
@@ -479,11 +559,6 @@ body:not(.homepage) .subheader {
     }
     .search-bar input {
         font-size: 14px;
-    }
-    .search-bar .category-select {
-        margin-left: auto; /* Sposta il select a destra se c'è spazio */
-        font-size: 12px;
-        padding: 6px 10px;
     }
 
     .user-actions {
@@ -585,11 +660,6 @@ body:not(.homepage) .subheader {
     .search-bar .search-icon {
         font-size: 16px;
     }
-    .search-bar .category-select {
-        font-size: 11px;
-        padding: 4px 8px;
-        margin-left: 10px;
-    }
 
     /* Subheader due colonne */
     .subheader {
@@ -666,63 +736,3 @@ body:not(.homepage) .subheader {
 }
 
 
-/* ------------------------------------------------------
-Stili per la sezione delle categorie
------------------------------------------------------- */
-
-/* Stile per le card delle categorie */
-.category-card {
-  border-radius: 15px;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5em;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  background-size: cover;
-  background-position: center;
-  text-align: center;
-}
-
-/* Effetto hover per le card delle categorie */
-.category-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-/* Titolo della categoria */
-.category-card h4 {
-font-weight: bold;
-  color: white;
-  margin: 0;
-  z-index: 2; /* Assicura che il testo sia sopra l'overlay */
-}
-
-/* Sfondo categoria Thriller */
-.category-card.thriller {
-  background-image: url(../../static/img/thriller.png);
-}
-/* Sfondo categoria Letteratura */
-.category-card.letteratura {
-  background-image: url(../../static/img/letteratura.png);
-}
-/* Sfondo categoria Avventura */
-.category-card.avventura {
-  background-image: url(../../static/img/avventura.png);
-}
-/* Sfondo categoria Fantasy */
-.category-card.fantasy {
-  background-image: url(../../static/img/fantascienza.png);
-}
-/* Sfondo categoria Classico */
-.category-card.classico {
- background-image: url(../../static/img/classico.png);
-}
-/* Sfondo categoria Romanzo */
-.category-card.romanzo {
- background-image: url(../../static/img/romanzo.png);
-}

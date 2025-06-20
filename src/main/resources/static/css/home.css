@@ -32,19 +32,6 @@ Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage
   z-index: 2;
 }
 
-/* Sezione hero (cambiato in frasi in latino) */
-.hero-section {
-  text-align: left;
-  width: 65%;
-  padding-left: 2px;
-}
-
-/* Titolo della sezione hero */
-.hero-section h2 {
-  color: white;
-  font-size: 3.8vw;
-}
-
 /* ------------------------------------------------------
 Stili per le card dei libri e delle categorie
 ------------------------------------------------------ */
