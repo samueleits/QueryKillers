@@ -4,37 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TBR - Il mio profilo</title>
-    <link rel="stylesheet" href="/css/layout.css">
-     <link rel="stylesheet" href="/css/profile.css"> 
-     <link rel="stylesheet" href="/css/home.css"> 
+    <link rel="stylesheet" href="../static/css/layout.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="profile-page">
     <header class="header">
         <div class="header-content-wrapper">
-            <div class="logo"> 
-                <a href="/Home"><h1>LOGO TBR</h1></a>
+            <div class="logo">
+                <a href="/"><h1>LOGO TBR</h1></a>
             </div>
-            <div class="search-bar-and-category">
-                <div class="search-bar">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" placeholder="Cerca libro...">
-                </div>
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Cerca libro...">
             </div>
             <div class="user-actions">
                 <div class="language-dropdown">
                     <span class="current-language" data-lang="it">Italiano - IT <i class="fas fa-caret-down"></i></span>
                     <div class="language-options">
                         <a href="#" data-lang="en">English - EN</a>
-                        <a href="#" data-lang="es">Español - ES</a>
+                        <a href="#" data-lang="es">Italiano - IT</a>
                     </div>
                 </div>
-                <a href="/login" class="profile-icon-dm">Login</a> 
+                <a href="login" class="login-button">Login</a>
             </div>
         </div>
     </header>
 
-   <div class="subheader">
+    <div class="subheader">
         <div class="subheader-content-wrapper">
             <a href="#" class="subheader-item">
                 <div class="circle-icon"><i class="fas fa-fire"></i></div>
@@ -49,20 +47,21 @@
                 <span>Challenge</span>
             </a>
             <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-book-open"></i></div>
-                <span>Recensioni</span>
-            </a>
-            <a href="#" class="subheader-item">
                 <div class="circle-icon"><i class="fas fa-list"></i></div>
                 <span>Liste</span>
             </a>
         </div>
     </div>
 
-    <main class="profile-page-main">
         <div class="main-background-container"> 
-            <div class="profile-content-wrapper"> 
-                <h2>Il mio profilo</h2>
+            <main class="main-content-wrapper"> 
+
+                <div class="main-hero-grid">
+                    <div class="hero-title">
+                        <h2>Il mio profilo</h2>
+                    </div>
+                </div>
+                
                 <div class="profile-grid">
                     <div class="profile-card user-info-card">
                         <div class="profile-header-image">
@@ -109,9 +108,8 @@
                         <h3>Sezione amici o animali</h3>
                         </div>
                 </div>
-            </div>
+            </main>
         </div>
-    </main>
 
     <footer class="footer">
         <div class="footer-content-wrapper">
@@ -129,8 +127,8 @@
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
-    <script src="/js/layout.js"></script> 
-    <script src="/js/profile.js"></script> 
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/layout.js"></script> 
+    <script src="../static/js/profile.js"></script> 
 </body>
 </html>
