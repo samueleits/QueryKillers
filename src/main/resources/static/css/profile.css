@@ -358,8 +358,9 @@ Definizione delle variabili CSS generiche per i colori e le ombre
     }
     .edit-info-button {
         padding: 8px 15px;
-        font-size: 0.8em;
+        font-size: 0.8em;  
     }
+    
     .stats-grid {
         grid-template-columns: 1fr;
     }
