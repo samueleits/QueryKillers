@@ -23,6 +23,7 @@ public class Libro {
     private String genre;
     private Integer year;
     private String description;
+    private String cover;
 
     /**
      * Costruttore vuoto della classe Libro.
@@ -168,4 +169,19 @@ public class Libro {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /*metodo che restituisce la copertina del libro / 
+     * method that returns the cover of the book
+    */
+
+    /**
+     * Retrieves the cover of the book.
+     * 
+     * @return the cover of the book
+     */
+    public String getCover() {
+        return cover;
+     }   
+
+
 }

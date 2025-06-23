@@ -1,5 +1,7 @@
 package com.tbr.lettura.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model; 
@@ -37,6 +39,18 @@ public class UserMVC {
         model.addAttribute("user", new Users());
         return "login";
     }
+
+    /**     * Mostra il profilo dell'utente.
+     *    * @param model il modello che contiene l'oggetto User da popolare         
+     * @return la view "profile"
+     */
+    @GetMapping("/profile")
+public String showUserProfile(Model model, Principal principal) {
+    String email = principal.getName();
+    Users user = userService.findByEmail(email);
+    model.addAttribute("user", user);
+    return "profile";
+}
 
     /**
      * Registra un nuovo utente e lo reindirizza alla pagina di login se la registrazione ha successo,
@@ -82,4 +96,9 @@ public String registerUser(@ModelAttribute Users user, Model model) {
             }
             return "redirect:/Home";
         }
+
+   @PostMapping("/profile")
+    public String updateUserProfile(@ModelAttribute("user") Users user, Model model) {
+        return "profile";
+    }
 }
