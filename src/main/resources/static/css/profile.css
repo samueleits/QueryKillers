@@ -18,17 +18,6 @@
     --footer-height: 80px; /* Altezza stimata del footer */
 }
 
-.profile-content-wrapper {
-  width: 100%;
-  max-width: 60vw;
-  margin: 0;
-  min-height: auto;
-  position: relative;
-  z-index: 2;
-}
-
-
-
 .profile-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Due colonne per le card principali */
