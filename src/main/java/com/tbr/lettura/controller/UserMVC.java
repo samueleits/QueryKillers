@@ -80,6 +80,6 @@ public String registerUser(@ModelAttribute Users user, Model model) {
                 model.addAttribute("showRegister", false); // Attiva il form di login
                 return "login";
             }
-            return "redirect:/";
+            return "redirect:/Home";
         }
 }

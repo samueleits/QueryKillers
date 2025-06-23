@@ -1,13 +1,14 @@
 package com.tbr.lettura.controller;
 
-import com.tbr.lettura.model.Libro;
-import com.tbr.lettura.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.tbr.lettura.model.Libro;
+import com.tbr.lettura.service.LibroService;
 
 /**
  * Controller MVC per la gestione della libreria.
@@ -37,11 +38,11 @@ public class LibreriaMVC {
      * @param model il modello della pagina
      * @return il nome della pagina da visualizzare, ovvero "principale-login"
      */
-    @GetMapping("/libri")
+    @GetMapping("/Home")
     public String getLibri(Model model) {
         model.addAttribute("titolo", "I più grandi libri di sempre");
         model.addAttribute("libri", libroService.getLibri());
-        return "index";
+        return "homepage-logged";
     }
 
     /**
@@ -51,11 +52,11 @@ public class LibreriaMVC {
      * @param model il modello della pagina
      * @return il nome della pagina da visualizzare, ovvero "principale-login"
      */
-    @PostMapping("/libri")
+    @PostMapping("/Home")
     public String addLibro(@ModelAttribute Libro libro, Model model) {
         libroService.addLibro(libro);
         model.addAttribute("titolo", "I più grandi libri di sempre");
         model.addAttribute("libri", libroService.getLibri());
-        return "index";
+        return "homepage-logged";
     }
 }
