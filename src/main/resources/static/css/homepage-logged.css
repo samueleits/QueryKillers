@@ -1,0 +1,193 @@
+/*-----------------------------------------------------
+Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage quando sei loggato
+-----------------------------------------------------*/
+
+/* Contenitore per lo sfondo homepage */
+.homepage-background-container {
+  background-image: url("../img/Sfondo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 60vw;
+  min-height: 90vh;
+  border-radius: 20px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Wrapper contenuto principale */
+.main-content-wrapper {
+  width: 100%;
+  max-width: 60vw;
+  margin: 0;
+  min-height: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-row {
+    display: flex;
+    justify-content:center; /* Centra gli elementi nella riga */
+    align-items: flex-start;  /* Allinea gli elementi all'inizio della riga */
+    width: 100%;
+    padding: 0px 0;
+    gap: 40px; /* spazio tra i due blocchi */
+}
+
+.topbar-container {
+    display: flex;
+    justify-content: flex-end; /* Sposta tutto il contenuto a destra */
+    align-items: center;
+    margin-top: 50px; /* Altezza minima per la topbar */
+    padding: 10px 20px;
+    position: fixed; /* Fissa la topbar in alto */  
+    z-index: 1000; /* Assicura che la topbar sia sopra altri elementi */
+    position: relative;
+    width: 100%;
+}
+.profile-icon-dm {
+    text-align: right;
+    color: var(--dark-gray);
+    background-color: var(--light-gray);
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    transition: background-color 0.3s;
+}
+
+.profile-icon-dm:hover {
+    background-color: var(--border-gray);
+}
+
+.profile-icon-dm h1,
+.profile-icon-dm h4,
+.profile-icon-dm h6 {
+    margin: 2px 0;
+}
+
+
+
+/* ------------------------------------------------------
+Stili per le card dei libri e delle categorie
+------------------------------------------------------ */
+
+/* Stile per le card dei libri */
+.book-card {
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Effetto hover per le card dei libri */
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Immagine della copertina del libro */
+.book-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+/* Informazioni sul libro (titolo e autore) */
+.book-info {
+  width: 100%;
+}
+
+/* Titolo del libro */
+.book-info .book-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #003049;
+  white-space: nowrap; /* Evita che il testo vada a capo */
+  overflow: hidden; /* Nasconde il testo in eccesso */
+  text-overflow: ellipsis; /* Aggiunge i puntini di sospensione quando il testo è in eccesso */
+}
+
+/* Autore del libro */
+.book-info .book-author {
+  font-size: 15px;
+  color: #669bbc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*-----------------------------------------------------
+Modifiche per rendere responsive l'homepage
+-----------------------------------------------------*/
+
+/* Media per tablet e schermi più piccoli */
+@media (max-width: 992px) {
+  .homepage-background-container {
+    width: 80vw;
+    min-height: 85vh;
+    padding: 25px;
+  }
+}
+
+/* Media per smartphone landscape e tablet */
+@media (max-width: 768px) {
+  .homepage-background-container {
+    width: 95vw;
+    min-height: auto;
+    padding: 20px 15px;
+    margin: 15px auto;
+    border-radius: 8px;
+  }
+  .hero-section h2 {
+    font-size: 2.5em;
+    padding: 30px 20px;
+  }
+  .book-card img {
+    width: 120px;
+    height: 180px;
+  }
+}
+
+/* Media per smartphone portrait */
+@media (max-width: 480px) {
+  .homepage-background-container {
+    width: 98vw;
+    padding: 10px;
+    margin: 10px auto;
+  }
+  .hero-section h2 {
+    font-size: 1.8em;
+    padding: 20px 10px;
+  }
+  .book-card {
+    padding: 10px;
+  }
+  .book-card img {
+    width: 100px;
+    height: 150px;
+  }
+  .book-info .book-title {
+    font-size: 1em;
+  }
+  .book-info .book-author {
+    font-size: 0.85em;
+  }
+  .category-card {
+    height: 100px;
+    font-size: 1.2em;
+  }
+}
