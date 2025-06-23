@@ -2,24 +2,17 @@
 Stili globali per il layout del sito, inclusi body, header e footer.
 -----------------------------------------------------*/
 
+
 /* Stile di base per l'intera pagina */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
-    color: #333;
     line-height: 1.6;
     overflow-x: hidden;
     /* Padding-top di fallback. Sarà sovrascritto da JS per precisione. */
     padding-top: 130px; /* Valore stimato */
-}
-
-/* Reset di base per tutti i titoli (h1-h6) e i link */
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    color: #003049;
 }
 
 /* Stile di base per tutti i link */
@@ -31,6 +24,26 @@ a {
 /* Rimuove la sottolineatura dai link quando ci si passa sopra con il mouse (hover) */
 a:hover {
     text-decoration: none;
+}
+
+/* Immagine di sfondo */
+.main-background-container {
+  background-image: url("../img/Sfondo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 60vw;
+  min-height: 80vh;
+  border-radius: 20px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 

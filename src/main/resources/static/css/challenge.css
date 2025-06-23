@@ -1,0 +1,94 @@
+/* ------------------------------------------------------------- 
+Stile per la pagina delle sfide
+---------------------------------------------------------------- */
+
+/* Griglia della pagina (contiene le card) */
+.challenge-page-grid {
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+/* --------------------------------------------------------------
+Stile per la sezione delle sfide disponibili
+---------------------------------------------------------------- */
+
+/* Card principale per le sfide */
+.challenge-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    z-index: 3;
+}
+
+/* Titolo della sezione delle sfide */
+.challenge-card h2 {
+    font-size: 1.7vw;
+    color: #003049;
+    margin-top: 0;
+}
+
+/* Contenitore di destra */
+.right-challenge-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Barra di ricerca per le sfide */
+.challenge-search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 50px;
+    padding: 15px 15px;
+    z-index: 3;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Icona lente di ingrandimento */
+.challenge-search-bar .search-icon {
+    color: #669bbc;
+    font-size: 18px;
+    margin-right: 10px; /* Spazio tra icona e input */
+}
+
+/* Input di ricerca */
+.challenge-search-bar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: #669bbc;
+    font-weight: bolder;
+    font-size: 16px;
+    padding: 0;
+    flex-grow: 1; /* Input si espande */
+    /* placeholder (Cerca libro...) */
+    &::placeholder {
+        color: #669bbc;
+    }
+}
+
+
+
+.create-challenge-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    z-index: 3;
+}
+
+.your-challenges-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    z-index: 3;
+}
+
+.done-challenges-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    z-index: 3;
+}
