@@ -1,5 +1,5 @@
 /*-----------------------------------------------------
-Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage
+Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage quando sei loggato
 -----------------------------------------------------*/
 
 /* Contenitore per lo sfondo homepage */
@@ -31,6 +31,9 @@ Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage
   position: relative;
   z-index: 2;
 }
+
+
+
 
 /* ------------------------------------------------------
 Stili per le card dei libri e delle categorie

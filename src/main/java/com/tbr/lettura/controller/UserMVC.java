@@ -47,21 +47,25 @@ public class UserMVC {
      * @return la view "redirect:/login" o "register" in base all'esito della registrazione
      */
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute Users user, Model model) {
-        if (userService.emailExists(user.getEmail())) {
-            model.addAttribute("registerError", "Email già in uso.");
-            model.addAttribute("showRegister", true); // Attiva il form di registrazione
-            return "login";
-        }
-        if (!userService.isPasswordValid(user.getPassword_hash())) {
-            model.addAttribute("registerError", "Password non valida: almeno 12 caratteri, una maiuscola e un carattere speciale.");
-            model.addAttribute("showRegister", true); // Attiva il form di registrazione
-            return "login";
-        }
-        userService.registerUser(user);
-        model.addAttribute("registerSuccess", "Registrazione avvenuta con successo! Ora puoi accedere.");
+public String registerUser(@ModelAttribute Users user, Model model) {
+    System.out.println("Ricevuta richiesta di registrazione per: " + user.getEmail());
+    if (userService.emailExists(user.getEmail())) {
+        System.out.println("Email già in uso: " + user.getEmail());
+        model.addAttribute("registerError", "Email già in uso.");
+        model.addAttribute("showRegister", true);
         return "login";
     }
+    if (!userService.isPasswordValid(user.getPassword_hash())) {
+        System.out.println("Password non valida per: " + user.getEmail());
+        model.addAttribute("registerError", "Password non valida: almeno 12 caratteri, una maiuscola e un carattere speciale.");
+        model.addAttribute("showRegister", true);
+        return "login";
+    }
+    userService.registerUser(user);
+    System.out.println("Registrazione avvenuta con successo per: " + user.getEmail());
+    model.addAttribute("registerSuccess", "Registrazione avvenuta con successo! Ora puoi accedere.");
+    return "login";
+}
 
     @PostMapping("/login")
         public String loginUser(@ModelAttribute("user") Users user, Model model) {
@@ -76,6 +80,6 @@ public class UserMVC {
                 model.addAttribute("showRegister", false); // Attiva il form di login
                 return "login";
             }
-            return "redirect:/";
+            return "redirect:/Home";
         }
 }
