@@ -15,13 +15,6 @@ body {
     padding-top: 130px; /* Valore stimato */
 }
 
-/* Reset di base per tutti i titoli (h1-h6) e i link */
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    color: #003049;
-}
-
 /* Stile di base per tutti i link */
 a {
     color: inherit;
@@ -33,6 +26,27 @@ a:hover {
     text-decoration: none;
 }
 
+/* Immagine di sfondo */
+.homepage-background-container,
+.profile-background-container,
+.homepage-logged-background-container {
+  background-image: url("../img/Sfondo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 60vw;
+  min-height: 90vh;
+  border-radius: 20px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
 
 /*-----------------------------------------------------
 Modifiche per l'header, subheader, main content e footer.
@@ -47,11 +61,20 @@ Modifiche per l'header, subheader, main content e footer.
 /* Il wrapper per il contenuto principale e il subheader
    Questi manterranno il max-width e il margin: 0 auto per centrare il blocco.
 */
-.subheader-content-wrapper,
-.main-content-wrapper {
+.subheader-content-wrapper {
     max-width: 100%; /* Larghezza massima del contenuto centrato */
 }
 
+
+/* Wrapper del contenuto della pagina */
+.main-content-wrapper {
+  width: 100%;
+  max-width: 60vw;
+  margin: 0;
+  min-height: auto;
+  position: relative;
+  z-index: 2;
+}
 
 /* Stile per l'header del sito, comune a tutte le pagine */
 .header {
@@ -214,7 +237,7 @@ Modifiche per l'header, subheader, main content e footer.
 }
 
 /* Nascondi il subheader nella pagina di login/registrazione */
-body:not(.homepage) .subheader {
+.login-page .subheader{
     display: none;
 }
 
@@ -273,20 +296,11 @@ body:not(.homepage) .subheader {
     background-color: #fdf0d5b4;
 }
 
+/* -------------------------------------------------------
+Stili per la sezione hero (intestazione principale o frasi in latino)
+------------------------------------------------------- */
 
-/* Stile per il contenuto principale (main-content-wrapper) */
-.main-content-wrapper {
-    width: 100%; /* Occupa tutta la larghezza disponibile all'interno del .homepage-background-container */
-    max-width: 1200px; /* Mantiene la larghezza massima definita */
-    margin: 0 auto; /* Centra il blocco orizzontalmente */
-    padding: 0 20px; /* Mantieni il padding laterale */
-    min-height: auto; /* Reimpostiamo l'altezza minima, sarà il container a dettarla */
-    position: relative;
-    z-index: 2; /* Assicura che il contenuto sia sopra l'overlay di sfondo */
-    padding-bottom: 20px; /* Padding sotto l'ultima sezione prima del footer */
-}
-
-/* Sezione hero (cambiato in frasi in latino) */
+/* Sezione hero */
 .hero-section {
   text-align: left;
   width: 65%;

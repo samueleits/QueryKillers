@@ -1,36 +1,5 @@
-/*-----------------------------------------------------
-Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage
------------------------------------------------------*/
+/* Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage */
 
-/* Contenitore per lo sfondo homepage */
-.homepage-background-container {
-  background-image: url("../img/Sfondo.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 60vw;
-  min-height: 90vh;
-  border-radius: 20px;
-  margin: 20px auto;
-  position: relative;
-  z-index: 1;
-  padding: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-/* Wrapper contenuto principale */
-.main-content-wrapper {
-  width: 100%;
-  max-width: 60vw;
-  margin: 0;
-  min-height: auto;
-  position: relative;
-  z-index: 2;
-}
 
 /* ------------------------------------------------------
 Stili per le card dei libri e delle categorie

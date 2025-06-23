@@ -2,26 +2,6 @@
 Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage quando sei loggato
 -----------------------------------------------------*/
 
-/* Contenitore per lo sfondo homepage */
-.homepage-background-container {
-  background-image: url("../img/Sfondo.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 60vw;
-  min-height: 90vh;
-  border-radius: 20px;
-  margin: 20px auto;
-  position: relative;
-  z-index: 1;
-  padding: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 /* Wrapper contenuto principale */
 .main-content-wrapper {
   width: 100%;
@@ -42,8 +22,6 @@ Stili per la sezione profilo
   height: 50%;
   border-radius: 20px;
 }
-
-
 
 /* ------------------------------------------------------
 Stili per le card dei libri e delle categorie
