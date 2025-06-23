@@ -32,6 +32,16 @@ Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage q
   z-index: 2;
 }
 
+/* ------------------------------------------------------
+Stili per la sezione profilo
+----------------------------------------------------- */
+.profile-section {
+  display: flex;
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  border-radius: 20px;
+}
 
 
 
