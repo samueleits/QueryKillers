@@ -299,16 +299,6 @@ body:not(.homepage) .subheader {
   font-size: 3.8vw;
 }
 
-/* ------------------------------------------------------
-Stili per la sezione profilo
------------------------------------------------------ */
-.profile-section {
-  display: flex;
-  background-color: white;
-  width: 50%;
-  height: 50%;
-}
-
 /* Stile per le sezioni dei contenuti (comune a tutte le sezioni di libri e categorie) */
 .books-section,
 .categories-section {

@@ -32,6 +32,7 @@ Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage q
   z-index: 2;
 }
 
+<<<<<<< HEAD
 .hero-row {
     display: flex;
     justify-content: space-between; /* Oppure "flex-end" o "center", come preferisci */
@@ -71,6 +72,17 @@ Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage q
 .profile-icon-dm h4,
 .profile-icon-dm h6 {
     margin: 2px 0;
+=======
+/* ------------------------------------------------------
+Stili per la sezione profilo
+----------------------------------------------------- */
+.profile-section {
+  display: flex;
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  border-radius: 20px;
+>>>>>>> c6bf67f6aae684a203e296076ea0d23ffa9bfeb0
 }
 
 
