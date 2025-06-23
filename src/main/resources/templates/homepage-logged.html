@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TBR - Homepage</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="../static/css/layout.css">
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
     <link rel="stylesheet" href="../static/css/home-logged.css">
+=======
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/home-logged.css">
+>>>>>>> c6bf67f6aae684a203e296076ea0d23ffa9bfeb0
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="homepage-logged">
@@ -25,9 +32,10 @@
                         <a href="#" data-lang="en">English - EN</a>
                         <a href="#" data-lang="es">Italiano - IT</a>
                     </div>
-                </div>
-                <a href="profile" class="login-button">icona profilo da sistemare</a>
-            </div>
+                <div class="profile-actions">
+                    <a href="/login.html" class="profile-icon-dm">Login</a> 
+                 </div>
+
         </div>
     </header>
 
@@ -54,15 +62,34 @@
 
     <div class="homepage-background-container">
         <main class="main-content-wrapper">
+<<<<<<< HEAD
+             <div class="hero-row">
+                <section class="hero-section">
+                    <h2>Habent sua fata libelli.</h2>
+                </section>
+            
+            <div class="topbar-container">
+                    <a href="profile" class="profile-icon-dm">
+                        <h1>Ciao (Nome Utente)!</h1>
+                        <h4>Leggendario, custode della saggezza eterna</h4>
+                        <h1>50</h1>
+                        <h6>Punti</h6>
+                    </a>
+                </div>
+            </div>
+
+        
+=======
             <section class="hero-section">
                 <h2>Habent sua fata libelli.</h2>
             </section>
             <a href="profile" class="profile-section">
-                <h1>Ciao (Nome Utente)!</h1>
+                <h1 th:text="${user.username}">Username</h1>
                 <h4>Leggendario, custode della saggezza eterna</h4>
                 <h1>50</h1>
-                <h6>Punti</h2>
+                <h6>Punti</h6>
             </a>
+>>>>>>> c6bf67f6aae684a203e296076ea0d23ffa9bfeb0
             <section class="books-section">
                 <div class="section-header">
                     <h3><i class="fas fa-bookmark icon"></i>In primo piano</h3>
@@ -70,28 +97,28 @@
                 </div>
                 <div class="books-grid">
                     <div class="book-card">
-                        <img src="../static/img/copertine/misery.png" alt="Copertina del libro">
+                        <img src="/img/copertine/misery.png" alt="Copertina del libro">
                         <div class="book-info">
                             <h4 class="book-title">Misery</h4>
                             <p class="book-author">Stephen King</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="../static/img/copertine/shining.png" alt="Copertina del libro">
+                        <img src="/img/copertine/shining.png" alt="Copertina del libro">
                         <div class="book-info">
                             <h4 class="book-title">Shining</h4>
                             <p class="book-author">Stephen King</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="../static/img/copertine/Il-cacciatore-di-aquiloni.png" alt="Copertina del libro">
+                        <img src="/img/copertine/Il-cacciatore-di-aquiloni.png" alt="Copertina del libro">
                         <div class="book-info">
                             <h4 class="book-title">Il cacciatore di aquiloni</h4>
                             <p class="book-author">Khaled Hosseini</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="../static/img/copertine/centanni-di-solitudine.png" alt="Copertina del libro">
+                        <img src="/img/copertine/centanni-di-solitudine.png" alt="Copertina del libro">
                         <div class="book-info">
                             <h4 class="book-title">Cent'anni di solitudine</h4>
                             <p class="book-author">Gabriel Garcia Marquinez</p>
@@ -107,28 +134,28 @@
                 </div>
                 <div class="books-grid">
                     <div class="book-card">
-                        <img src="../static/img/copertine/doctor-sleep.png" alt="Copertina del libro">
+                        <img src="/img/copertine/doctor-sleep.png" alt="Copertina del libro">
                         <div class="book-info">
                             <h4 class="book-title">Doctor Sleep</h4>
                             <p class="book-author">Stephen King</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="../static/img/copertine/l-amica-geniale.png" alt="Copertina del libro">
+                        <img src="/img/copertine/l-amica-geniale.png" alt="Copertina del libro">
                         <div class="book-info">
                             <h4 class="book-title">L'amica Geniale</h4>
                             <p class="book-author">Elena Ferrante</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="../static/img/copertine/la-casa-degli-spiriti.png" alt="Copertina del libro">
+                        <img src="/img/copertine/la-casa-degli-spiriti.png" alt="Copertina del libro">
                         <div class="book-info">
                             <h4 class="book-title">La casa degli spiriti</h4>
                             <p class="book-author">Isabel Allende</p>
                         </div>
                     </div>
                     <div class="book-card">
-                        <img src="../static/img/copertine/l-ombra-del-vento.png" alt="Copertina del libro">
+                        <img src="/img/copertine/l-ombra-del-vento.png" alt="Copertina del libro">
                         <div class="book-info">
                             <h4 class="book-title">L'ombra del vento</h4>
                             <p class="book-author">Carlos Ruiz Zafon</p>

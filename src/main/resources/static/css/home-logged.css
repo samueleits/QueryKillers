@@ -12,6 +12,47 @@ Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage q
   z-index: 2;
 }
 
+<<<<<<< HEAD
+.hero-row {
+    display: flex;
+    justify-content: space-between; /* Oppure "flex-end" o "center", come preferisci */
+    align-items: flex-start;  /* Allinea gli elementi all'inizio della riga */
+    width: 100%;
+    padding: 0px 0;
+    gap: 40px; /* spazio tra i due blocchi */
+}
+
+.topbar-container {
+    display: flex;
+    justify-content: flex-end; /* Sposta tutto il contenuto a destra */
+    align-items: center;
+    margin-top: 50px; /* Altezza minima per la topbar */
+    padding: 10px 20px;
+    position: fixed; /* Fissa la topbar in alto */  
+    z-index: 1000; /* Assicura che la topbar sia sopra altri elementi */
+    position: relative;
+    width: 100%;
+}
+.profile-icon-dm {
+    text-align: right;
+    text-decoration: none;
+    color: var(--dark-gray);
+    background-color: var(--light-gray);
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    transition: background-color 0.3s;
+}
+
+.profile-icon-dm:hover {
+    background-color: var(--border-gray);
+}
+
+.profile-icon-dm h1,
+.profile-icon-dm h4,
+.profile-icon-dm h6 {
+    margin: 2px 0;
+=======
 /* ------------------------------------------------------
 Stili per la sezione profilo
 ----------------------------------------------------- */
@@ -21,6 +62,7 @@ Stili per la sezione profilo
   width: 50%;
   height: 50%;
   border-radius: 20px;
+>>>>>>> c6bf67f6aae684a203e296076ea0d23ffa9bfeb0
 }
 
 /* ------------------------------------------------------

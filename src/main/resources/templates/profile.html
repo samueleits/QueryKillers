@@ -67,8 +67,8 @@
                             <img src="https://picsum.photos/id/100/100/100" alt="Avatar utente" class="profile-avatar"> 
                         </div>
                         <div class="user-details">
-                            <h3>Username</h3>
-                            <p>Email: username@example.com</p>
+                            <h3 th:text="${user.username}">Username</h3>
+                            <p>Email: <span th:text="${user.email}">email@example.com</span></p>
                             <p>Password: **********</p>
                         </div>
                         <button class="edit-info-button">Modifica informazioni</button>
