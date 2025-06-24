@@ -68,6 +68,15 @@ public class Challenge {
     }
 
     /**
+     * Imposta il nome della sfida.
+     *
+     * @param name nuovo nome della sfida
+     */
+    public void setName(String name) {
+        this.name = name;   
+    }
+
+    /**
      * Restituisce la data di inizio della sfida.
      *
      * @return data di inizio

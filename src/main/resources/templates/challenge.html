@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TBR - Challenge</title>
-    <link rel="stylesheet" href="../static/css/layout.css">
-    <link rel="stylesheet" href="../static/css/challenge.css">
-    <link rel="stylesheet" href="../static/css/responsive.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/challenge.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="homepage">
@@ -27,7 +27,7 @@
                         <a href="#" data-lang="es">Italiano - IT</a>
                     </div>
                 </div>
-                <a href="profile.html" class="login-button">profile icon da sistemare</a>
+                <a href="/profile" class="login-button">profile icon da sistemare</a>
             </div>
         </div>
     </header>
@@ -68,7 +68,16 @@
             </div>
             <div class="right-challenge-container">
                 <div class="create-challenge-card">
-
+                    <h3>Crea una nuova challenge</h3>
+                    <form th:action="@{/Challenge}" method="post" th:object="${challenge}">
+                        <label for="name">Nome challenge:</label>
+                        <input type="text" id="name" name="name" th:field="*{name}" required>
+                        <br>
+                        <label for="end_date">Data fine:</label>
+                        <input type="date" id="end_date" name="end_date" th:field="*{end_date}" required>
+                        <br>
+                        <button type="submit">Crea</button>
+                    </form>
                 </div>
                 <div class="your-challenges-card">
                     
@@ -96,8 +105,8 @@
         </div>
     </footer>
 
-    <script src="../static/js/main.js"></script>
-    <script src="../static/js/home.js"></script>
-    <script src="../static/js/layout.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/layout.js"></script>
 </body>
 </html>

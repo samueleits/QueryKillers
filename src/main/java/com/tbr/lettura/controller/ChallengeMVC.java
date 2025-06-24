@@ -1,0 +1,68 @@
+package com.tbr.lettura.controller;
+
+import java.security.Principal;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.tbr.lettura.model.Challenge;
+import com.tbr.lettura.model.Users;
+import com.tbr.lettura.service.ChallengeService;
+import com.tbr.lettura.service.UserService;
+
+@Controller
+public class ChallengeMVC {
+
+    @Autowired
+    private ChallengeService challengeService;
+
+    @Autowired
+    private UserService userService;
+    
+
+
+    @GetMapping("/Challenge")
+    public String getChallenge(Model model) {
+        List<Challenge> challenges = challengeService.getAllChallenges();
+        model.addAttribute("challenges", challenges);
+        model.addAttribute("challenge", new Challenge());
+        return "challenge";
+    }
+
+    @GetMapping("/Challenge/{id}")
+    public String getChallengeDetail(@PathVariable int id, Model model) {
+        Optional<Challenge> challenge = challengeService.getChallengeById(id);
+        model.addAttribute("challenge", challenge);
+        return "challenge-detail";
+    }
+
+    @GetMapping("/Challenge/new")
+    public String showCreateChallengeForm(Model model) {
+        model.addAttribute("challenge", new Challenge());
+        return "challenge-form";
+    }
+
+    @PostMapping("/Challenge")
+    public String createChallenge(@ModelAttribute Challenge challenge, Principal principal) {
+        challenge.setStart_date(LocalDate.now());
+        Challenge savedChallenge = challengeService.saveChallenge(challenge); // Cambia qui
+
+        String email = principal.getName();
+        Users user = userService.findByEmail(email);
+
+        // Usa l'ID della challenge appena salvata
+        challengeService.addChallengeToUser(user.getId(), savedChallenge.getId());
+        return "redirect:/Challenge";
+    }
+
+    
+
+}

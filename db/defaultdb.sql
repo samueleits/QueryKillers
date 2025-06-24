@@ -37,7 +37,13 @@ CREATE TABLE "challenges" (
   "name" varchar(100) NOT NULL,
   "start_date" date NOT NULL,
   "end_date" date NOT NULL,
+  /*
+  "creator_id" int NOT NULL,
+  */
   PRIMARY KEY ("id")
+  /*
+  CONSTRAINT "fk_challenge_creator" FOREIGN KEY ("creator_id") REFERENCES "users" ("id") ON DELETE CASCADE
+  */
 );
 
 /*

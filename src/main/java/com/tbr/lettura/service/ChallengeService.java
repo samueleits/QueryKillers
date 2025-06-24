@@ -1,6 +1,7 @@
 package com.tbr.lettura.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class ChallengeService {
     @Autowired
     private ChallengeRepository challengeRepo;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * Restituisce la lista delle sfide associate a un utente.
      *
@@ -41,23 +45,17 @@ public class ChallengeService {
      * @param challengeId id della sfida
      */
     public void addChallengeToUser(int userId, int challengeId) {
-        if (userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId) == null) {
-            UserChallenge uc = new UserChallenge(); // Crea una nuova associazione utente-sfida
-            Users user = new Users(); // Crea un nuovo oggetto Users per l'associazione
-            user.setId(userId); // Imposta l'id dell'utente
-            uc.setUser(user); // Associa l'utente all'oggetto UserChallenge
-
-            Challenge challenge = challengeRepo.findById(challengeId).orElse(null); // Recupera la sfida dal repository
-            // Se la sfida non esiste, gestire l'errore (ad esempio, lanciare un'eccezione o loggare un messaggio)
-            if (challenge == null) {
-                // devo capire come gestire l'errore
-                return;
-            }
-            uc.setChallenge(challenge);
-
-            userChallengeRepo.save(uc);
-        }
+    if (userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId) == null) {
+        UserChallenge uc = new UserChallenge();
+        Users user = userService.findById(userId); // <-- Cambia qui!
+        Optional<Challenge> challengeOpt = challengeRepo.findById(challengeId);
+        if (user == null || challengeOpt.isEmpty()) return;
+        uc.setUser(user);
+        uc.setChallenge(challengeOpt.get());
+        uc.setScore(0); // opzionale
+        userChallengeRepo.save(uc);
     }
+}
 
     /**
      * Incrementa il punteggio di una sfida per un utente.
@@ -73,4 +71,23 @@ public class ChallengeService {
             userChallengeRepo.save(uc);
         }
     }
+
+    public List<Challenge> getAllChallenges() {
+        return challengeRepo.findAll();
+    }
+
+    public Optional<Challenge> getChallengeById(int id) {
+        return challengeRepo.findById(id);
+    }
+
+    public Challenge saveChallenge(Challenge challenge) {
+        return challengeRepo.save(challenge);
+    }
+
+    public List<Challenge> getChallengesForUser(int userId) {
+    List<UserChallenge> userChallenges = userChallengeRepo.findByUserId(userId);
+    return userChallenges.stream()
+        .map(UserChallenge::getChallenge)
+        .toList();
+}
 }
