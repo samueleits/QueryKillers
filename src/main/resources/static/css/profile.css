@@ -16,24 +16,99 @@ Definizione delle variabili CSS generiche per i colori e le ombre
     --shadow-medium: rgba(0, 0, 0, 0.2);
     --shadow-dark: rgba(0, 0, 0, 0.3);
 
-    /* Altezze (queste dovrebbero comunque essere definite in layout.css per un uso consistente
-       o rimosse se non sono più rilevanti per la tua architettura CSS) */
+    /* Altezze  */
     --header-height: 80px; /* Altezza dell'header principale */
     --subheader-height: 50px; /* Altezza del subheader (se presente) */
     --footer-height: 80px; /* Altezza stimata del footer */
 }
 
+/* Stili specifici per la pagina del profilo */
+.profile-page-main {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    min-height: calc(100vh - var(--header-height) - var(--subheader-height) - var(--footer-height) - 40px); /* Regola l'altezza minima */
+}
+
+/* Sottobarra dell'header (Subheader) */
+.subheader {
+    background-color: #c1121f; /* Colore rosso come da mockup */
+    padding: 5px 0;
+    box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+
+/* Contenitore del contenuto del subheader */
+.subheader-content-wrapper {
+    display: flex;
+    justify-content: center; /* Centra gli elementi all'interno di questo wrapper */
+    align-items: center;
+    gap: 50px; /* Spazio fisso tra gli elementi */
+}
+
+/* Elemento del subheader */
+.subheader-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    transition: color 0.3s;
+    text-align: center;
+    flex-shrink: 0; /* Impedisce che gli elementi si restringano (importante per il responsive) */
+}
+
+/* Stile hover per l'elemento del subheader */
+.subheader-item:hover {
+    color: #ccc;
+}
+
+/* Icona circolare nel subheader */
+.subheader-item .circle-icon {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    color: #c70000;
+    font-size: 22px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Stile hover per l'icona circolare nel subheader */
+.subheader-item:hover .circle-icon {
+    background-color: #f0f0f0;
+}
+
+
+.profile-content-wrapper {
+    width: 100%;
+    height:100px;
+    margin: 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
 .profile-content-wrapper h2 {
-    color: var(--dark-gray); /* Usa variabile */
     font-size: 2.2em;
     margin-bottom: 30px;
-    text-align: center;
+    color: var(--white); /* Usa variabile */
+    text-align:left;
 }
+
 
 .profile-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Due colonne per le card principali */
     gap: 20px;
+    width: 90%;
     margin-bottom: 40px;
 }
 
@@ -72,15 +147,16 @@ Definizione delle variabili CSS generiche per i colori e le ombre
 
 /* Contenitore dell'avatar (dove applicare il bordo circolare) */
 .profile-avatar-container {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%; /* Rende il contenitore circolare */
     overflow: hidden; /* Nasconde l'eccesso dell'immagine */
     border: 5px solid var(--white); /* Bordo bianco (usa variabile) */
     box-shadow: 0 2px 8px var(--shadow-medium); /* Ombra per profondità */
     margin-top: 80px; /* Sposta l'avatar sotto l'header image */
-    position: relative;
+    position: absolute; /* Posiziona l'avatar sopra l'header image */
     z-index: 3; /* Assicura che l'avatar sia sopra l'header image */
+    left:10%;
     background-color: var(--medium-gray); /* Colore di fallback se l'immagine non carica */
 }
 
@@ -95,18 +171,24 @@ Definizione delle variabili CSS generiche per i colori e le ombre
 .user-details {
     margin-top: 20px;
     width: 100%;
+   
 }
 
 .user-details h3 {
     font-size: 1.8em;
-    color: var(--dark-gray); /* Usa variabile */
-    margin-bottom: 10px;
+    color: var(--dark-gray);
+    margin-bottom: 0;         /*  Elimina spazio sotto il titolo */
+    padding-top:100px;            /* Rimuove padding errato */
+    text-align: center;
+    
 }
 
 .user-details p {
     font-size: 1em;
     color: var(--dark-gray); /* Usa variabile */
     margin-bottom: 5px;
+    text-align: center;
+    padding: 0px;
 }
 
 .edit-info-button {
@@ -137,6 +219,10 @@ Definizione delle variabili CSS generiche per i colori e le ombre
     color: var(--dark-gray); /* Usa variabile */
     background-color: var(--light-gray); /* Leggermente diverso per contrasto */
     text-align: center;
+    margin-top:-120px;
+    width:100%;
+    padding-left: 20px;
+    padding-right: 0px;
 }
 
 /* Stili per la card delle statistiche account */
@@ -266,3 +352,6 @@ Definizione delle variabili CSS generiche per i colori e le ombre
         grid-template-columns: 1fr;
     }
 }
+
+
+

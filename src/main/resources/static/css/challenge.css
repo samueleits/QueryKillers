@@ -10,6 +10,13 @@ Stile per la pagina delle sfide
     margin-bottom: 40px;
 }
 
+/* Contenitore di destra */
+.right-challenge-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 /* --------------------------------------------------------------
 Stile per la sezione delle sfide disponibili
 ---------------------------------------------------------------- */
@@ -20,6 +27,7 @@ Stile per la sezione delle sfide disponibili
     padding: 20px;
     border-radius: 20px;
     z-index: 3;
+    max-height: 125vh;
 }
 
 /* Titolo della sezione delle sfide */
@@ -27,13 +35,6 @@ Stile per la sezione delle sfide disponibili
     font-size: 1.7vw;
     color: #003049;
     margin-top: 0;
-}
-
-/* Contenitore di destra */
-.right-challenge-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 
 /* Barra di ricerca per le sfide */
@@ -70,7 +71,63 @@ Stile per la sezione delle sfide disponibili
     }
 }
 
+.challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 109vh;
+    margin-top: 20px;
+    overflow-y: scroll; 
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
 
+.challenge-list::-webkit-scrollbar {
+    display: none;
+}
+
+.challenge-item {
+    display: flex;
+    flex-direction: column;
+    background-color: #669bbc24;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.challenge-item h2 {
+    font-size: 1.2vw;
+    color: #003049;
+    margin: 0 0 10px 0;
+}
+
+.challenge-item p {
+    font-size: 1vw;
+    color: #003049;
+    margin: 0;
+}
+
+.join-challenge-button {
+    background-color: #003049;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1vw;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 28%;
+    right: 2%;
+}
+
+.join-challenge-button:hover {
+    background-color: #669bbc;
+}
+
+/* ---------------------------------------------------------------
+Stile per la sezione crea nuove challenge
+---------------------------------------------------------------- */
 
 .create-challenge-card {
     background-color: white;
@@ -78,6 +135,52 @@ Stile per la sezione delle sfide disponibili
     border-radius: 20px;
     z-index: 3;
 }
+
+.create-challenge-card h2 {
+    font-size: 1.7vw;
+    color: #003049;
+    margin-top: 0;
+}
+
+.create-challenge-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.challenge-button {
+    background-color: #003049;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1.2vw;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.challenge-button:hover {
+    background-color: #669bbc;
+}
+
+.create-challenge-text {
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #003049;
+    margin-bottom: 10px;
+}
+
+.create-challenge-form input {
+    padding: 10px;
+    border: 1px solid #669bbc;
+    background-color: #669bbc24;
+    border-radius: 10px;
+    font-size: 1.2vw;
+    margin-bottom: 20px;
+}
+
+/*----------------------------------------------------------------
+Stile per la sezione delle tue sfide
+----------------------------------------------------------------*/
 
 .your-challenges-card {
     background-color: white;
