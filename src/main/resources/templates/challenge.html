@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TBR - Challenge</title>
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/challenge.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="../static/css/layout.css">
+    <link rel="stylesheet" href="../static/css/challenge.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="homepage">
@@ -55,9 +55,11 @@
 
     <div class="main-background-container">
         <main class="main-content-wrapper">
-            <section class="hero-section">
-                <h2>Le tue challenge</h2>
-            </section>
+            <div class="main-hero-grid">
+                <div class="hero-title">
+                    <h2>Le tue challenge</h2>
+                </div>
+            </div>
             <div class="challenge-page-grid">
             <div class="challenge-card">
                 <h2>Challenge disponibili</h2>
@@ -65,25 +67,102 @@
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" placeholder="Cerca challenge...">
                 </div>
+                <div class="challenge-list">
+                    <div class="challenge-item">
+                        <h2>Challenge 1</h2>
+                        <p>Descrizione della challenge 1</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 2</h2>
+                        <p>Descrizione della challenge 2</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 3</h2>
+                        <p>Descrizione della challenge 3</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 4</h2>
+                        <p>Descrizione della challenge 1</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 5</h2>
+                        <p>Descrizione della challenge 2</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 6</h2>
+                        <p>Descrizione della challenge 3</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 7</h2>
+                        <p>Descrizione della challenge 1</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 8</h2>
+                        <p>Descrizione della challenge 2</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 9</h2>
+                        <p>Descrizione della challenge 3</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 10</h2>
+                        <p>Descrizione della challenge 1</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 11</h2>
+                        <p>Descrizione della challenge 2</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 12</h2>
+                        <p>Descrizione della challenge 3</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 13</h2>
+                        <p>Descrizione della challenge 1</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 14</h2>
+                        <p>Descrizione della challenge 2</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h2>Challenge 15</h2>
+                        <p>Descrizione della challenge 3</p>
+                        <button class="join-challenge-button">Unisciti</button>
+                    </div>
+                </div>
             </div>
             <div class="right-challenge-container">
                 <div class="create-challenge-card">
-                    <h3>Crea una nuova challenge</h3>
-                    <form th:action="@{/Challenge}" method="post" th:object="${challenge}">
-                        <label for="name">Nome challenge:</label>
-                        <input type="text" id="name" name="name" th:field="*{name}" required>
+                    <h2>Crea nuove challenge</h2>
+                    <form class="create-challenge-form" th:action="@{/Challenge}" method="post" th:object="${challenge}">
+                        <label class="create-challenge-text" for="name">Nome challenge:</label>
+                        <input class="create-challenge-form" type="text" id="name" name="name" th:field="*{name}" required>
                         <br>
-                        <label for="end_date">Data fine:</label>
-                        <input type="date" id="end_date" name="end_date" th:field="*{end_date}" required>
+                        <label class="create-challenge-text" for="end_date">Data fine:</label>
+                        <input class="create-challenge-form" type="date" id="end_date" name="end_date" th:field="*{end_date}" required>
                         <br>
-                        <button type="submit">Crea</button>
+                        <button class="challenge-button" type="submit">Crea</button>
                     </form>
                 </div>
                 <div class="your-challenges-card">
-                    
+                    challenge in corso
                 </div>
                 <div class="done-challenges-card">
-
+                    challenge completate
                 </div>
             </div>
         </div>
@@ -105,8 +184,8 @@
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
-    <script src="/js/home.js"></script>
-    <script src="/js/layout.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/layout.js"></script>
+    <script src="../static/js/challenge.js"></script>
 </body>
 </html>
