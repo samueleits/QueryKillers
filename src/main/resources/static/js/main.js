@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const profileIcon = document.createElement('a');
-                profileIcon.href = 'profile.html'; // In futuro, punterà alla pagina profilo
+                profileIcon.href = '/profile'; // In futuro, punterà alla pagina profilo
                 profileIcon.classList.add('profile-icon');
                 profileIcon.textContent = username ? username.substring(0, 2).toUpperCase() : 'US'; // Prende le prime due lettere dell'username
                 userActionsDiv.appendChild(profileIcon);

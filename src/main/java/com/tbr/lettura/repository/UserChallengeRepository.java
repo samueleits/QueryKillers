@@ -29,4 +29,15 @@ public interface UserChallengeRepository extends JpaRepository<UserChallenge, In
      * @return UserChallenge corrispondente, oppure null se non esiste
      */
     UserChallenge findByUserIdAndChallengeId(Integer userId, Integer challengeId);
+
+    
+    /**
+     * Restituisce la lista delle associazioni per una data sfida.
+     *
+     * @param challengeId id della sfida
+     * @return lista di UserChallenge per la sfida specificata
+     */
+    List<UserChallenge> findByChallengeId(Integer challengeId);
+
+
 }

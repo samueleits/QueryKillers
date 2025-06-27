@@ -47,7 +47,7 @@ public class ChallengeService {
     public void addChallengeToUser(int userId, int challengeId) {
     if (userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId) == null) {
         UserChallenge uc = new UserChallenge();
-        Users user = userService.findById(userId); // <-- Cambia qui!
+        Users user = userService.findById(userId); 
         Optional<Challenge> challengeOpt = challengeRepo.findById(challengeId);
         if (user == null || challengeOpt.isEmpty()) return;
         uc.setUser(user);
