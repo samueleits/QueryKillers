@@ -1,7 +1,6 @@
 package com.tbr.lettura.controller;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,11 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.tbr.lettura.model.Challenge;
-import com.tbr.lettura.model.UserChallenge;
 import com.tbr.lettura.model.Users;
-import com.tbr.lettura.repository.UserChallengeRepository;
-import com.tbr.lettura.service.ChallengeService;
 import com.tbr.lettura.service.UserService;
 
 /**
@@ -26,12 +21,6 @@ public class UserMVC {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ChallengeService challengeService;
-
-    @Autowired
-    private UserChallengeRepository userChallengeRepo;
 
     /**
      * Mostra il form per la registrazione di un nuovo utente.
@@ -56,26 +45,12 @@ public class UserMVC {
      * @return la view "profile"
      */
     @GetMapping("/profile")
-    public String showUserProfile(Model model, Principal principal) {
-        String email = principal.getName();
-        Users user = userService.findByEmail(email);
-
-        // Recupera tutte le challenge a cui partecipa l'utente
-        List<Challenge> challenges = challengeService.getChallengesForUser(user.getId());
-
-        model.addAttribute("user", user);
-        model.addAttribute("challenges", challenges);
-
-        // Se vuoi mostrare la classifica di una challenge selezionata:
-        if (!challenges.isEmpty()) {
-            Challenge challenge = challenges.get(0); // ad esempio la prima
-            List<UserChallenge> partecipanti = userChallengeRepo.findByChallengeIdOrderByScoreDesc(challenge.getId());
-            model.addAttribute("challenge", challenge);
-            model.addAttribute("partecipanti", partecipanti);
-        }
-
-        return "profile";
-    }
+public String showUserProfile(Model model, Principal principal) {
+    String email = principal.getName();
+    Users user = userService.findByEmail(email);
+    model.addAttribute("user", user);
+    return "profile";
+}
 
     /**
      * Registra un nuovo utente e lo reindirizza alla pagina di login se la registrazione ha successo,
@@ -86,25 +61,25 @@ public class UserMVC {
      * @return la view "redirect:/login" o "register" in base all'esito della registrazione
      */
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute Users user, Model model) {
-        System.out.println("Ricevuta richiesta di registrazione per: " + user.getEmail());
-        if (userService.emailExists(user.getEmail())) {
-            System.out.println("Email già in uso: " + user.getEmail());
-            model.addAttribute("registerError", "Email già in uso.");
-            model.addAttribute("showRegister", true);
-            return "login";
-        }
-        if (!userService.isPasswordValid(user.getPassword_hash())) {
-            System.out.println("Password non valida per: " + user.getEmail());
-            model.addAttribute("registerError", "Password non valida: almeno 12 caratteri, una maiuscola e un carattere speciale.");
-            model.addAttribute("showRegister", true);
-            return "login";
-        }
-        userService.registerUser(user);
-        System.out.println("Registrazione avvenuta con successo per: " + user.getEmail());
-        model.addAttribute("registerSuccess", "Registrazione avvenuta con successo! Ora puoi accedere.");
+public String registerUser(@ModelAttribute Users user, Model model) {
+    System.out.println("Ricevuta richiesta di registrazione per: " + user.getEmail());
+    if (userService.emailExists(user.getEmail())) {
+        System.out.println("Email già in uso: " + user.getEmail());
+        model.addAttribute("registerError", "Email già in uso.");
+        model.addAttribute("showRegister", true);
         return "login";
     }
+    if (!userService.isPasswordValid(user.getPassword_hash())) {
+        System.out.println("Password non valida per: " + user.getEmail());
+        model.addAttribute("registerError", "Password non valida: almeno 12 caratteri, una maiuscola e un carattere speciale.");
+        model.addAttribute("showRegister", true);
+        return "login";
+    }
+    userService.registerUser(user);
+    System.out.println("Registrazione avvenuta con successo per: " + user.getEmail());
+    model.addAttribute("registerSuccess", "Registrazione avvenuta con successo! Ora puoi accedere.");
+    return "login";
+}
 
     @PostMapping("/login")
         public String loginUser(@ModelAttribute("user") Users user, Model model) {
