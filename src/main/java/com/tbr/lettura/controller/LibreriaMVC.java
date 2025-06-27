@@ -82,16 +82,31 @@ public class LibreriaMVC {
         return "homepage-logged";
     }
 
-@GetMapping("/libri")
-public String mostraTuttiLibri(Model model, Principal principal) {
-    Users user = userRepository.findByEmail(principal.getName());
-    model.addAttribute("user", user);
-    
-    List<Libro> libri = libroRepository.findAll();
-    model.addAttribute("libri", libri);
-    
-    return "libri-tutti";
+    @GetMapping("/libri")
+    public String mostraTuttiILibri(Model model, Principal principal) {
+        Users user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("user", user);
+        List<Libro> libri = libroRepository.findAll();
+        model.addAttribute("libri", libri);
+        return "libri-tutti";
+    }
+
+    @GetMapping("/libri/filter")
+public String filterLibri(
+    @RequestParam(required = false) String title,
+    @RequestParam(required = false) String author,
+    @RequestParam(required = false) String genre,
+    Model model) {
+
+    List<Libro> filteredLibri = libroRepository.findByTitleContainingIgnoreCaseAndAuthorContainingIgnoreCaseAndGenreContainingIgnoreCase(
+        title != null ? title : "", // Passa stringa vuota se null
+        author != null ? author : "",
+        genre != null ? genre : ""
+    );
+    model.addAttribute("libri", filteredLibri);
+    return "libri-tutti"; // Ricarica la stessa pagina con i libri filtrati
 }
+
 
 @PostMapping("/toggle-read")
 @ResponseBody

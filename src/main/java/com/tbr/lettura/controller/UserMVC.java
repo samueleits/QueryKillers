@@ -62,22 +62,22 @@ public String showUserProfile(Model model, Principal principal) {
     model.addAttribute("user", user);
 
     // Conta i libri letti dall'utente
-    int libriLetti = libroUserRepository.countLibriLettiByUserId(user.getId());
-    model.addAttribute("libriLetti", libriLetti);
+    // int libriLetti = libroUserRepository.countLibriLettiByUserId(user.getId());
+    // model.addAttribute("libriLetti", libriLetti);
 
-    // Calcola il livello (esempio: 1-4 = 'Principiante', 5-9 = 'Intermedio', ecc.)
-    String livello;
-    if (libriLetti >= 10) {
-        livello = "Esperto";
-    } else if (libriLetti >= 5) {
-        livello = "Intermedio";
-    } else if (libriLetti >= 1) {
-        livello = "Principiante";
-    } else {
-        livello = "Nessun livello";
-    }
+    // // Calcola il livello (esempio: 1-4 = 'Principiante', 5-9 = 'Intermedio', ecc.)
+    // String livello;
+    // if (libriLetti >= 10) {
+    //     livello = "Esperto";
+    // } else if (libriLetti >= 5) {
+    //     livello = "Intermedio";
+    // } else if (libriLetti >= 1) {
+    //     livello = "Principiante";
+    // } else {
+    //     livello = "Nessun livello";
+    // }
 
-    model.addAttribute("livello", livello);
+    // model.addAttribute("livello", livello);
 
     // Challenge e partecipanti
     List<UserChallenge> userChallenges = userChallengeRepository.findByUserId(user.getId());
