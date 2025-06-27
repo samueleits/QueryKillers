@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tbr.lettura.model.Libro;
 import com.tbr.lettura.model.Users;
+import com.tbr.lettura.repository.LibroRepository;
 import com.tbr.lettura.service.LibroService;
 import com.tbr.lettura.service.UserService;
+import java.util.List;
+
 
 /**
  * Controller MVC per la gestione della libreria.
@@ -26,6 +29,9 @@ public class LibreriaMVC {
 
     @Autowired
     private UserService userService;
+
+        @Autowired
+    private LibroRepository libroRepository;
 
     /**
      * Pagina di benvenuto.
@@ -67,5 +73,12 @@ public class LibreriaMVC {
         model.addAttribute("titolo", "I più grandi libri di sempre");
         model.addAttribute("libri", libroService.getLibri());
         return "homepage-logged";
+    }
+
+    @GetMapping("/libri")
+    public String mostraTuttiILibri(Model model) {
+        List<Libro> libri = libroRepository.findAll();
+        model.addAttribute("libri", libri);
+        return "libri-tutti";
     }
 }
