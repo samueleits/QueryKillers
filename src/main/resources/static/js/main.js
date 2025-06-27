@@ -36,60 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Gestione dello stato di login nell'header
-    const userActionsDiv = document.querySelector('.user-actions');
-    const loginButton = userActionsDiv ? userActionsDiv.querySelector('.login-button') : null;
-    const currentLanguageSpan = userActionsDiv ? userActionsDiv.querySelector('.current-language') : null;
-
-    function updateHeaderForLoginStatus() {
-        // Verifica se l'utente è loggato (es. tramite localStorage)
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        const username = localStorage.getItem('username'); // Recupera l'username salvato
-
-        if (userActionsDiv) {
-            // Rimuovi eventuali elementi preesistenti per evitare duplicati
-            const existingProfileIcon = userActionsDiv.querySelector('.profile-icon');
-            if (existingProfileIcon) {
-                existingProfileIcon.remove();
-            }
-
-            if (isLoggedIn) {
-                // Se loggato: nascondi il pulsante Login e mostra l'icona profilo
-                if (loginButton) {
-                    loginButton.style.display = 'none';
-                }
-                if (currentLanguageSpan) {
-                     // Rimuovi l'icona caret-down se presente nel current-language (se non vuoi il dropdown)
-                     const caretIcon = currentLanguageSpan.querySelector('.fa-caret-down');
-                     if (caretIcon) {
-                         caretIcon.remove();
-                     }
-                }
-
-                const profileIcon = document.createElement('a');
-                profileIcon.href = '/profile'; // In futuro, punterà alla pagina profilo
-                profileIcon.classList.add('profile-icon');
-                profileIcon.textContent = username ? username.substring(0, 2).toUpperCase() : 'US'; // Prende le prime due lettere dell'username
-                userActionsDiv.appendChild(profileIcon);
-
-            } else {
-                // Se non loggato: mostra il pulsante Login e assicurati che l'icona profilo non ci sia
-                if (loginButton) {
-                    loginButton.style.display = ''; // Reimposta a display predefinito (flex o inline-block)
-                }
-                if (currentLanguageSpan && !currentLanguageSpan.querySelector('.fa-caret-down')) {
-                    // Aggiungi di nuovo il caret-down se era stato rimosso per il dropdown lingua
-                    const caretIcon = document.createElement('i');
-                    caretIcon.classList.add('fas', 'fa-caret-down');
-                    currentLanguageSpan.appendChild(caretIcon);
-                }
-            }
-        }
-    }
-
-    // Chiamata iniziale per impostare l'header allo stato di login/logout
-    updateHeaderForLoginStatus();
-
     // Se l'utente torna alla pagina dopo un login/logout, refresh dell'header
     window.addEventListener('storage', (event) => {
         if (event.key === 'isLoggedIn' || event.key === 'username') {
