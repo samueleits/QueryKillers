@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tbr.lettura.model.Libro;
+import com.tbr.lettura.model.LibroUser;
+import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.LibroRepository;
+import com.tbr.lettura.repository.LibroUserRepository;
+import com.tbr.lettura.repository.UserRepository;
 
 /**
  * Service che gestisce la logica relativa ai libri.
@@ -17,6 +21,12 @@ import com.tbr.lettura.repository.LibroRepository;
 public class LibroService {
     @Autowired
     private LibroRepository libroRepository;
+
+    @Autowired
+private LibroUserRepository libroUserRepository;
+
+@Autowired
+private UserRepository userRepository;
 
     /**
      * Restituisce la lista di tutti i libri presenti nel repository.
@@ -140,4 +150,21 @@ public class LibroService {
     public void deleteLibro(int id) {
         libroRepository.deleteById(id);
     }
+
+public void toggleReadStatus(int userId, int bookId) {
+    LibroUser libroUser = libroUserRepository.findByUserIdAndBookId(userId, bookId).orElse(null);
+
+    if (libroUser == null) {
+        libroUser = new LibroUser();
+        libroUser.setUser(userRepository.findById(userId).orElseThrow());
+        libroUser.setBook(libroRepository.findById(bookId).orElseThrow());
+        libroUser.setRead(true);
+    } else {
+        libroUser.setRead(!libroUser.isRead());
+    }
+
+    libroUserRepository.save(libroUser);
+}
+
+
 }

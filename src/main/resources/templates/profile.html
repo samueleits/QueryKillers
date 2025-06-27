@@ -13,7 +13,7 @@
     <header class="header">
         <div class="header-content-wrapper">
             <div class="logo">
-                <a href="/"><h1>LOGO TBR</h1></a>
+                <a href="/Home"><h1>LOGO TBR</h1></a>
             </div>
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
@@ -27,7 +27,7 @@
                         <a href="#" data-lang="es">Italiano - IT</a>
                     </div>
                 </div>
-                <a href="/login" class="login-button">Login</a>
+                <a href="/profile" class="login-button">Profilo</a>
             </div>
         </div>
     </header>
@@ -101,34 +101,23 @@
                         </div>
                     </div>
 
-                    <div class="profile-card account-stats-card">
-                        <h3><i class="fas fa-chart-bar icon"></i> Statistiche account</h3>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <span class="stat-number">50</span>
-                                <span class="stat-label">Libri letti</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">6</span>
-                                <span class="stat-label">Da finire</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">12</span>
-                                <span class="stat-label">Recensioni</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">3</span>
-                                <span class="stat-label">Amici</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="profile-card friends-animals-card">
-                        <h3>Sezione amici o animali</h3>
-                        </div>
-                </div>
-            </main>
+                    <!-- all'interno della profile-card account-stats-card -->
+<div class="profile-card account-stats-card">
+    <h3><i class="fas fa-chart-bar icon"></i> Statistiche account</h3>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-number" th:text="${libriLetti}">50</span>
+            <span class="stat-label">Libri letti</span>
         </div>
+        <div class="stat-item animal-level">
+            <img th:src="@{'/img/livelli/' + ${livello.toLowerCase()} + '.png'}" alt="Livello animale" style="width: 50px; height: 50px;">
+            <span class="stat-label">Livello: <strong th:text="${livello}">Drago</strong></span>
+        </div>
+    </div>
+</div>
+
+
+
 
     <footer class="footer">
         <div class="footer-content-wrapper">

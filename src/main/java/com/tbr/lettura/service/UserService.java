@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tbr.lettura.model.Users;
+import com.tbr.lettura.repository.LibroUserRepository;
 import com.tbr.lettura.repository.UserRepository;
 
 /**
@@ -17,6 +18,9 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+        @Autowired
+    private LibroUserRepository libroUserRepository;
 
     public boolean emailExists(String email) {
         System.out.println("Controllo se esiste l'email: " + email);
@@ -47,5 +51,18 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    
+    public String calcolaLivelloAnimale(Users user) {
+    long count = libroUserRepository.countByUserAndIsRead(user, true);
+
+    if (count <= 4) return "Bruco";
+    if (count <= 9) return "Topo";
+    if (count <= 14) return "Coniglio";
+    if (count <= 22) return "Volpe";
+    if (count <= 31) return "Lupo";
+    if (count <= 39) return "Orso";
+    if (count <= 47) return "Gufo";
+    if (count <= 50) return "Drago";
+    return "Entità Mistica";
+}
+
 }

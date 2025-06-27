@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.tbr.lettura.model.Challenge;
 import com.tbr.lettura.model.UserChallenge;
 import com.tbr.lettura.model.Users;
+import com.tbr.lettura.repository.LibroUserRepository;
 import com.tbr.lettura.repository.UserChallengeRepository;
 import com.tbr.lettura.service.UserService;
 
@@ -28,6 +29,9 @@ public class UserMVC {
 
     @Autowired
     private UserChallengeRepository userChallengeRepository;
+
+        @Autowired
+    private LibroUserRepository libroUserRepository;
 
     /**
      * Mostra il form per la registrazione di un nuovo utente.
@@ -51,25 +55,45 @@ public class UserMVC {
      *    * @param model il modello che contiene l'oggetto User da popolare         
      * @return la view "profile"
      */
-    @GetMapping("/profile")
-    public String showUserProfile(Model model, Principal principal) {
-        String email = principal.getName();
-        Users user = userService.findByEmail(email);
-        model.addAttribute("user", user);
+@GetMapping("/profile")
+public String showUserProfile(Model model, Principal principal) {
+    String email = principal.getName();
+    Users user = userService.findByEmail(email);
+    model.addAttribute("user", user);
 
-        // Recupera la challenge associata all'utente (prendi la più recente o la prima)
-        List<UserChallenge> userChallenges = userChallengeRepository.findByUserId(user.getId());
-        if (!userChallenges.isEmpty()) {
-            Challenge challenge = userChallenges.get(0).getChallenge(); 
-            model.addAttribute("challenge", challenge);
-            model.addAttribute("partecipanti", userChallengeRepository.findByChallengeId(challenge.getId()));
-        } else {
-            model.addAttribute("challenge", null);
-            model.addAttribute("partecipanti", List.of());
-        }
+    // Conta i libri letti dall'utente
+    int libriLetti = libroUserRepository.countLibriLettiByUserId(user.getId());
+    model.addAttribute("libriLetti", libriLetti);
 
-        return "profile";
+    // Calcola il livello (esempio: 1-4 = 'Principiante', 5-9 = 'Intermedio', ecc.)
+    String livello;
+    if (libriLetti >= 10) {
+        livello = "Esperto";
+    } else if (libriLetti >= 5) {
+        livello = "Intermedio";
+    } else if (libriLetti >= 1) {
+        livello = "Principiante";
+    } else {
+        livello = "Nessun livello";
     }
+
+    model.addAttribute("livello", livello);
+
+    // Challenge e partecipanti
+    List<UserChallenge> userChallenges = userChallengeRepository.findByUserId(user.getId());
+    if (!userChallenges.isEmpty()) {
+        Challenge challenge = userChallenges.get(0).getChallenge();
+        model.addAttribute("challenge", challenge);
+        model.addAttribute("partecipanti", userChallengeRepository.findByChallengeId(challenge.getId()));
+    } else {
+        model.addAttribute("challenge", null);
+        model.addAttribute("partecipanti", List.of());
+    }
+
+    return "profile";
+}
+
+
 
     /**
      * Registra un nuovo utente e lo reindirizza alla pagina di login se la registrazione ha successo,
@@ -116,8 +140,19 @@ public class UserMVC {
             return "redirect:/Home";
         }
 
-   @PostMapping("/profile")
-    public String updateUserProfile(@ModelAttribute("user") Users user, Model model) {
-        return "profile";
-    }
+@PostMapping("/profile")
+public String updateUserProfile(@ModelAttribute("user") Users user, Model model) {
+    // Recupera il vero utente dal DB (per sicurezza)
+    Users dbUser = userService.findById(user.getId());
+
+    // Ricalcola il livello animale
+    String livello = userService.calcolaLivelloAnimale(dbUser);
+
+    // Aggiungi attributi al modello
+    model.addAttribute("user", dbUser);
+    model.addAttribute("livello", livello);
+
+    return "profile";
+}
+
 }

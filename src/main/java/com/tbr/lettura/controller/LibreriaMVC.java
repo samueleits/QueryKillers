@@ -8,10 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.ResponseEntity;
 import com.tbr.lettura.model.Libro;
 import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.LibroRepository;
+import com.tbr.lettura.repository.UserRepository;
 import com.tbr.lettura.service.LibroService;
 import com.tbr.lettura.service.UserService;
 import java.util.List;
@@ -32,6 +35,10 @@ public class LibreriaMVC {
 
         @Autowired
     private LibroRepository libroRepository;
+
+        @Autowired
+    private UserRepository userRepository;
+
 
     /**
      * Pagina di benvenuto.
@@ -75,10 +82,25 @@ public class LibreriaMVC {
         return "homepage-logged";
     }
 
-    @GetMapping("/libri")
-    public String mostraTuttiILibri(Model model) {
-        List<Libro> libri = libroRepository.findAll();
-        model.addAttribute("libri", libri);
-        return "libri-tutti";
-    }
+@GetMapping("/libri")
+public String mostraTuttiLibri(Model model, Principal principal) {
+    Users user = userRepository.findByEmail(principal.getName());
+    model.addAttribute("user", user);
+    
+    List<Libro> libri = libroRepository.findAll();
+    model.addAttribute("libri", libri);
+    
+    return "libri-tutti";
+}
+
+@PostMapping("/toggle-read")
+@ResponseBody
+public ResponseEntity<String> toggleRead(@RequestParam("bookId") int bookId, Principal principal) {
+    String email = principal.getName();
+    Users user = userService.findByEmail(email);
+
+    libroService.toggleReadStatus(user.getId(), bookId); // assicurati che esista e faccia il toggle
+
+    return ResponseEntity.ok("Stato aggiornato");
+}
 }

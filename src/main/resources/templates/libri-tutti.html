@@ -3,6 +3,9 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <title>Tutti i Libri - TBR</title>
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/home.css">
@@ -37,7 +40,7 @@
 <header class="header">
     <div class="header-content-wrapper">
         <div class="logo">
-            <a href="/"><h1>LOGO TBR</h1></a>
+            <a href="/Home"><h1>LOGO TBR</h1></a>
         </div>
         <div class="search-bar">
             <i class="fas fa-search search-icon"></i>
@@ -45,7 +48,7 @@
         </div>
         <div id="autocomplete-results"></div> 
         <div class="user-actions">
-            <a href="/login" class="login-button">Login</a>
+            <a href="/profile" class="login-button">Profilo</a>
         </div>
     </div>
 </header>
@@ -71,14 +74,22 @@
   </div>
   <div class="books-grid">
     <div class="book-card" th:each="libro : ${libri}">
-        <img th:src="${libro.cover}" th:alt="${libro.title}" />
-        <div class="book-info">
-            <h4 class="book-title" th:text="${libro.title}"></h4>
-            <p class="book-author" th:text="${libro.author}"></p>
-            <p class="book-description" th:text="${libro.description}"></p>
-        </div>
+    <img th:src="@{${libro.cover}}" th:alt="${libro.title}">
+    <div class="book-info">
+        <h4 class="book-title" th:text="${libro.title}">Titolo</h4>
+        <p class="book-author" th:text="${libro.author}">Autore</p>
+        <p class="book-description" th:text="${libro.description}">Descrizione</p>
+
+        <!-- Bottone per segnare come letto -->
+        <button 
+            class="read-button"
+            th:attr="data-user-id=${user.id}, data-book-id=${libro.id}"
+            onclick="toggleLetto(this)">
+            ✅ Letto
+        </button>
     </div>
-  </div>
+</div>
+
 </section>
 
 
