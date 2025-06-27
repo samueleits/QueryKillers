@@ -29,7 +29,7 @@ a:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  width: 60vw;
+  width: 80%;
   min-height: 80vh;
   border-radius: 20px;
   margin: 20px auto;
@@ -365,7 +365,7 @@ Stili per le sezioni dei libri e delle categorie
 /* Griglia per i libri e le categorie (stile di base) */
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr)); /* 3-6 colonne circa, adattivo */
+    grid-template-columns: repeat(auto-fit, minmax(15%, 1fr)); /* 3-6 colonne circa, adattivo */
     gap: 15px;
 }
 
@@ -392,10 +392,7 @@ Stili per le sezioni dei libri e delle categorie
 /* Immagine della copertina del libro */
 .book-card img {
   width: 100%;
-  max-height: 500px;
-  object-fit: cover;
-  border-radius: 15px;
-  margin-bottom: 10px;
+  object-fit: fill;
 }
 
 /* Contenitore delle informazioni del libro */
