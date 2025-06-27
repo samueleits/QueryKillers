@@ -347,7 +347,98 @@ body:not(.homepage) .subheader {
 }
 
 /* Griglia per i libri e le categorie (stile di base) */
-.books-grid,
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr)); /* 3-6 colonne circa, adattivo */
+    gap: 15px;
+}
+
+/* Stile per le card dei libri */
+.book-card {
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Effetto hover per le card dei libri */
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Immagine della copertina del libro */
+.book-card img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+/* Contenitore delle informazioni del libro */
+.book-info {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.877);
+    transition: top 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+/* Quando si passa il mouse sulla card, sposta il .book-info */
+.book-card:hover .book-info {
+    top: 0; /* Sposta il pannello a sinistra, sovrapponendosi al contenuto esistente */
+}
+
+/* Stili per Titolo e Autore (rimangono simili, ma gestiti dal .book-info) */
+.book-info .book-title {
+    font-size: 150%;
+    font-weight: bold;
+    color: #003049;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 5%; /* Adatta padding se necessario */
+    text-align: center; /* Centra il testo */
+}
+
+.book-info .book-author {
+    font-size: 85%;
+    color: #669bbc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 5%; /* Adatta padding se necessario */
+    text-align: center; /* Centra il testo */
+}
+
+
+
+
+/* -------------------------------------------------------
+Stile per la card delle categorie
+-------------------------------------------------------- */
+
+.categories-section {
+    background-color: white;
+    border-radius:20px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 4 colonne circa, adattivo */
