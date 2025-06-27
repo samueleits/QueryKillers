@@ -13,7 +13,7 @@
     <header class="header">
         <div class="header-content-wrapper">
             <div class="logo">
-                <a href="/"><h1>LOGO TBR</h1></a>
+                <a href="/Home"><h1>LOGO TBR</h1></a>
             </div>
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
@@ -61,10 +61,17 @@
             <div class="challenge-page-grid">
             <div class="challenge-card">
                 <h2>Challenge disponibili</h2>
-                <div class="challenge-search-bar">
+                <form method="get" th:action="@{/Challenge}" class="challenge-search-bar">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" placeholder="Cerca challenge...">
-                </div>
+                    <input type="text" name="search" placeholder="Cerca challenge..." th:value="${param.search}">
+                </form>
+            <div class="challenge-list">
+                <ul>
+                    <li th:each="c : ${challenges}">
+                        <span th:text="${c.name}">Nome Challenge</span>
+                    </li>
+                </ul>
+            </div>
             </div>
             <div class="right-challenge-container">
                 <div class="create-challenge-card">

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tbr.lettura.model.Challenge;
 import com.tbr.lettura.model.Users;
@@ -30,8 +31,15 @@ public class ChallengeMVC {
 
 
     @GetMapping("/Challenge")
-    public String getChallenge(Model model) {
-        List<Challenge> challenges = challengeService.getAllChallenges();
+    public String getChallenge(Model model, @RequestParam(required = false) String search) {
+        List<Challenge> challenges;
+        if (search != null && !search.isEmpty()) {
+            challenges = challengeService.getAllChallenges().stream()
+                .filter(c -> c.getName().toLowerCase().contains(search.toLowerCase()))
+                .toList();
+        } else {
+            challenges = challengeService.getAllChallenges();
+        }
         model.addAttribute("challenges", challenges);
         model.addAttribute("challenge", new Challenge());
         return "challenge";
@@ -53,7 +61,7 @@ public class ChallengeMVC {
     @PostMapping("/Challenge")
     public String createChallenge(@ModelAttribute Challenge challenge, Principal principal) {
         challenge.setStart_date(LocalDate.now());
-        Challenge savedChallenge = challengeService.saveChallenge(challenge); // Cambia qui
+        Challenge savedChallenge = challengeService.saveChallenge(challenge); 
 
         String email = principal.getName();
         Users user = userService.findByEmail(email);
