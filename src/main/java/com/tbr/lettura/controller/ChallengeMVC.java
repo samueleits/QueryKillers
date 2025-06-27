@@ -3,14 +3,12 @@ package com.tbr.lettura.controller;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -45,18 +43,8 @@ public class ChallengeMVC {
         return "challenge";
     }
 
-    @GetMapping("/Challenge/{id}")
-    public String getChallengeDetail(@PathVariable int id, Model model) {
-        Optional<Challenge> challenge = challengeService.getChallengeById(id);
-        model.addAttribute("challenge", challenge);
-        return "challenge-detail";
-    }
+    
 
-    @GetMapping("/Challenge/new")
-    public String showCreateChallengeForm(Model model) {
-        model.addAttribute("challenge", new Challenge());
-        return "challenge-form";
-    }
 
     @PostMapping("/Challenge")
     public String createChallenge(@ModelAttribute Challenge challenge, Principal principal) {

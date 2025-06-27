@@ -40,6 +40,11 @@ public class UserService {
 
     public Users findByUsername(String username) {
         return userRepository.findByUsername(username);
+    
+    }
+
+    public Users findById(int id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     
