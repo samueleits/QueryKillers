@@ -41,8 +41,9 @@
         </div>
         <div class="search-bar">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" placeholder="Cerca libro...">
+            <input type="text" placeholder="Cerca libro..." id="bookSearchInput">
         </div>
+        <div id="autocomplete-results"></div> 
         <div class="user-actions">
             <a href="/login" class="login-button">Login</a>
         </div>
@@ -60,6 +61,7 @@
 
 <div class="main-background-container">
 <main class="main-content-wrapper">
+</footer>
 
 
 <section class="books-section">
@@ -96,5 +98,12 @@
         </div>
     </div>
 </footer>
+ <script th:inline="javascript">
+            // Thymeleaf inietta la lista di libri qui dentro
+            // Assicurati che il controller passi la lista con nome "libri"
+            window.allLibriData = /*[[${libri}]]*/ [];
+        </script>
+
+        <script src="/js/autocomplete-script.js"></script>
 </body>
 </html>

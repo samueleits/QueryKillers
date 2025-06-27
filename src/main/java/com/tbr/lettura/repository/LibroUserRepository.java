@@ -18,6 +18,9 @@ public interface LibroUserRepository extends JpaRepository<LibroUser, Integer> {
     Optional<LibroUser> findByUserAndBook(Users user, Libro book);
     List<LibroUser> findByUser(Users user);
     List<LibroUser> findByUserAndIsRead(Users user, boolean isRead);
+    List<LibroUser> findByUserAndBook_TitleContainingIgnoreCase(Users user, String query); // Corretto
+    List<LibroUser> findByUserAndBook_AuthorContainingIgnoreCase(Users user, String query); // Corretto
+    List<LibroUser> findByUserAndBook_GenreContainingIgnoreCase(Users user, String query); // Corretto
 }
 
 
