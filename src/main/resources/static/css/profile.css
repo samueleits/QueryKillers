@@ -16,342 +16,198 @@ Definizione delle variabili CSS generiche per i colori e le ombre
     --shadow-medium: rgba(0, 0, 0, 0.2);
     --shadow-dark: rgba(0, 0, 0, 0.3);
 
-    /* Altezze  */
+    /* Altezze */
     --header-height: 80px; /* Altezza dell'header principale */
     --subheader-height: 50px; /* Altezza del subheader (se presente) */
     --footer-height: 80px; /* Altezza stimata del footer */
 }
 
-/* Stili specifici per la pagina del profilo */
-.profile-page-main {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    min-height: calc(100vh - var(--header-height) - var(--subheader-height) - var(--footer-height) - 40px); /* Regola l'altezza minima */
-}
-
-/* Sottobarra dell'header (Subheader) */
-.subheader {
-    background-color: #c1121f; /* Colore rosso come da mockup */
-    padding: 5px 0;
-    box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.05);
-    position: fixed;
-    width: 100%;
-    z-index: 999;
-}
-
-/* Contenitore del contenuto del subheader */
-.subheader-content-wrapper {
-    display: flex;
-    justify-content: center; /* Centra gli elementi all'interno di questo wrapper */
-    align-items: center;
-    gap: 50px; /* Spazio fisso tra gli elementi */
-}
-
-/* Elemento del subheader */
-.subheader-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    font-size: 10px;
-    font-weight: bold;
-    transition: color 0.3s;
-    text-align: center;
-    flex-shrink: 0; /* Impedisce che gli elementi si restringano (importante per il responsive) */
-}
-
-/* Stile hover per l'elemento del subheader */
-.subheader-item:hover {
-    color: #ccc;
-}
-
-/* Icona circolare nel subheader */
-.subheader-item .circle-icon {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5px;
-    color: #c70000;
-    font-size: 22px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-/* Stile hover per l'icona circolare nel subheader */
-.subheader-item:hover .circle-icon {
-    background-color: #f0f0f0;
-}
-
+/* ----------------------------------------------------
+Stile per la pagina del profilo utente
+-----------------------------------------------------*/
 
 .profile-content-wrapper {
     width: 100%;
-    height:100px;
-    margin: 0;
-    padding: 0 20px;
+    margin: 0 auto;
+    min-height: auto;
     position: relative;
-    z-index: 2;
+    z-index: 100;
 }
-
-.profile-content-wrapper h2 {
-    font-size: 2.2em;
-    margin-bottom: 30px;
-    color: var(--white); /* Usa variabile */
-    text-align:left;
-}
-
 
 .profile-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Due colonne per le card principali */
-    gap: 20px;
-    width: 90%;
-    margin-bottom: 40px;
+    /* Ho modificato a 3 colonne, come nel commento originale (1fr 1fr 1fr) */
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
 }
 
+/* Griglia delle sezioni profilo, statistiche e challenge */
 .profile-card {
-    background-color: var(--white); /* Usa variabile */
-    border-radius: 10px;
-    box-shadow: 0 2px 8px var(--shadow-light); /* Usa variabile */
+    background-color: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 2px 8px var(--shadow-light);
     padding: 20px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 15px;
 }
+
+/* -----------------------------------------------------
+Stile per la card del profilo utente
+-----------------------------------------------------*/
 
 /* Stili per la card delle informazioni utente */
 .user-info-card {
-    grid-column: 1 / 2;
-    align-items: center;
-    text-align: center;
     overflow: hidden;
     position: relative;
+    padding-top: 25%; /* Spazio per l'immagine header */
 }
 
 .profile-header-image {
     width: 100%;
-    height: 150px;
+    height: 0;
+    padding-bottom: 30%; /* Imposta l'altezza come percentuale della larghezza */
     overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
-    border-radius: 10px 10px 0 0;
 }
+
 .profile-header-image img {
+    position: absolute; /* Riempi lo spazio creato dal padding-bottom */
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 20px;
 }
 
 /* Contenitore dell'avatar (dove applicare il bordo circolare) */
 .profile-avatar-container {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%; /* Rende il contenitore circolare */
-    overflow: hidden; /* Nasconde l'eccesso dell'immagine */
-    border: 5px solid var(--white); /* Bordo bianco (usa variabile) */
-    box-shadow: 0 2px 8px var(--shadow-medium); /* Ombra per profondità */
-    margin-top: 80px; /* Sposta l'avatar sotto l'header image */
-    position: absolute; /* Posiziona l'avatar sopra l'header image */
-    z-index: 3; /* Assicura che l'avatar sia sopra l'header image */
-    left:10%;
-    background-color: var(--medium-gray); /* Colore di fallback se l'immagine non carica */
+    width: 6vw;
+    height: 6vw;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #669bbc;
+    position: absolute;
+    top: 5.5vw; /* Offset dall'alto, basato su VW */
+    left: 5%; /* Offset dalla sinistra, percentuale */
+    transform: translateX(0); /* Rimuovi la trasformazione X in modo che left:10% sia preciso */
+    z-index: 3;
+    background-color: var(--medium-gray);
 }
 
 /* L'immagine stessa dell'avatar */
 .profile-avatar {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Assicura che l'immagine copra il contenitore senza distorcere */
-    display: block; /* Rimuove lo spazio extra sotto l'immagine */
+    object-fit: cover;
+    display: block;
 }
 
 .user-details {
-    margin-top: 20px;
     width: 100%;
-   
+    position: relative; /* Per posizionare h3 se è fuori dal flusso */
 }
 
 .user-details h3 {
-    font-size: 1.8em;
-    color: var(--dark-gray);
-    margin-bottom: 0;         /*  Elimina spazio sotto il titolo */
-    padding-top:100px;            /* Rimuove padding errato */
-    text-align: center;
-    
+    position: absolute;
+    top: 0;
+    left: 60%;
+    transform: translateX(-50%); /* Posizionamento */
+    font-size: 2vw; /* Dimensione del font responsiva */
+    color: #003049;
+    white-space: nowrap; /* Impedisce al testo di andare a capo se la larghezza è limitata */
 }
 
-.user-details p {
-    font-size: 1em;
-    color: var(--dark-gray); /* Usa variabile */
+.user-details h2 {
+    font-size: 1vw; 
+    color: #003049;
     margin-bottom: 5px;
-    text-align: center;
-    padding: 0px;
+    text-align: left;
+    padding: 0;
+    margin-top: 12vh;
 }
 
 .edit-info-button {
-    background-color: #fdf0d5; /* Usa variabile */
-    color: var(--dark-gray); /* Usa variabile */
-    border: 1px solid var(--border-gray); /* Usa variabile */
-    padding: 10px 20px;
+    background-color: #003049;
+    color: white;
+    border: 1px solid #003049;
+    padding: 20px 20px;
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.9em;
     font-weight: bold;
     margin-top: 20px;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .edit-info-button:hover {
-    background-color: var(--border-gray); /* Colore leggermente più scuro */
-    border-color: var(--dark-gray); /* Colore leggermente più scuro */
+    background-color: #669bbc86;
+    border-color: #669bbc86;
 }
+
+/* ------------------------------------------------------
+Stili per le card delle challenge
+-------------------------------------------------------*/
 
 /* Stili per la card delle challenge */
 .challenges-card {
-    grid-column: 2 / 3;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
-    color: var(--dark-gray); /* Usa variabile */
-    background-color: var(--light-gray); /* Leggermente diverso per contrasto */
     text-align: center;
-    margin-top:-120px;
-    width:100%;
-    padding-left: 20px;
-    padding-right: 0px;
 }
+
+/* -------------------------------------------------------
+Stili per la card delle statistiche account
+-------------------------------------------------------*/
 
 /* Stili per la card delle statistiche account */
 .account-stats-card {
-    grid-column: 1 / 3;
-    background-color: var(--light-gray);
-}
-
-.account-stats-card h3 {
-    font-size: 1.5em;
-    color: var(--dark-gray); /* Usa variabile */
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.account-stats-card h3 .icon {
-    margin-right: 10px;
-    color: var(--primary-red); /* Usa variabile */
+    background-color: white;
 }
 
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
     text-align: center;
 }
 
 .stat-item {
     padding: 10px;
-    background-color:white; /* Usa variabile */
+    background-color:white;
     border-radius: 8px;
-    box-shadow: inset 0 1px 3px var(--shadow-light); /* Usa variabile */
+    box-shadow: inset 0 1px 3px var(--shadow-light);
 }
 
 .stat-item .stat-number {
-    font-size: 2.5em;
+    font-size: 3em;
     font-weight: bold;
-    color: var(--primary-red); /* Usa variabile */
+    color: #669bbc;
     display: block;
     margin-bottom: 5px;
 }
 
 .stat-item .stat-label {
     font-size: 0.9em;
-    color: var(--dark-gray); /* Usa variabile */
+    font-weight: bold;
+    color: #003049;
 }
 
-/* Stili per la card amici o animali */
+/* -------------------------------------------------------
+Stili per la card degli amici e degli animali
+-------------------------------------------------------*/
+
 .friends-animals-card {
-    grid-column: 1 / 3;
     display: flex;
+    /* Altezza responsiva minima, ma mantieni flexbox per centrare */
+    height: 30vh; /* Se 30vh è troppo, riduci */
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
-    color: var(--dark-gray); /* Usa variabile */
+    color: var(--dark-gray);
     background-color: var(--light-gray);
-    min-height: 150px;
+    min-height: 150px; /* Mantieni un'altezza minima per schermi molto piccoli */
     text-align: center;
 }
-
-/* Media Queries per la responsività */
-@media (max-width: 992px) {
-    .profile-background-container {
-        width: 80vw;
-        padding: 25px;
-    }
-    .profile-grid {
-        grid-template-columns: 1fr;
-    }
-    .user-info-card,
-    .challenges-card,
-    .account-stats-card,
-    .friends-animals-card {
-        grid-column: 1 / 2;
-    }
-}
-
-@media (max-width: 768px) {
-    .profile-background-container {
-        width: 95vw;
-        padding: 20px 15px;
-    }
-    .profile-avatar-container {
-        width: 100px;
-        height: 100px;
-        border-width: 4px; /* Bordo leggermente più sottile su schermi più piccoli */
-    }
-    .user-details h3 {
-        font-size: 1.5em;
-    }
-    .user-details p {
-        font-size: 0.9em;
-    }
-    .stat-item .stat-number {
-        font-size: 2em;
-    }
-    .stat-item .stat-label {
-        font-size: 0.8em;
-    }
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .profile-background-container {
-        padding: 10px;
-    }
-    .profile-card {
-        padding: 15px;
-    }
-    .profile-avatar-container {
-        width: 80px;
-        height: 80px;
-        border-width: 3px; /* Bordo ancora più sottile per schermi molto piccoli */
-    }
-    .user-details h3 {
-        font-size: 1.3em;
-    }
-    .edit-info-button {
-        padding: 8px 15px;
-        font-size: 0.8em;  
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-

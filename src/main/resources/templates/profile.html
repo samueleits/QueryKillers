@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TBR - Il mio profilo</title>
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/profile.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="../static/css/layout.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="homepage">
@@ -27,52 +27,56 @@
                         <a href="#" data-lang="es">Italiano - IT</a>
                     </div>
                 </div>
-                <a href="/profile" class="login-button">Profilo</a>
+                <a href="/profile" class="profile-icon">AB</a>
             </div>
         </div>
     </header>
 
-    <div class="subheader">
-        <div class="subheader-content-wrapper">
-            <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-fire"></i></div>
-                <span>Novità</span>
-            </a>
-            <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-star"></i></div>
-                <span>Bestseller</span>
-            </a>
-            <a href="/Challenge" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-trophy"></i></div>
-                <span>Challenge</span>
-            </a>
-            <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-list"></i></div>
-                <span>Liste</span>
-            </a>
-        </div>
-    </div>
-
         <div class="main-background-container"> 
-            <main class="main-content-wrapper"> 
-                <div class="profile-content-wrapper">                   
-                        <h2>Il mio profilo</h2>
+            <main class="profile-content-wrapper"> 
+                <div class="main-hero-grid">
+                    <div class="single-line-hero-title">
+                        Il mio profilo
+                    </div>
+                    <div class="hero-card">
+
+                    </div>
                 </div>
                 
                 <div class="profile-grid">
                     <div class="profile-card user-info-card">
                         <div class="profile-header-image">
-                            <img src="https://picsum.photos/id/10/400/150" alt="Immagine di copertina profilo"> 
+                            <img src="../static/img/sfondo/Sfondo-username.jpg" alt="Immagine di copertina profilo"> 
                         </div>
                         <div class="profile-avatar-container">
-                            <img src="https://picsum.photos/id/100/100/100" alt="Avatar utente" class="profile-avatar"> 
+                            <img src="../static/img/animali/(0-4)bruco(livello 0).png" alt="Avatar utente" class="profile-avatar"> 
                         </div>
                         <div class="user-details">
                             <h3 th:text="${user.username}">Username</h3>
-                            <p>Email: <span th:text="${user.email}">email@example.com</span></p>
-                            <p>Password: **********</p>
+                            <h2>Email: <span th:text="${user.email}">email@example.com</span></h2>
+                            <h2>Password: **********</h2>
                         </div>
                         <button class="edit-info-button">Modifica informazioni</button>
+                    </div>
+
+                    <div class="profile-card account-stats-card">
+                        <div class="section-header">
+                            <h3><i class="fa-solid fa-square-poll-vertical icon"></i>Statistiche account</h3>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">12</span>
+                                <span class="stat-label">Challenge completate</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" th:text="${libriLetti}">50</span>
+                                <span class="stat-label">Libri letti</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">0</span>
+                                <span class="stat-label">Da leggere</span>
+                            </div>                        
+                        </div>
                     </div>
 
                     <div class="profile-card challenges-card">
@@ -100,18 +104,15 @@
                             <p>Nessuna challenge creata.</p>
                         </div>
                     </div>
-
-                    <!-- all'interno della profile-card account-stats-card -->
-<div class="profile-card account-stats-card">
-    <h3><i class="fas fa-chart-bar icon"></i> Statistiche account</h3>
-    <div class="stats-grid">
-        <div class="stat-item">
-            <span class="stat-number" th:text="${libriLetti}">50</span>
-            <span class="stat-label">Libri letti</span>
-        </div>
-        <div class="stat-item animal-level">
-            <img th:src="@{'/img/livelli/' + ${livello.toLowerCase()} + '.png'}" alt="Livello animale" style="width: 50px; height: 50px;">
-            <span class="stat-label">Livello: <strong th:text="${livello}">Drago</strong></span>
+                </div>
+                <div class="profile-card friends-animals-card">
+                    <h3>Sezione amici / animali</h3>
+                </div>
+                <div class="stat-item animal-level">
+                    <img th:src="@{'/img/livelli/' + ${livello.toLowerCase()} + '.png'}" alt="Livello animale" style="width: 50px; height: 50px;">
+                    <span class="stat-label">Livello: <strong th:text="${livello}">Drago</strong></span>
+                </div>
+            </main>
         </div>
     </div>
 </div>
@@ -135,8 +136,8 @@
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
-    <script src="/js/layout.js"></script> 
-    <script src="/js/profile.js"></script> 
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/layout.js"></script> 
+    <script src="../static/js/profile.js"></script> 
 </body>
 </html>
