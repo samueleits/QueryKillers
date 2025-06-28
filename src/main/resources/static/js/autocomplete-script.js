@@ -27,9 +27,8 @@ bookSearchInput.addEventListener('input', function () {
         if (filteredLibri.length > 0) {
             filteredLibri.forEach(libro => {
                 const div = document.createElement('div');
-                div.style.display = 'flex';
-                div.style.alignItems = 'center';
-
+                div.className = 'autocomplete-item';
+                
                 const img = document.createElement('img');
                 img.className = 'book-thumbnail';
                 img.src = (libro.cover && libro.cover.trim() !== '') 

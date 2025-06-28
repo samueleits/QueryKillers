@@ -68,6 +68,15 @@
                 <ul>
                     <li th:each="c : ${challenges}">
                         <span th:text="${c.name}">Nome Challenge</span>
+                        <span th:if="${joinedChallengeIds.contains(c.id)}" style="color: green; font-weight: bold;">già iscritto</span>
+                        <form th:if="${!joinedChallengeIds.contains(c.id)}" th:action="@{/Challenge/join}" method="post" style="display:inline;">
+                            <input type="hidden" name="challengeId" th:value="${c.id}" />
+                            <button type="submit">Unisciti</button>
+                        </form>
+                        <form th:if="${joinedChallengeIds.contains(c.id)}" th:action="@{/Challenge/leave}" method="post" style="display:inline;">
+                            <input type="hidden" name="challengeId" th:value="${c.id}" />
+                            <button type="submit">Abbandona</button>
+                        </form>
                     </li>
                 </ul>
             </div>

@@ -8,7 +8,7 @@
 
     <title>Tutti i Libri - TBR</title>
     <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/libri-tutti.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -42,11 +42,11 @@
         <div class="logo">
             <a href="/Home"><h1>LOGO TBR</h1></a>
         </div>
-        <div class="search-bar">
+        <div class="search-bar" style="position:relative;">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" placeholder="Cerca libro..." id="bookSearchInput">
+            <input id="bookSearchInput" type="text" placeholder="Cerca libro...">
+            <div id="autocomplete-results"></div>
         </div>
-        <div id="autocomplete-results"></div> 
         <div class="user-actions">
             <a href="/profile" class="login-button">Profilo</a>
         </div>

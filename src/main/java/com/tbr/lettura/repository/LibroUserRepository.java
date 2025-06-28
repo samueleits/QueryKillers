@@ -27,8 +27,10 @@ public interface LibroUserRepository extends JpaRepository<LibroUser, Integer> {
     Optional<LibroUser> findByUserIdAndBookId(int userId, int bookId);
 
     
-// @Query("SELECT COUNT(lu) FROM libroUser lu WHERE lu.user.id = :userId AND lu.isRead = true")
-// int countLibriLettiByUserId(@Param("userId") int userId);
+@Query("SELECT COUNT(lu) FROM LibroUser lu WHERE lu.user.id = :userId AND lu.isRead = true")
+    int countLibriLettiByUserId(@Param("userId") int userId);
+
+    
 
 
 }

@@ -1,5 +1,6 @@
 package com.tbr.lettura.service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +73,20 @@ public class ChallengeService {
         }
     }
 
+    public void removeChallengeFromUser(int userId, int challengeId) {
+        UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId);
+        if (uc != null) {
+            userChallengeRepo.delete(uc);
+        }
+    }
+
+    public List<UserChallenge> getLeaderboardForChallenge(int challengeId) {
+        return userChallengeRepo.findByChallengeId(challengeId)
+            .stream()
+            .sorted(Comparator.comparingInt(UserChallenge::getScore).reversed())
+            .toList();
+    }
+
     public List<Challenge> getAllChallenges() {
         return challengeRepo.findAll();
     }
@@ -90,4 +105,9 @@ public class ChallengeService {
         .map(UserChallenge::getChallenge)
         .toList();
 }
+
+    public boolean userIsInChallenge(int userId, int challengeId) {
+        return userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId) != null;
+        
+    }
 }

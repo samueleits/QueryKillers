@@ -81,21 +81,22 @@ Stili per l'header e il footer
 
 /* Contenitore per gli elementi nella parte superiore dell'header */
 .header-content-wrapper {
-    position: relative; /* Importante: il genitore deve essere posizionato per il posizionamento assoluto del figlio */
-    display: flex; /* Mantiene flex per gli altri elementi, o usa display: block; e float */
-    justify-content: space-between; /* Mantiene logo e user actions ai lati */
+    display: flex;
+    justify-content: center; /* centra tutti gli elementi */
     align-items: center;
     padding: 0 20px;
+    gap: 40px; /* spazio tra logo, search-bar e user-actions */
 }
 
 
 /* Barra di ricerca */
 .search-bar {
-    position: absolute; /* Rimuove l'elemento dal flusso normale del documento */
-    left: 50%; /* Sposta il bordo sinistro al 50% del genitore */
-    transform: translateX(-50%); /* Sposta l'elemento indietro del 50% della sua larghezza, centrando */
-    width: 40%; /* Assicura che la trasformazione funzioni bene con max-width */
-    max-width: 600px; /* Limita la larghezza massima della barra di ricerca */
+    position: static; /* rimuovi absolute */
+    margin: 0 auto;   /* centra la barra */
+    left: unset;
+    transform: unset;
+    width: 40%;
+    max-width: 600px;
     display: flex;
     align-items: center;
     background-color: white;
