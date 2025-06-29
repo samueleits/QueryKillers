@@ -21,6 +21,7 @@ import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.LibroRepository;
 import com.tbr.lettura.repository.LibroUserRepository;
 import com.tbr.lettura.repository.UserChallengeRepository;
+import com.tbr.lettura.service.UserLibroService;
 import com.tbr.lettura.service.UserService;
 
 
@@ -33,6 +34,9 @@ public class UserMVC {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserLibroService userLibroService;
 
     @Autowired
     private UserChallengeRepository userChallengeRepository;
@@ -78,35 +82,52 @@ public class UserMVC {
         List<Libro> libri = libroRepository.findAll();
         model.addAttribute("libri", libri);
 
-        // Libri letti
-        int libriLetti = libroUserRepository.countLibriLettiByUserId(user.getId());
-        model.addAttribute("libriLetti", libriLetti);
+        // Recupera tutti i libri dell'utente
+        List<LibroUser> libriNellaLibreria = libroUserRepository.findByUser(user);
 
-        // Calcola il livello (esempio: 1-4 = 'Principiante', 5-9 = 'Intermedio', ecc.)
+        // Lista libri letti e non letti
+        List<LibroUser> libriLetti = libriNellaLibreria.stream()
+            .filter(LibroUser::isRead)
+            .toList();
+
+        List<LibroUser> libriNonLetti = libriNellaLibreria.stream()
+            .filter(lu -> !lu.isRead())
+            .toList();
+
+        // Passa le liste al template
+        model.addAttribute("libriLetti", libriLetti);
+        model.addAttribute("libriNonLetti", libriNonLetti);
+
+        // Passa i conteggi al template
+        model.addAttribute("libriLettiCount", libriLetti.size());
+        model.addAttribute("libriDaLeggere", libriNonLetti.size());
+
+        // Calcola il livello in base al numero di libri letti
+        int libriLettiCount = libriLetti.size();
         String livello;
         String animalImg;
-        if (libriLetti >= 0 && libriLetti <= 4) {
+        if (libriLettiCount >= 0 && libriLettiCount <= 4) {
             livello = "Bruco";
             animalImg = "(0-4)bruco(livello 0).png";
-        } else if (libriLetti >= 5 && libriLetti <= 9) {
+        } else if (libriLettiCount >= 5 && libriLettiCount <= 9) {
             livello = "Topo";
             animalImg = "(5-9)topo(livello 1).png";
-        } else if (libriLetti >= 10 && libriLetti <= 14) {
+        } else if (libriLettiCount >= 10 && libriLettiCount <= 14) {
             livello = "Coniglio";
             animalImg = "(10-14)coniglio(livello 2).png";
-        } else if (libriLetti >= 15 && libriLetti <= 22) {
+        } else if (libriLettiCount >= 15 && libriLettiCount <= 22) {
             livello = "Volpe";
             animalImg = "(15-22)volpe(livello 3).png";
-        } else if (libriLetti >= 23 && libriLetti <= 31) {
+        } else if (libriLettiCount >= 23 && libriLettiCount <= 31) {
             livello = "Lupo";
             animalImg = "(23-31)lupo(livello 4).png";
-        } else if (libriLetti >= 32 && libriLetti <= 39) {
+        } else if (libriLettiCount >= 32 && libriLettiCount <= 39) {
             livello = "Orso";
             animalImg = "(32-39)orso(livello 5).png";
-        } else if (libriLetti >= 40 && libriLetti <= 47) {
+        } else if (libriLettiCount >= 40 && libriLettiCount <= 47) {
             livello = "Gufo";
             animalImg = "(40-47)gufo(livello 6).png";
-        } else if (libriLetti >= 48 && libriLetti <= 50) {
+        } else if (libriLettiCount >= 48 && libriLettiCount <= 50) {
             livello = "Drago";
             animalImg = "(48-50)drago(livello 7).png";
         } else {
@@ -132,11 +153,6 @@ public class UserMVC {
         }
         model.addAttribute("leaderboardMap", leaderboardMap);
 
-        List<LibroUser> libriNellaLibreria = libroUserRepository.findByUser(user);
-        
-        model.addAttribute("libriNellaLibreria", libriNellaLibreria);
-
-       
         return "profile";
     }
 
@@ -223,9 +239,12 @@ public class UserMVC {
         libroUser.setRead(false);
         libroUser.setRead_date(null);
         libroUserRepository.save(libroUser);
+        userLibroService.aggiungiLibroAllaLibreria(user.getId(), bookId);
 
         return "redirect:/profile";
     }
+
+   
 
     /**
      * Rimuove un libro dalla libreria dell'utente.

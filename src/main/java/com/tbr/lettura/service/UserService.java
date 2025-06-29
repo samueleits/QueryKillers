@@ -33,13 +33,8 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    /**
-     * Controlla se un utente esiste nel database in base al nome utente.
-     *
-     * @param username il nome utente da controllare
-     * @return true se il nome utente esiste, false altrimenti
-     */
-    public boolean isPasswordValid(String password) {
+    
+    public boolean isPasswordValid(String password) { // Controlla se la password è valida
         System.out.println("Controllo se è valida la password: " + password);
         String passwordPattern = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]).{12,}$";
         return password != null && password.matches(passwordPattern);

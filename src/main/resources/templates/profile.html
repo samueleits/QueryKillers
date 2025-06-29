@@ -72,7 +72,7 @@
                                 <span class="stat-label">Challenge completate</span>
                             </div>
                             <div class="stat-item">
-                                <span th:text="${libriLetti}">50</span>
+                                <span th:text="${libriLettiCount}">50</span>
                                 <span class="stat-label">Libri letti</span>
                             </div>
                             <div class="stat-item">
@@ -132,29 +132,38 @@
                         </div>
                     </div>
                 </div>
-                <div class="profile-card Library-card">
-                    <h3>Libreria personale</h3>
-                    <div class="books-grid">
-                        <div class="book-card" th:each="libroUser : ${libriNellaLibreria}">
-                            <img th:src="@{${libroUser.book.cover}}" th:alt="${libroUser.book.title}">
-                            <div class="book-info">
-                                <h4 th:text="${libroUser.book.title}">Titolo</h4>
-                                <p th:text="${libroUser.book.author}">Autore</p>
-                                <p th:text="${libroUser.book.description}">Descrizione</p>
-                                <span th:if="${libroUser.isRead}" class="badge badge-success">Letto</span>
-                                <span th:if="${!libroUser.isRead}" class="badge badge-secondary">Non letto</span>
-
-                                <!-- Bottone "Segna come letto" solo se non è già letto -->
-                                <form th:if="${!libroUser.isRead}" th:action="@{/profile/mark-as-read}" method="post" style="display:inline;">
-                                    <input type="hidden" name="libroUserId" th:value="${libroUser.id}" />
-                                    <button type="submit" class="btn btn-success">Segna come letto</button>
-                                </form>
-
-                                <!-- Bottone "Rimuovi dalla libreria" sempre visibile -->
-                                <form th:action="@{/profile/remove-from-library}" method="post" style="display:inline;">
-                                    <input type="hidden" name="libroUserId" th:value="${libroUser.id}" />
-                                    <button type="submit" class="btn btn-danger">Rimuovi</button>
-                                </form>
+                <div class="personal-library-section">
+                    <h2>Libreria personale</h2>
+                    <div class="library-column">
+                        <h3>Libri letti</h3>
+                        <div th:if="${#lists.isEmpty(libriLetti)}">Nessun libro letto.</div>
+                        <div th:each="libroUser : ${libriLetti}">
+                            <div class="book-card">
+                                <img th:src="@{${libroUser.book.cover}}" th:alt="${libroUser.book.title}">
+                                <div>
+                                    <h4 th:text="${libroUser.book.title}">Titolo</h4>
+                                    <p th:text="${libroUser.book.author}">Autore</p>
+                                    <p th:text="${libroUser.book.description}">Descrizione</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="library-column">
+                        <h3>Libri non letti</h3>
+                        <div th:if="${#lists.isEmpty(libriNonLetti)}">Nessun libro non letto.</div>
+                        <div th:each="libroUser : ${libriNonLetti}">
+                            <div class="book-card">
+                                <img th:src="@{${libroUser.book.cover}}" th:alt="${libroUser.book.title}">
+                                <div>
+                                    <h4 th:text="${libroUser.book.title}">Titolo</h4>
+                                    <p th:text="${libroUser.book.author}">Autore</p>
+                                    <p th:text="${libroUser.book.description}">Descrizione</p>
+                                    <!-- Bottone per segnare come letto -->
+                                    <form th:action="@{/profile/mark-as-read}" method="post" style="display:inline;">
+                                        <input type="hidden" name="libroUserId" th:value="${libroUser.id}" />
+                                        <button type="submit" class="btn btn-success">Segna come letto</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
