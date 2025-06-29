@@ -16,12 +16,12 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @Bean
+    @Bean // Bean per la codifica delle password
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-}
+    }   
 
-    @Bean
+    @Bean // Bean per l'AuthenticationManager
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
             .userDetailsService(userDetailsService)

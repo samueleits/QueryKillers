@@ -46,17 +46,17 @@ public class ChallengeService {
      * @param challengeId id della sfida
      */
     public void addChallengeToUser(int userId, int challengeId) {
-    if (userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId) == null) {
-        UserChallenge uc = new UserChallenge();
-        Users user = userService.findById(userId); 
-        Optional<Challenge> challengeOpt = challengeRepo.findById(challengeId);
-        if (user == null || challengeOpt.isEmpty()) return;
-        uc.setUser(user);
-        uc.setChallenge(challengeOpt.get());
-        uc.setScore(0); // opzionale
-        userChallengeRepo.save(uc);
+        if (userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId) == null) {
+            UserChallenge uc = new UserChallenge();
+            Users user = userService.findById(userId); 
+            Optional<Challenge> challengeOpt = challengeRepo.findById(challengeId);
+            if (user == null || challengeOpt.isEmpty()) return;
+            uc.setUser(user);
+            uc.setChallenge(challengeOpt.get());
+            uc.setScore(0); // opzionale
+            userChallengeRepo.save(uc);
+        }
     }
-}
 
     /**
      * Incrementa il punteggio di una sfida per un utente.
@@ -72,6 +72,12 @@ public class ChallengeService {
             userChallengeRepo.save(uc);
         }
     }
+    /**
+     * Rimuove una sfida da un utente.
+     *
+     * @param userId id dell'utente
+     * @param challengeId id della sfida
+     */
 
     public void removeChallengeFromUser(int userId, int challengeId) {
         UserChallenge uc = userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId);
@@ -79,6 +85,12 @@ public class ChallengeService {
             userChallengeRepo.delete(uc);
         }
     }
+    /**
+     * Restituisce la classifica di una sfida specifica, ordinata per punteggio decrescente.
+     *
+     * @param challengeId id della sfida
+     * @return lista di UserChallenge ordinata per punteggio
+     */
 
     public List<UserChallenge> getLeaderboardForChallenge(int challengeId) {
         return userChallengeRepo.findByChallengeId(challengeId)
@@ -86,25 +98,56 @@ public class ChallengeService {
             .sorted(Comparator.comparingInt(UserChallenge::getScore).reversed())
             .toList();
     }
+    /**
+     * Restituisce tutte le sfide disponibili.
+     *
+     * @return lista di Challenge
+     */
 
     public List<Challenge> getAllChallenges() {
         return challengeRepo.findAll();
     }
+    /**
+     * Restituisce una sfida specifica per ID.
+     *
+     * @param id id della sfida
+     * @return Optional contenente la Challenge se trovata, altrimenti vuoto
+     */
 
     public Optional<Challenge> getChallengeById(int id) {
         return challengeRepo.findById(id);
     }
+    /**
+     * Salva una nuova sfida o aggiorna una esistente.
+     *
+     * @param challenge oggetto Challenge da salvare
+     * @return Challenge salvata
+     */
 
     public Challenge saveChallenge(Challenge challenge) {
         return challengeRepo.save(challenge);
     }
+    /**
+     * Restituisce tutte le sfide a cui un utente partecipa.
+     *
+     * @param userId id dell'utente
+     * @return lista di Challenge associate all'utente
+     */
 
     public List<Challenge> getChallengesForUser(int userId) {
-    List<UserChallenge> userChallenges = userChallengeRepo.findByUserId(userId);
-    return userChallenges.stream()
-        .map(UserChallenge::getChallenge)
-        .toList();
-}
+        List<UserChallenge> userChallenges = userChallengeRepo.findByUserId(userId);
+        return userChallenges.stream()
+            .map(UserChallenge::getChallenge)
+            .toList();
+    }
+
+    /**
+     * Verifica se un utente partecipa a una specifica sfida.
+     *
+     * @param userId id dell'utente
+     * @param challengeId id della sfida
+     * @return true se l'utente partecipa alla sfida, false altrimenti
+     */
 
     public boolean userIsInChallenge(int userId, int challengeId) {
         return userChallengeRepo.findByUserIdAndChallengeId(userId, challengeId) != null;

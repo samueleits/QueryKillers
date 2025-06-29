@@ -43,10 +43,12 @@
             <a href="/Home"><h1>LOGO TBR</h1></a>
         </div>
         <div class="search-bar" style="position:relative;">
-            <i class="fas fa-search search-icon"></i>
-            <input id="bookSearchInput" type="text" placeholder="Cerca libro...">
-            <div id="autocomplete-results"></div>
-        </div>
+                <i class="fas fa-search search-icon"></i>
+                <form id="searchForm" action="/libri/filter" method="get" style="width:100%;">
+                    <input id="bookSearchInput" name="title" type="text" placeholder="Cerca libro..." autocomplete="off">
+                    <div id="autocomplete-results"></div>
+                </form>
+            </div>
         <div class="user-actions">
             <a href="/profile" class="login-button">Profilo</a>
         </div>
@@ -101,6 +103,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="filterForm">
+                        <input type="hidden" name="genre" th:value="${param.genre}">
                         <div class="mb-3">
                             <label for="filterTitle" class="form-label">Titolo:</label>
                             <input type="text" class="form-control" id="filterTitle">

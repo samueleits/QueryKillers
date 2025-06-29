@@ -2,7 +2,9 @@ package com.tbr.lettura.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.tbr.lettura.model.Libro;
 
@@ -12,22 +14,24 @@ import com.tbr.lettura.model.Libro;
  * Estende JpaRepository per operazioni CRUD su Libro.
  */
 public interface LibroRepository extends JpaRepository<Libro, Integer> {
-/**
+
     @Query("""
     SELECT 
-        b
+        l
     FROM 
-        Book b
-        JOIN UserBook ub ON b.id = ub.book.id
+        Libro l
+        JOIN LibroUser lu ON l.id = lu.book.id
     WHERE 
-        ub.isRead = true
+        lu.isRead = true
     GROUP BY 
-        b.id
+        l.id
     ORDER BY 
-        COUNT(ub.user.id) DESC;
+        COUNT(lu.user.id) DESC
     """)
-List<Book> findMostReadBooks(Pageable pageable);
-*/
-     List<Libro> findByTitleContainingIgnoreCaseAndAuthorContainingIgnoreCaseAndGenreContainingIgnoreCase(
+    List<Libro> findMostReadBooks(Pageable pageable);
+
+    List<Libro> findAllByOrderByIdDesc(Pageable pageable);
+
+    List<Libro> findByTitleContainingIgnoreCaseAndAuthorContainingIgnoreCaseAndGenreContainingIgnoreCase(
         String title, String author, String genre);
 }

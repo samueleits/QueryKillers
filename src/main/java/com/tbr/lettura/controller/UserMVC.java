@@ -42,6 +42,7 @@ public class UserMVC {
 
     @Autowired
     private LibroRepository libroRepository;
+
     /**
      * Mostra il form per la registrazione di un nuovo utente.
      * 
@@ -60,11 +61,15 @@ public class UserMVC {
         return "login";
     }
 
-    /**     * Mostra il profilo dell'utente.
-     *    * @param model il modello che contiene l'oggetto User da popolare         
+    
+    /**
+     * Mostra il profilo dell'utente autenticato, inclusi i libri nella libreria,
+     * i libri letti, il livello dell'utente e le challenge a cui partecipa.
+     * 
+     * @param model il modello che contiene le informazioni da visualizzare
+     * @param principal l'utente autenticato
      * @return la view "profile"
      */
-
     @GetMapping("/profile")
     public String showUserProfile(Model model, Principal principal) {
         String email = principal.getName();
@@ -79,17 +84,37 @@ public class UserMVC {
 
         // Calcola il livello (esempio: 1-4 = 'Principiante', 5-9 = 'Intermedio', ecc.)
         String livello;
-        if (libriLetti >= 10) {
-            livello = "Esperto";
-        } else if (libriLetti >= 5) {
-            livello = "Intermedio";
-        } else if (libriLetti >= 1) {
-            livello = "Principiante";
+        String animalImg;
+        if (libriLetti >= 0 && libriLetti <= 4) {
+            livello = "Bruco";
+            animalImg = "(0-4)bruco(livello 0).png";
+        } else if (libriLetti >= 5 && libriLetti <= 9) {
+            livello = "Topo";
+            animalImg = "(5-9)topo(livello 1).png";
+        } else if (libriLetti >= 10 && libriLetti <= 14) {
+            livello = "Coniglio";
+            animalImg = "(10-14)coniglio(livello 2).png";
+        } else if (libriLetti >= 15 && libriLetti <= 22) {
+            livello = "Volpe";
+            animalImg = "(15-22)volpe(livello 3).png";
+        } else if (libriLetti >= 23 && libriLetti <= 31) {
+            livello = "Lupo";
+            animalImg = "(23-31)lupo(livello 4).png";
+        } else if (libriLetti >= 32 && libriLetti <= 39) {
+            livello = "Orso";
+            animalImg = "(32-39)orso(livello 5).png";
+        } else if (libriLetti >= 40 && libriLetti <= 47) {
+            livello = "Gufo";
+            animalImg = "(40-47)gufo(livello 6).png";
+        } else if (libriLetti >= 48 && libriLetti <= 50) {
+            livello = "Drago";
+            animalImg = "(48-50)drago(livello 7).png";
         } else {
-            livello = "Nessun livello";
+            livello = "Bruco";
+            animalImg = "(0-4)bruco(livello 0).png";
         }
-
         model.addAttribute("livello", livello);
+        model.addAttribute("animalImg", animalImg);
 
         // Challenge a cui partecipa
         List<UserChallenge> userChallenges = userChallengeRepository.findByUserId(user.getId());
@@ -201,6 +226,14 @@ public class UserMVC {
 
         return "redirect:/profile";
     }
+
+    /**
+     * Rimuove un libro dalla libreria dell'utente.
+     *
+     * @param libroUserId l'ID della relazione Libro-User da rimuovere
+     * @param principal l'utente autenticato
+     * @return la redirect alla pagina del profilo
+     */
     @PostMapping("/profile/remove-from-library")
     public String removeFromLibrary(@RequestParam("libroUserId") int libroUserId, Principal principal) {
         LibroUser libroUser = libroUserRepository.findById(libroUserId).orElse(null);
@@ -209,12 +242,19 @@ public class UserMVC {
         }
         return "redirect:/profile";
     }
+
+    /**
+     * Segna un libro come letto.
+     *
+     * @param libroUserId l'ID della relazione Libro-User da aggiornare
+     * @param principal l'utente autenticato
+     * @return la redirect alla pagina del profilo
+     */
     @PostMapping("/profile/mark-as-read")
     public String markAsRead(@RequestParam("libroUserId") int libroUserId, Principal principal) {
         LibroUser libroUser = libroUserRepository.findById(libroUserId).orElse(null);
         if (libroUser != null && libroUser.getUser().getEmail().equals(principal.getName())) {
             libroUser.setRead(true);
-            libroUser.setRead_date(java.time.LocalDate.now());
             libroUserRepository.save(libroUser);
         }
         return "redirect:/profile";

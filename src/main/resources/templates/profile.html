@@ -15,9 +15,12 @@
             <div class="logo">
                 <a href="/Home"><h1>LOGO TBR</h1></a>
             </div>
-            <div class="search-bar">
+            <div class="search-bar" style="position:relative;">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" placeholder="Cerca libro...">
+                <form id="searchForm" action="/libri/filter" method="get" style="width:100%;">
+                    <input id="bookSearchInput" name="title" type="text" placeholder="Cerca libro..." autocomplete="off">
+                    <div id="autocomplete-results"></div>
+                </form>
             </div>
             <div class="user-actions">
                 <div class="language-dropdown">
@@ -49,7 +52,7 @@
                             <img src="/img/sfondo/Sfondo-username.jpg" alt="Immagine di copertina profilo"> 
                         </div>
                         <div class="profile-avatar-container">
-                            <img src="/img/animali/(0-4)bruco(livello 0).png" alt="Avatar utente" class="profile-avatar"> 
+                            <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar utente" class="profile-avatar">
                         </div>
                         <div class="user-details">
                             <h3 th:text="${user.username}">Username</h3>
@@ -156,10 +159,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="stat-item animal-level">
-                    <img th:src="@{'/img/livelli/' + ${livello.toLowerCase()} + '.png'}" alt="Livello animale" style="width: 50px; height: 50px;">
-                    <span class="stat-label">Livello: <strong th:text="${livello}">Drago</strong></span>
-                </div>
             </main>
         </div>
     </div>
@@ -186,13 +185,10 @@
 
     <script src="/js/main.js"></script>
     <script src="/js/layout.js"></script> 
-    <script src="/js/profile.js"></script>
-
     <script th:inline="javascript">
-        /*<![CDATA[*/
         window.allLibriData = /*[[${libri}]]*/ [];
-        /*]]>*/
     </script>
+    <script src="/js/autocomplete-script.js"></script>
 
 
     <script>

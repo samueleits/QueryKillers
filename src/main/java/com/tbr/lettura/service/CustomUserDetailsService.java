@@ -14,6 +14,13 @@ import com.tbr.lettura.repository.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+    /**
+     * Carica un utente dal database in base all'email.
+     * 
+     * @param email l'email dell'utente da caricare
+     * @return UserDetails contenente le informazioni dell'utente
+     * @throws UsernameNotFoundException se l'utente non viene trovato
+     */
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

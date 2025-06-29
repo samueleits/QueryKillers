@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.tbr.lettura.model.Libro;
 import com.tbr.lettura.model.LibroUser;
-import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.LibroRepository;
 import com.tbr.lettura.repository.LibroUserRepository;
 import com.tbr.lettura.repository.UserRepository;
@@ -150,21 +151,47 @@ private UserRepository userRepository;
     public void deleteLibro(int id) {
         libroRepository.deleteById(id);
     }
+    /**
+     * Aggiorna un libro esistente nel repository.
+     *
+     * @param libro libro da aggiornare
+     */
 
-public void toggleReadStatus(int userId, int bookId) {
-    LibroUser libroUser = libroUserRepository.findByUserIdAndBookId(userId, bookId).orElse(null);
+    public void toggleReadStatus(int userId, int bookId) {
+        LibroUser libroUser = libroUserRepository.findByUserIdAndBookId(userId, bookId).orElse(null);
 
-    if (libroUser == null) {
-        libroUser = new LibroUser();
-        libroUser.setUser(userRepository.findById(userId).orElseThrow());
-        libroUser.setBook(libroRepository.findById(bookId).orElseThrow());
-        libroUser.setRead(true);
-    } else {
-        libroUser.setRead(!libroUser.isRead());
+        if (libroUser == null) {
+            libroUser = new LibroUser();
+            libroUser.setUser(userRepository.findById(userId).orElseThrow());
+            libroUser.setBook(libroRepository.findById(bookId).orElseThrow());
+            libroUser.setRead(true);
+        } else {
+            libroUser.setRead(!libroUser.isRead());
+        }
+
+        libroUserRepository.save(libroUser);
+    }
+    /**
+     * Restituisce i libri più letti, limitati al numero massimo specificato.
+     *
+     * @param max numero massimo di libri da restituire
+     * @return lista dei libri più letti
+     */
+    public List<Libro> getLibriPiuLetti(int max) {
+        Pageable pageable = PageRequest.of(0, max);
+        return libroRepository.findMostReadBooks(pageable);
     }
 
-    libroUserRepository.save(libroUser);
-}
+    /**
+     * Restituisce le ultime uscite, limitate al numero massimo specificato.
+     *
+     * @param max numero massimo di libri da restituire
+     * @return lista delle ultime uscite
+     */
+    public List<Libro> getUltimeUscite(int max) {
+        Pageable pageable = PageRequest.of(0, max);
+        return libroRepository.findAllByOrderByIdDesc(pageable);
+    }
 
 
 }

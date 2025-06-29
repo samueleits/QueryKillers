@@ -17,9 +17,12 @@
             <div class="logo">
                 <a href="/Home"><h1>LOGO TBR</h1></a>
             </div>
-            <div class="search-bar">
+            <div class="search-bar" style="position:relative;">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" placeholder="Cerca libro...">
+                <form id="searchForm" action="/libri/filter" method="get" style="width:100%;">
+                    <input id="bookSearchInput" name="title" type="text" placeholder="Cerca libro..." autocomplete="off">
+                    <div id="autocomplete-results"></div>
+                </form>
             </div>
             <div class="user-actions">
                 <div class="language-dropdown">
@@ -58,51 +61,29 @@
 
     <div class="main-background-container">
         <main class="main-content-wrapper">
-               <section class="hero-section">
-                <h2>Habent sua fata libelli.</h2>
-                </section>
-
-                <section class="profile-section">
-                <a href="/profile" class="profile-icon-dm">
-                    <h1>Ciao (Nome Utente)!</h1>
-                    <h4>Leggendario, custode della saggezza eterna</h4>
-                    <h1>50</h1>
-                    <h6>Punti</h6>
+            <section class="profile-section">
+                <a href="/profile" class="profile-icon-dm" style="display: flex; align-items: center; gap: 20px;">
+                    <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar livello" style="width:70px; height:70px; border-radius:50%; border:3px solid #669bbc;">
+                    <div>
+                        <h1 th:text="'Ciao, ' + ${user.username} + '!'">Ciao, Nome Utente!</h1>
+                        <h4 th:text="${livello}">Livello</h4>
+                        <h1 th:text="${libriLetti}">0</h1>
+                        <h6>Punti</h6>
+                    </div>
                 </a>
             </section>
             
             <section class="books-section">
                 <div class="section-header">
-                    <h3><i class="fas fa-bookmark icon"></i>In primo piano</h3>
-                    <a href="#" class="view-all">Vedi altro ></a>
+                    <h3><i class="fas fa-star"></i> Libri più letti</h3>
                 </div>
                 <div class="books-grid">
-                    <div class="book-card">
-                        <img src="/img/copertine/misery.png" alt="Copertina del libro">
+                    <div class="book-card" th:each="libro : ${libriPiuLetti}">
+                        <img th:src="@{${libro.cover}}" th:alt="${libro.title}">
                         <div class="book-info">
-                            <h4 class="book-title">Misery</h4>
-                            <p class="book-author">Stephen King</p>
-                        </div>
-                    </div>
-                    <div class="book-card">
-                        <img src="/img/copertine/shining.png" alt="Copertina del libro">
-                        <div class="book-info">
-                            <h4 class="book-title">Shining</h4>
-                            <p class="book-author">Stephen King</p>
-                        </div>
-                    </div>
-                    <div class="book-card">
-                        <img src="/img/copertine/Il-cacciatore-di-aquiloni.png" alt="Copertina del libro">
-                        <div class="book-info">
-                            <h4 class="book-title">Il cacciatore di aquiloni</h4>
-                            <p class="book-author">Khaled Hosseini</p>
-                        </div>
-                    </div>
-                    <div class="book-card">
-                        <img src="/img/copertine/centanni-di-solitudine.png" alt="Copertina del libro">
-                        <div class="book-info">
-                            <h4 class="book-title">Cent'anni di solitudine</h4>
-                            <p class="book-author">Gabriel Garcia Marquinez</p>
+                            <h4 class="book-title" th:text="${libro.title}">Titolo</h4>
+                            <p class="book-author" th:text="${libro.author}">Autore</p>
+                            <p class="book-description" th:text="${libro.description}">Descrizione</p>
                         </div>
                     </div>
                 </div>
@@ -111,35 +92,14 @@
             <section class="books-section">
                 <div class="section-header">
                     <h3><i class="fas fa-feather-alt icon"></i>Ultime uscite</h3>
-                    <a href="#" class="view-all">Vedi altro ></a>
                 </div>
                 <div class="books-grid">
-                    <div class="book-card">
-                        <img src="/img/copertine/doctor-sleep.png" alt="Copertina del libro">
+                    <div class="book-card" th:each="libro : ${ultimeUscite}">
+                        <img th:src="@{${libro.cover}}" th:alt="${libro.title}">
                         <div class="book-info">
-                            <h4 class="book-title">Doctor Sleep</h4>
-                            <p class="book-author">Stephen King</p>
-                        </div>
-                    </div>
-                    <div class="book-card">
-                        <img src="/img/copertine/l-amica-geniale.png" alt="Copertina del libro">
-                        <div class="book-info">
-                            <h4 class="book-title">L'amica Geniale</h4>
-                            <p class="book-author">Elena Ferrante</p>
-                        </div>
-                    </div>
-                    <div class="book-card">
-                        <img src="/img/copertine/la-casa-degli-spiriti.png" alt="Copertina del libro">
-                        <div class="book-info">
-                            <h4 class="book-title">La casa degli spiriti</h4>
-                            <p class="book-author">Isabel Allende</p>
-                        </div>
-                    </div>
-                    <div class="book-card">
-                        <img src="/img/copertine/l-ombra-del-vento.png" alt="Copertina del libro">
-                        <div class="book-info">
-                            <h4 class="book-title">L'ombra del vento</h4>
-                            <p class="book-author">Carlos Ruiz Zafon</p>
+                            <h4 class="book-title" th:text="${libro.title}">Titolo</h4>
+                            <p class="book-author" th:text="${libro.author}">Autore</p>
+                            <p class="book-description" th:text="${libro.description}">Descrizione</p>
                         </div>
                     </div>
                 </div>
@@ -151,30 +111,14 @@
                     <a href="#" class="view-all">Visualizza tutto</a>
                 </div>
                 <div class="categories-grid">
-                    <div class="category-card thriller">
-                        <h4>Thriller</h4>
-                    </div>
-                    <div class="category-card letteratura">
-                        <h4>Letteratura</h4>
-                    </div>
-                    <div class="category-card avventura">
-                        <h4>Avventura</h4>
-                    </div>
-                    <div class="category-card fantasy">
-                        <h4>Fantasy</h4>
-                    </div>
-                    <div class="category-card classico">
-                        <h4>Classico</h4>
-                    </div>
-                    <div class="category-card romanzo">
-                        <h4>Romanzo</h4>
-                    </div>
-                    <div class="category-card drammatico">
-                        <h4>Drammatico</h4>
-                    </div>
-                    <div class="category-card storico">
-                        <h4>Storico</h4>
-                    </div>
+                    <a th:href="@{'/libri/filter?genre=Thriller'}" class="category-card thriller"><h4>Thriller</h4></a>
+                    <a th:href="@{'/libri/filter?genre=Letteratura'}" class="category-card letteratura"><h4>Letteratura</h4></a>
+                    <a th:href="@{'/libri/filter?genre=Avventura'}" class="category-card avventura"><h4>Avventura</h4></a>
+                    <a th:href="@{'/libri/filter?genre=Fantasy'}" class="category-card fantasy"><h4>Fantasy</h4></a>
+                    <a th:href="@{'/libri/filter?genre=Classico'}" class="category-card classico"><h4>Classico</h4></a>
+                    <a th:href="@{'/libri/filter?genre=Romanzo'}" class="category-card romanzo"><h4>Romanzo</h4></a>
+                    <a th:href="@{'/libri/filter?genre=Drammatico'}" class="category-card drammatico"><h4>Drammatico</h4></a>
+                    <a th:href="@{'/libri/filter?genre=Storico'}" class="category-card storico"><h4>Storico</h4></a>
                 </div>
             </section>
         </main>
@@ -197,7 +141,12 @@
     </footer>
 
     <script src="/js/main.js"></script>
-    <script src="/js/home.js"></script>
     <script src="/js/layout.js"></script>
+    <script th:inline="javascript">
+        window.allLibriData = /*[[${libri}]]*/ [];
+    </script>
+    <script src="/js/autocomplete-script.js"></script>
+    
+
 </body>
 </html>
