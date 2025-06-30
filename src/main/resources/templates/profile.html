@@ -35,142 +35,147 @@
         </div>
     </header>
 
-        <div class="main-background-container"> 
-            <main class="profile-content-wrapper"> 
-                <div class="main-hero-grid">
-                    <div class="single-line-hero-title">
-                        Il mio profilo
+    <div class="main-background-container"> 
+        <main class="profile-content-wrapper"> 
+            <div class="main-hero-grid">
+                <div class="single-line-hero-title">
+                    Il mio profilo
+                </div>
+                <div class="hero-card">
+                </div>
+            </div>
+            
+            <div class="profile-grid">
+                <div class="profile-card user-info-card">
+                    <div class="profile-header-image">
+                        <img src="/img/sfondo/Sfondo-username.jpg" alt="Immagine di copertina profilo"> 
                     </div>
-                    <div class="hero-card">
-
+                    <div class="profile-avatar-container">
+                        <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar utente" class="profile-avatar">
+                    </div>
+                    <div class="user-details">
+                        <h3 th:text="${user.username}">Username</h3>
+                        <h2>Email: <span th:text="${user.email}">email@example.com</span></h2>
+                        <h2>Password: **********</h2>
                     </div>
                 </div>
-                
-                <div class="profile-grid">
-                    <div class="profile-card user-info-card">
-                        <div class="profile-header-image">
-                            <img src="/img/sfondo/Sfondo-username.jpg" alt="Immagine di copertina profilo"> 
-                        </div>
-                        <div class="profile-avatar-container">
-                            <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar utente" class="profile-avatar">
-                        </div>
-                        <div class="user-details">
-                            <h3 th:text="${user.username}">Username</h3>
-                            <h2>Email: <span th:text="${user.email}">email@example.com</span></h2>
-                            <h2>Password: **********</h2>
-                        </div>
-                        <button class="edit-info-button">Modifica informazioni</button>
+
+                <div class="profile-card account-stats-card">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-square-poll-vertical icon"></i>Statistiche account</h3>
                     </div>
-
-                    <div class="profile-card account-stats-card">
-                        <div class="section-header">
-                            <h3><i class="fa-solid fa-square-poll-vertical icon"></i>Statistiche account</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span th:text="${libriLettiCount}">50</span>
+                            <span class="stat-label">Libri letti</span>
                         </div>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <span th:text="${libriLettiCount}">50</span>
-                                <span class="stat-label">Libri letti</span>
-                            </div>
-                            <div class="stat-item">
-                                <span th:text="${libriDaLeggere}">0</span>
-                                <span class="stat-label">Da leggere</span>
-                            </div>                        
-                        </div>
-                    </div>
-
-                    <div class="profile-card challenges-card">
-                        <h3>Le tue Challenge</h3>
-                        <div th:if="${#lists.isEmpty(userChallenges)}">
-                            <p>Nessuna challenge a cui partecipi.</p>
-                        </div>
-                            <div id="challenge-carousel" th:if="${!#lists.isEmpty(userChallenges)}">
-                                <div class="carousel-controls">
-                                    <button id="prev-challenge" class="carousel-arrow">&lt;</button>
-                                    <div class="challenge-carousel-content">
-                                        <div th:each="uc, iterStat : ${userChallenges}" 
-                                            th:id="'challenge-slide-' + ${iterStat.index}" 
-                                            th:class="'challenge-slide' + (${iterStat.index == 0} ? ' active' : '')" 
-                                            style="display: none;">
-                                            <h4 th:text="${uc.challenge.name}">Nome Challenge</h4>
-                                            <table class="challenge-leaderboard">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Posizione</th>
-                                                        <th>Utente</th>
-                                                        <th>Punti</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr th:each="entry, stat : ${leaderboardMap[uc.challenge.id]}">
-                                                        <td th:text="${stat.index + 1}">1</td>
-                                                        <td th:text="${entry.user.username}">Utente</td>
-                                                        <td th:text="${entry.score}">0</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <form th:action="@{/challenge/mark-read}" method="post" style="margin-top:10px;">
-                                                <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
-                                                <input type="text" name="bookTitle" placeholder="Scrivi il titolo del libro..." required />
-                                                <button type="submit">Segna come letto</button>
-                                            </form>
-                                            <div class="leave-btn-wrapper">
-                                                <form th:action="@{/Challenge/leave}" method="post">
-                                                    <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
-                                                    <button type="submit" class="leave-challenge-btn">Abbandona</button>
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button id="next-challenge" class="carousel-arrow">&gt;</button>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="stat-item">
+                            <span th:text="${libriDaLeggere}">0</span>
+                            <span class="stat-label">Da leggere</span>
+                        </div>                        
                     </div>
                 </div>
-                <div class="personal-library-section">
-                    <h2>Libreria personale</h2>
-                    <div class="library-column">
-                        <h3>Libri letti</h3>
-                        <div th:if="${#lists.isEmpty(libriLetti)}">Nessun libro letto.</div>
-                        <div th:each="libroUser : ${libriLetti}">
-                            <div class="book-card">
-                                <img th:src="@{${libroUser.book.cover}}" th:alt="${libroUser.book.title}">
-                                <div>
-                                    <h4 th:text="${libroUser.book.title}">Titolo</h4>
-                                    <p th:text="${libroUser.book.author}">Autore</p>
-                                    <p th:text="${libroUser.book.description}">Descrizione</p>
-                                </div>
-                            </div>
-                        </div>
+
+                <div class="profile-card challenges-card">
+                    <h3>Le tue Challenge</h3>
+                    <div th:if="${#lists.isEmpty(userChallenges)}">
+                        <p>Nessuna challenge a cui partecipi.</p>
                     </div>
-                    <div class="library-column">
-                        <h3>Libri non letti</h3>
-                        <div th:if="${#lists.isEmpty(libriNonLetti)}">Nessun libro non letto.</div>
-                        <div th:each="libroUser : ${libriNonLetti}">
-                            <div class="book-card">
-                                <img th:src="@{${libroUser.book.cover}}" th:alt="${libroUser.book.title}">
-                                <div>
-                                    <h4 th:text="${libroUser.book.title}">Titolo</h4>
-                                    <p th:text="${libroUser.book.author}">Autore</p>
-                                    <p th:text="${libroUser.book.description}">Descrizione</p>
-                                    <!-- Bottone per segnare come letto -->
-                                    <form th:action="@{/profile/mark-as-read}" method="post" style="display:inline;">
-                                        <input type="hidden" name="libroUserId" th:value="${libroUser.id}" />
-                                        <button type="submit" class="btn btn-success">Segna come letto</button>
+                    <div id="challenge-carousel" th:if="${!#lists.isEmpty(userChallenges)}">
+                        <div class="carousel-controls">
+                            <button id="prev-challenge" class="carousel-arrow">&lt;</button>
+                            <div class="challenge-carousel-content">
+                                <div th:each="uc, iterStat : ${userChallenges}" 
+                                    th:id="'challenge-slide-' + ${iterStat.index}" 
+                                    th:class="'challenge-slide' + (${iterStat.index == 0} ? ' active' : '')" 
+                                    style="display: none;">
+                                    <h4 th:text="${uc.challenge.name}">Nome Challenge</h4>
+                                    <table class="challenge-leaderboard">
+                                        <thead>
+                                            <tr>
+                                                <th>Posizione</th>
+                                                <th>Utente</th>
+                                                <th>Punti</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="entry, stat : ${leaderboardMap[uc.challenge.id]}">
+                                                <td th:text="${stat.index + 1}">1</td>
+                                                <td th:text="${entry.user.username}">Utente</td>
+                                                <td th:text="${entry.score}">0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <form th:action="@{/challenge/mark-read}" method="post" style="margin-top:10px;">
+                                        <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
+                                        <input type="text" name="bookTitle" placeholder="Scrivi il titolo del libro..." required />
+                                        <button type="submit">Segna come letto</button>
                                     </form>
+                                    <div class="leave-btn-wrapper">
+                                        <form th:action="@{/Challenge/leave}" method="post">
+                                            <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
+                                            <button type="submit" class="leave-challenge-btn">Abbandona</button>
+                                        </form>
+                                    </div>
                                 </div>
+                            </div>
+                            <button id="next-challenge" class="carousel-arrow">&gt;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Libreria personale DENTRO main-background-container -->
+            <div class="personal-library-section">
+                <h2>Libreria personale</h2>
+                <div class="library-column">
+                    <h3>Libri letti</h3>
+                    <div th:if="${#lists.isEmpty(libriLetti)}">Nessun libro letto.</div>
+                    <div class="books-grid-personal">
+                        <div class="book-card" th:each="libroUser : ${libriLetti}">
+                            <img th:src="@{${libroUser.book.cover}}" th:alt="${libroUser.book.title}">
+                            <div>
+                                <h4 th:text="${libroUser.book.title}">Titolo</h4>
+                                <p th:text="${libroUser.book.author}">Autore</p>
+                                <p th:text="${libroUser.book.description}">Descrizione</p>
+                                <form th:action="@{/profile/mark-as-unread}" method="post" style="display:inline;">
+                                    <input type="hidden" name="libroUserId" th:value="${libroUser.id}" />
+                                    <button type="submit" class="btn btn-warning">Segna come non letto</button>
+                                </form>
+                                <form th:action="@{/profile/remove-from-library}" method="post" style="display:inline;">
+                                    <input type="hidden" name="libroUserId" th:value="${libroUser.id}" />
+                                    <button type="submit" class="btn btn-danger">Rimuovi dalla libreria</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
+                <div class="library-column">
+                    <h3>Libri non letti</h3>
+                    <div th:if="${#lists.isEmpty(libriNonLetti)}">Nessun libro non letto.</div>
+                    <div class="books-grid-personal">
+                        <div class="book-card" th:each="libroUser : ${libriNonLetti}">
+                            <img th:src="@{${libroUser.book.cover}}" th:alt="${libroUser.book.title}">
+                            <div>
+                                <h4 th:text="${libroUser.book.title}">Titolo</h4>
+                                <p th:text="${libroUser.book.author}">Autore</p>
+                                <p th:text="${libroUser.book.description}">Descrizione</p>
+                                <form th:action="@{/profile/mark-as-read}" method="post" style="display:inline;">
+                                    <input type="hidden" name="libroUserId" th:value="${libroUser.id}" />
+                                    <button type="submit" class="btn btn-warning">Segna come letto</button>
+                                </form>
+                                <form th:action="@{/profile/remove-from-library}" method="post" style="display:inline;">
+                                    <input type="hidden" name="libroUserId" th:value="${libroUser.id}" />
+                                    <button type="submit" class="btn btn-danger">Rimuovi dalla libreria</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fine libreria personale -->
+        </main>
     </div>
-</div>
-
-
-
 
     <footer class="footer">
         <div class="footer-content-wrapper">
@@ -194,7 +199,6 @@
         window.allLibriData = /*[[${libri}]]*/ [];
     </script>
     <script src="/js/autocomplete-script.js"></script>
-
 
     <script>
         function mostraBarraRicerca(button) {

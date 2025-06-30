@@ -154,11 +154,107 @@ Stili per le card delle challenge
 
 /* Stili per la card delle challenge */
 .challenges-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    padding: 32px 24px 36px 24px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    font-size: 1.5em;
+    min-height: 420px;
+}
+
+.challenges-card h3 {
+    font-size: 2em;
+    color: #003049;
+    margin-bottom: 18px;
+    font-weight: bold;
+}
+
+.challenge-carousel-content h4 {
+    font-size: 1.4em;
+    color: #c1121f;
+    margin-bottom: 18px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.challenge-leaderboard {
+    margin: 0 auto 18px auto;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+    width: 100%;
+    max-width: 340px;
+    font-size: 1.1em;
+}
+
+.challenge-leaderboard th {
+    color: #003049;
+    font-weight: bold;
+    background: #f7f9fa;
+    border-radius: 8px 8px 0 0;
+    padding: 8px 0;
+}
+
+.challenge-leaderboard td {
+    background: #f7f9fa;
+    border-radius: 8px;
     text-align: center;
+    padding: 6px 0;
+}
+
+.carousel-arrow {
+    background: #669bbc;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background 0.2s;
+}
+.carousel-arrow:hover {
+    background: #003049;
+}
+
+.challenge-carousel-content form input[type="text"] {
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-right: 8px;
+    font-size: 1em;
+}
+
+.challenge-carousel-content form button[type="submit"] {
+    background: #ffc107;
+    color: #003049;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s;
+}
+.challenge-carousel-content form button[type="submit"]:hover {
+    background: #e0a800;
+}
+
+.leave-challenge-btn {
+    background: #c1121f;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 32px;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 18px;
+    transition: background 0.2s;
+}
+.leave-challenge-btn:hover {
+    background: #780000;
 }
 
 /* -------------------------------------------------------
@@ -172,27 +268,38 @@ Stili per la card delle statistiche account
 
 .stats-grid {
     text-align: center;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .stat-item {
-    padding: 10px;
-    background-color:white;
-    border-radius: 8px;
-    box-shadow: inset 0 1px 3px var(--shadow-light);
+    padding: 18px 0;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px var(--shadow-light);
+    font-size: 1.3em;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 12px;
 }
 
 .stat-item .stat-number {
-    font-size: 3em;
+    font-size: 2.2em;
     font-weight: bold;
-    color: #669bbc;
-    display: block;
-    margin-bottom: 5px;
+    color: #003049;
+    margin-right: 8px;
+    line-height: 1;
 }
 
 .stat-item .stat-label {
-    font-size: 0.9em;
-    font-weight: bold;
+    font-size: 1.1em;
+    font-weight: 600;
     color: #003049;
+    letter-spacing: 0.5px;
 }
 
 /* -------------------------------------------------------
@@ -259,4 +366,132 @@ Stili per la card degli amici e degli animali
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 10px;
+}
+
+.personal-library-section {
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    max-width: 1400px; 
+    border-radius: 20px; 
+    overflow: hidden;
+}
+.library-columns-wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+.library-column {
+    flex: 1 1 0;
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: 0 18px 24px 18px;
+    box-shadow: 0 2px 8px #0001;
+    min-width: 280px;
+    background: #f7f9fa;
+}
+.library-column h3 {
+    margin-bottom: 18px;
+    color: #003049;
+    border-bottom: 3px solid #669bbc;
+    padding-bottom: 10px;
+    font-size: 1.4em;
+    letter-spacing: 1px;
+    position: sticky;
+    top: 0;
+    background: #f7f9fa;
+    z-index: 2;
+}
+
+/* --- Griglia dei libri --- */
+.books-grid-personal {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}
+@media (max-width: 1200px) {
+    .books-grid-personal {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 800px) {
+    .books-grid-personal {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* --- Card libro --- */
+.book-card {
+    margin-bottom: 24px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px #00304922;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 260px;
+    height: 100%;
+    gap: 16px;
+    padding: 18px 16px 24px 16px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.book-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px #00304933;
+}
+.book-card img {
+    width: 140px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 2px solid #e0e0e0;
+    background: #fafbfc;
+    flex-shrink: 0;
+}
+.book-card h4 {
+    margin: 0 0 6px 0;
+    font-size: 1.1em;
+    color: #003049;
+}
+.book-card p {
+    margin: 0 0 4px 0;
+    font-size: 0.95em;
+    color: #555;
+}
+
+/* --- Bottoni --- */
+.btn.btn-success,
+.btn.btn-warning,
+.btn.btn-danger {
+    margin-top: 8px;
+    padding: 6px 14px;
+    font-size: 0.95em;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px #0001;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+    margin: 4px 2px;
+    border: none;
+    cursor: pointer;
+}
+.btn.btn-warning {
+    background: #ffc107;
+    color: #333;
+}
+.btn.btn-danger {
+    background: #c1121f;
+    color: #fff;
+}
+.btn.btn-warning:hover,
+.btn.btn-danger:hover {
+    transform: scale(1.05);
+}
+.btn.btn-warning:hover {
+    background: #e0a800;
+}
+.btn.btn-danger:hover {
+    background: #780000;
 }

@@ -21,7 +21,6 @@ import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.LibroRepository;
 import com.tbr.lettura.repository.LibroUserRepository;
 import com.tbr.lettura.repository.UserChallengeRepository;
-import com.tbr.lettura.service.UserLibroService;
 import com.tbr.lettura.service.UserService;
 
 
@@ -34,9 +33,6 @@ public class UserMVC {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserLibroService userLibroService;
 
     @Autowired
     private UserChallengeRepository userChallengeRepository;
@@ -250,6 +246,16 @@ public class UserMVC {
         LibroUser libroUser = libroUserRepository.findById(libroUserId).orElse(null);
         if (libroUser != null && libroUser.getUser().getEmail().equals(principal.getName())) {
             libroUser.setRead(true);
+            libroUserRepository.save(libroUser);
+        }
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/profile/mark-as-unread")
+    public String markAsUnread(@RequestParam("libroUserId") int libroUserId, Principal principal) {
+        LibroUser libroUser = libroUserRepository.findById(libroUserId).orElse(null);
+        if (libroUser != null && libroUser.getUser().getEmail().equals(principal.getName())) {
+            libroUser.setRead(false);
             libroUserRepository.save(libroUser);
         }
         return "redirect:/profile";

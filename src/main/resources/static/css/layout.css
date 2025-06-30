@@ -30,7 +30,8 @@ a:hover {
   background-position: center;
   background-size: cover;
   width: 80%;
-  min-height: 80vh;
+  min-height: 100vh;
+  height: auto;
   border-radius: 20px;
   margin: 20px auto;
   position: relative;
