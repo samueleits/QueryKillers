@@ -218,31 +218,7 @@ public class UserMVC {
             return "profile";
         }
 
-    @PostMapping("/profile/add-to-library")
-    public String addToLibrary(@RequestParam("bookId") int bookId, Principal principal) {
-        String email = principal.getName();
-        Users user = userService.findByEmail(email);
-
-        // Recupera il libro 
-        Libro libro = libroRepository.findById(bookId).orElse(null);
-        if (libro == null) return "redirect:/profile";
-
-        // Evita duplicati
-        if (libroUserRepository.findByUserAndBook(user, libro).isPresent()) {
-            return "redirect:/profile";
-        }
-
-        // Crea e salva la relazione
-        LibroUser libroUser = new LibroUser();
-        libroUser.setUser(user);
-        libroUser.setBook(libro);
-        libroUser.setRead(false);
-        libroUser.setRead_date(null);
-        libroUserRepository.save(libroUser);
-        userLibroService.aggiungiLibroAllaLibreria(user.getId(), bookId);
-
-        return "redirect:/profile";
-    }
+    
 
    
 

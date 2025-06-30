@@ -81,7 +81,7 @@
                 <h4 class="book-title" th:text="${libro.title}">Titolo</h4>
                 <p class="book-author" th:text="${libro.author}">Autore</p>
                 <p class="book-description" th:text="${libro.description}">Descrizione</p>
-                <form th:action="@{/profile/add-to-library}" method="post">
+                <form th:action="@{/libri}" method="post">
                     <input type="hidden" name="bookId" th:value="${libro.id}" />
                     <button type="submit" class="btn btn-primary">Aggiungi alla libreria</button>
                 </form>

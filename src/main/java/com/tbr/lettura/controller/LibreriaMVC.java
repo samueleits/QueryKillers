@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tbr.lettura.model.Libro;
+import com.tbr.lettura.model.LibroUser;
 import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.LibroRepository;
 import com.tbr.lettura.repository.LibroUserRepository;
 import com.tbr.lettura.repository.UserRepository;
 import com.tbr.lettura.service.LibroService;
+import com.tbr.lettura.service.UserLibroService;
 import com.tbr.lettura.service.UserService;
 
 
@@ -34,6 +36,9 @@ public class LibreriaMVC {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserLibroService userLibroService;
 
     @Autowired
     private LibroRepository libroRepository;
@@ -146,8 +151,10 @@ public class LibreriaMVC {
 
     @GetMapping("/libri")
     public String mostraTuttiILibri(Model model, Principal principal) {
-        Users user = userRepository.findByEmail(principal.getName()); // Ottieni l'utente corrente
-        model.addAttribute("user", user); // Aggiungi l'utente al modello
+        if (principal != null) {
+        Users user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("user", user);
+    }
         List<Libro> libri = libroRepository.findAll(); // Ottieni tutti i libri dalla repository
         model.addAttribute("libri", libri); // Aggiungi la lista dei libri al modello
         return "libri-tutti";
@@ -201,6 +208,32 @@ public class LibreriaMVC {
         libroService.toggleReadStatus(user.getId(), bookId); // Chiama il servizio per aggiornare lo stato del libro
 
         return ResponseEntity.ok("Stato aggiornato");
+    }
+
+    @PostMapping("/libri")
+    public String addToLibrary(@RequestParam("bookId") int bookId, Principal principal) {
+        String email = principal.getName();
+        Users user = userService.findByEmail(email);
+
+        // Recupera il libro 
+        Libro libro = libroRepository.findById(bookId).orElse(null);
+        if (libro == null) return "redirect:/libri";
+
+        // Evita duplicati
+        if (libroUserRepository.findByUserAndBook(user, libro).isPresent()) {
+            return "redirect:/libri";
+        }
+
+        // Crea e salva la relazione
+        LibroUser libroUser = new LibroUser();
+        libroUser.setUser(user);
+        libroUser.setBook(libro);
+        libroUser.setRead(false);
+        libroUser.setRead_date(null);
+        libroUserRepository.save(libroUser);
+        userLibroService.aggiungiLibroAllaLibreria(user.getId(), bookId);
+
+        return "redirect:/libri";
     }
 
     
