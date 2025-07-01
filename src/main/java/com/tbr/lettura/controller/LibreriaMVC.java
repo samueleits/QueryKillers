@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tbr.lettura.model.Libro;
-import com.tbr.lettura.model.LibroUser;
 import com.tbr.lettura.model.Users;
 import com.tbr.lettura.repository.LibroRepository;
 import com.tbr.lettura.repository.LibroUserRepository;
@@ -219,19 +218,12 @@ public class LibreriaMVC {
         Libro libro = libroRepository.findById(bookId).orElse(null);
         if (libro == null) return "redirect:/libri";
 
-        // Evita duplicati
-        if (libroUserRepository.findByUserAndBook(user, libro).isPresent()) {
-            return "redirect:/libri";
+        // Usa SOLO il service, che gestisce duplicati e salvataggio
+        try {
+            userLibroService.aggiungiLibroAllaLibreria(user.getId(), bookId);
+        } catch (RuntimeException e) {
+            // Se il libro è già presente, ignora o gestisci il messaggio
         }
-
-        // Crea e salva la relazione
-        LibroUser libroUser = new LibroUser();
-        libroUser.setUser(user);
-        libroUser.setBook(libro);
-        libroUser.setRead(false);
-        libroUser.setRead_date(null);
-        libroUserRepository.save(libroUser);
-        userLibroService.aggiungiLibroAllaLibreria(user.getId(), bookId);
 
         return "redirect:/libri";
     }
