@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TBR - Homepage</title>
 
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/profile.css">
-    <link rel="stylesheet" href="/css/home-logged.css">
+    <link rel="stylesheet" href="../static/css/layout.css">
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <link rel="stylesheet" href="../static/css/home-logged.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="homepage">
@@ -31,47 +31,38 @@
                         <a href="#" data-lang="en">English - EN</a>
                         <a href="#" data-lang="es">Italiano - IT</a>
                     </div>
-                <div class="profile-actions">
-                    <a href="/profile" class="login-button">Profilo</a> 
-                 </div>
-
+                </div>
+                <div class="profile-menu-container">
+                    <div class="profile-icon profile-menu-toggle">AB</div>
+                    <div class="hamburger-menu-content">
+                        <a href="/profile" class="menu-item"><i class="fas fa-user-circle"></i> Il mio profilo</a>
+                        <a href="/challenge" class="menu-item"><i class="fa-solid fa-medal"></i> Le mie challenge</a>
+                        <a href="/libri-tutti" class="menu-item"><i class="fas fa-book"></i> Tutti i libri</a>
+                        <a href="" class="menu-item logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <div class="subheader">
-        <div class="subheader-content-wrapper">
-            <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-fire"></i></div>
-                <span>Novità</span>
-            </a>
-            <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-star"></i></div>
-                <span>Bestseller</span>
-            </a>
-            <a href="/Challenge" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-trophy"></i></div>
-                <span>Challenge</span>
-            </a>
-            <a href="#" class="subheader-item">
-                <div class="circle-icon"><i class="fas fa-list"></i></div>
-                <span>Liste</span>
-            </a>
-        </div>
-    </div>
-
     <div class="main-background-container">
         <main class="main-content-wrapper">
-            <section class="profile-section">
-                <a href="/profile" class="profile-icon-dm" style="display: flex; align-items: center; gap: 20px;">
-                    <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar livello" style="width:70px; height:70px; border-radius:50%; border:3px solid #669bbc;">
-                    <div>
-                        <h1 th:text="'Ciao, ' + ${user.username} + '!'">Ciao, Nome Utente!</h1>
-                        <h4 th:text="${livello}">Livello</h4>
-                        <h1 th:text="${libriLetti}">0</h1>
-                        <h6>Punti</h6>
-                    </div>
-                </a>
-            </section>
+            <div class="main-hero-grid">
+                <div class="hero-title">
+                    Lectio dat intellectum.
+                </div>
+                <div class="profile-section">
+                    <a href="/profile" class="profile-icon-dm" style="display: flex; align-items: center; gap: 20px;">
+                        <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar livello" style="width:70px; height:70px; border-radius:50%; border:3px solid #669bbc;">
+                        <div>
+                            <h1 th:text="'Ciao, ' + ${user.username} + '!'">Ciao, Nome Utente!</h1>
+                            <h4 th:text="${livello}">Livello</h4>
+                            <h1 th:text="${libriLetti}">0</h1>
+                            <h6>Punti</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
             
             <section class="books-section">
                 <div class="section-header">
@@ -140,8 +131,8 @@
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
-    <script src="/js/layout.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/layout.js"></script>
     <script th:inline="javascript">
         window.allLibriData = /*[[${libri}]]*/ [];
     </script>

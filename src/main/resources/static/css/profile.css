@@ -15,11 +15,6 @@ Definizione delle variabili CSS generiche per i colori e le ombre
     --shadow-light: rgba(0, 0, 0, 0.1);
     --shadow-medium: rgba(0, 0, 0, 0.2);
     --shadow-dark: rgba(0, 0, 0, 0.3);
-
-    /* Altezze */
-    --header-height: 80px; /* Altezza dell'header principale */
-    --subheader-height: 50px; /* Altezza del subheader (se presente) */
-    --footer-height: 80px; /* Altezza stimata del footer */
 }
 
 /* ----------------------------------------------------

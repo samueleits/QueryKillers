@@ -25,6 +25,7 @@ a:hover {
 
 /* Immagine di sfondo */
 .main-background-container {
+  position: relative;
   background-image: url("../img/Sfondo.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -34,7 +35,6 @@ a:hover {
   height: auto;
   border-radius: 20px;
   margin: 20px auto;
-  position: relative;
   z-index: 1;
   padding: 20px;
   overflow: hidden;
@@ -220,78 +220,69 @@ Stili per l'header e il footer
     background-color: #fdf0d5b4;
 }
 
-/* ------------------------------------------------------
-Stili per il subheader (sottobarra dell'header)
------------------------------------------------------- */
-
-/* Sottobarra dell'header (Subheader) */
-.subheader {
-    background-color: #c1121f; /* Colore rosso come da mockup */
-    padding: 5px 0;
-    box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.05);
-    position: fixed;
-    width: 100%;
-    z-index: 999;
+/* Profile Menu Container */
+.profile-menu-container {
+    position: relative;
+    cursor: pointer;
 }
 
-/* Nascondi il subheader nella pagina di login/registrazione */
-.login-page .subheader {
+/* Hamburger Menu Content */
+.hamburger-menu-content {
     display: none;
+    position: absolute;
+    top: 4.5vh;
+    right: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 100;
+    overflow: hidden;
+    padding: 8px;
 }
 
-/* Contenitore del contenuto del subheader */
-.subheader-content-wrapper {
+/* Show Menu State (controlled by JavaScript) */
+.hamburger-menu-content.show {
+    display: block;
+}
+
+.hamburger-menu-content .menu-item {
     display: flex;
-    justify-content: center; /* Centra gli elementi all'interno di questo wrapper */
     align-items: center;
-    gap: 50px; /* Spazio fisso tra gli elementi */
+    padding: 10px;
+    color: #003049;
+    font-size: 1em;
 }
 
-/* Elemento del subheader */
-.subheader-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #fdf0d5;
-    font-size: 10px;
-    font-weight: bold;
-    transition: color 0.3s;
-    text-align: center;
-    flex-shrink: 0; /* Impedisce che gli elementi si restringano (importante per il responsive) */
+.hamburger-menu-content .menu-item i {
+    margin-right: 10px;
+    color: #003049;
 }
 
-/* Stile hover per l'elemento del subheader */
-.subheader-item:hover {
-    color: #fdf0d5b4;
+.hamburger-menu-content .menu-item:hover {
+    background-color: #f0f0f0;
 }
 
-/* Icona circolare nel subheader */
-.subheader-item .circle-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #fdf0d5;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5px;
-    color: #c70000;
-    font-size: 22px;
+.hamburger-menu-content .menu-item.logout {
+    margin-top: 8px;
+    color: #780000; 
 }
 
-/* Stile hover per l'icona circolare nel subheader */
-.subheader-item:hover .circle-icon {
-    background-color: #fdf0d5b4;
+.hamburger-menu-content .menu-item.logout i {
+    color: #780000; 
+}
+
+.hamburger-menu-content .menu-item.logout:hover {
+    background-color: #ffd3d3;
 }
 
 /* Stile per il contenuto principale (main-content-wrapper) */
 .main-content-wrapper {
-    width: 100%; /* Occupa tutta la larghezza disponibile all'interno del .homepage-background-container */
-    margin: 0 auto; /* Centra il blocco orizzontalmente */
-    min-height: auto; /* Reimpostiamo l'altezza minima, sarà il container a dettarla */
+    width: 100%; 
+    min-height: auto; 
     position: relative;
-    z-index: 100; /* Assicura che il contenuto sia sopra l'overlay di sfondo */
-    padding-bottom: 20px; /* Padding sotto l'ultima sezione prima del footer */
+    z-index: 100;
+    padding-bottom: 20px;
 }
 
 /* --------------------------------------------------------

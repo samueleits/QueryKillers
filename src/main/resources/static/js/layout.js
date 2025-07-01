@@ -1,40 +1,35 @@
-/* Script per gestire dinamicamente l'altezza dell'header fisso e il posizionamento della sottobarra e del contenuto.
-----------------------------------------------------*/
+document.addEventListener('DOMContentLoaded', () => {
+    const profileMenuToggle = document.querySelector('.profile-menu-toggle');
+    const hamburgerMenuContent = document.querySelector('.hamburger-menu-content');
 
-document.addEventListener('DOMContentLoaded', function() {
-    const header = document.querySelector('.header');
-    const subheader = document.querySelector('.subheader');
-    const body = document.body;
+    if (profileMenuToggle && hamburgerMenuContent) {
+        // Function to toggle menu visibility
+        const toggleMenu = () => {
+            hamburgerMenuContent.classList.toggle('show');
+        };
 
-    function adjustLayout() {
-        // Verifica se gli elementi esistono per evitare errori su pagine senza subheader
-        if (header && body) {
-            const headerHeight = header.offsetHeight;
-            let totalOffset = headerHeight;
+        // Event listener to open/close menu when profile icon is clicked
+        profileMenuToggle.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent click from bubbling up to document
+            toggleMenu();
+        });
 
-            if (subheader && !subheader.classList.contains('hidden-on-login')) { // Controlla se il subheader non è nascosto
-                const subheaderHeight = subheader.offsetHeight;
-                subheader.style.top = `${headerHeight}px`;
-                totalOffset += subheaderHeight;
-            } else if (subheader) {
-                // Se il subheader è presente ma nascosto, assicurati che il top sia corretto per il mobile se appare
-                // Oppure non aggiungere la sua altezza
-                subheader.style.top = `${headerHeight}px`;
+        // Event listener to close menu when clicking outside of it
+        document.addEventListener('click', (event) => {
+            if (!hamburgerMenuContent.contains(event.target) && !profileMenuToggle.contains(event.target)) {
+                if (hamburgerMenuContent.classList.contains('show')) {
+                    hamburgerMenuContent.classList.remove('show');
+                }
             }
+        });
 
-            body.style.paddingTop = `${totalOffset}px`;
-        }
-    }
-
-    // Esegui la funzione all'avvio della pagina
-    adjustLayout();
-
-    // Esegui la funzione ogni volta che la finestra viene ridimensionata
-    window.addEventListener('resize', adjustLayout);
-
-    // Osserva le mutazioni del DOM per gestire cambiamenti dinamici (es. visibilità subheader)
-    const observer = new MutationObserver(adjustLayout);
-    if (subheader) {
-        observer.observe(subheader, { attributes: true, attributeFilter: ['style', 'class'] });
+        // Optional: Close menu when a menu item is clicked
+        hamburgerMenuContent.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (hamburgerMenuContent.classList.contains('show')) {
+                    hamburgerMenuContent.classList.remove('show');
+                }
+            });
+        });
     }
 });
