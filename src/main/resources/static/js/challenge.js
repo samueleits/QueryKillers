@@ -23,3 +23,38 @@ document.addEventListener('DOMContentLoaded', function() {
             item.style.backgroundColor = colors[colorIndex];
         });
     });
+
+    // challenge-carousel.js
+document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".mini-challenge-slide");
+    const prevBtn = document.getElementById("prevChallengeBtn");
+    const nextBtn = document.getElementById("nextChallengeBtn");
+
+    if (!slides.length || !prevBtn || !nextBtn) return;
+
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            if (i === index) {
+                slide.classList.remove("hidden-slide");
+                slide.classList.add("active-slide");
+            } else {
+                slide.classList.remove("active-slide");
+                slide.classList.add("hidden-slide");
+            }
+        });
+    }
+
+    prevBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    });
+
+    showSlide(currentSlide);
+});

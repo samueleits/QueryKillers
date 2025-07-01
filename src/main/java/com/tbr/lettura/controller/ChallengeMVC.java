@@ -2,7 +2,9 @@ package com.tbr.lettura.controller;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ import com.tbr.lettura.repository.LibroRepository;
 import com.tbr.lettura.repository.LibroUserRepository;
 import com.tbr.lettura.service.ChallengeService;
 import com.tbr.lettura.service.UserService;
+import com.tbr.lettura.model.UserChallenge;
+
 
 @Controller
 public class ChallengeMVC {
@@ -66,6 +70,20 @@ public class ChallengeMVC {
         List<Integer> joinedChallengeIds = challengeService.getUserChallenges(user.getId()) // Ottieni le sfide dell'utente
             .stream().map(uc -> uc.getChallenge().getId()).toList(); // Estrai gli ID delle sfide
         model.addAttribute("joinedChallengeIds", joinedChallengeIds); // Aggiungi gli ID delle sfide al modello
+        
+         // user challenges
+        List<UserChallenge> userChallenges = challengeService.getUserChallenges(user.getId());
+        model.addAttribute("userChallenges", userChallenges);
+
+        // leaderboard per ogni challenge dell'utente
+        Map<Integer, List<UserChallenge>> leaderboardMap = new HashMap<>();
+        for (UserChallenge uc : userChallenges) {
+            List<UserChallenge> leaderboard = challengeService.getLeaderboardForChallenge(uc.getChallenge().getId());
+            leaderboardMap.put(uc.getChallenge().getId(), leaderboard);
+        }
+        model.addAttribute("leaderboardMap", leaderboardMap);
+
+
         List<Libro> libri = libroRepository.findAll(); // Ottieni tutti i libri dalla repository
         model.addAttribute("libri", libri); // Aggiungi la lista dei libri al modello
 

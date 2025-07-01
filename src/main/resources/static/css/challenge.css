@@ -1,3 +1,4 @@
+
 /* ------------------------------------------------------------- 
 Stile per la pagina delle sfide
 ---------------------------------------------------------------- */
@@ -52,7 +53,7 @@ Stile per la sezione delle sfide disponibili
 .challenge-search-bar .search-icon {
     color: #669bbc;
     font-size: 18px;
-    margin-right: 10px; /* Spazio tra icona e input */
+    margin-right: 10px;
 }
 
 /* Input di ricerca */
@@ -64,71 +65,104 @@ Stile per la sezione delle sfide disponibili
     font-weight: bolder;
     font-size: 16px;
     padding: 0;
-    flex-grow: 1; /* Input si espande */
-    /* placeholder (Cerca libro...) */
-    &::placeholder {
-        color: #669bbc;
-    }
+    flex-grow: 1;
 }
 
+.challenge-search-bar input::placeholder {
+    color: #669bbc;
+}
+
+/* Lista delle challenge disponibili */
 .challenge-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-height: 109vh;
     margin-top: 20px;
-    overflow-y: scroll; 
+    overflow-y: scroll;
     -ms-overflow-style: none;
-    scrollbar-width: none; 
+    scrollbar-width: none;
 }
 
 .challenge-list::-webkit-scrollbar {
     display: none;
 }
 
+/* Singolo contenitore della challenge */
 .challenge-item {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     background-color: #669bbc24;
-    padding: 20px;
-    border-radius: 20px;
-    position: relative;
+    padding: 15px 20px;
+    border-radius: 15px;
+    flex-wrap: wrap;
 }
 
-.challenge-item h2 {
+/* Titolo challenge + badge */
+.challenge-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 1.2vw;
     color: #003049;
-    margin: 0 0 10px 0;
 }
 
-.challenge-item p {
-    font-size: 1vw;
-    color: #003049;
-    margin: 0;
+/* Azioni challenge: Unisciti / Abbandona */
+.challenge-actions {
+    display: flex;
+    gap: 10px;
 }
 
-.join-challenge-button {
-    background-color: #003049;
-    color: white;
+/* Badge "già iscritto" */
+.badge.joined {
+    color: green;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* Pulsanti Unisciti / Abbandona */
+.btn {
     border: none;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 20px;
-    font-size: 1vw;
+    font-size: 0.9em;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    position: absolute;
-    bottom: 28%;
-    right: 2%;
+    font-weight: bold;
 }
 
-.join-challenge-button:hover {
+.btn.join {
+    background-color: #003049;
+    color: white;
+}
+
+.btn.join:hover {
     background-color: #669bbc;
+}
+
+.btn.leave {
+    background-color: #e63946;
+    color: white;
+}
+
+.btn.leave:hover {
+    background-color: #ff6b6b;
+}
+
+/* Messaggio quando non ci sono challenge */
+.no-challenge-msg {
+    color: #777;
+    font-style: italic;
+    margin-top: 20px;
+    text-align: center;
 }
 
 /* ---------------------------------------------------------------
 Stile per la sezione crea nuove challenge
 ---------------------------------------------------------------- */
 
+/* Card per creare una nuova challenge */
 .create-challenge-card {
     background-color: white;
     padding: 20px;
@@ -136,52 +170,49 @@ Stile per la sezione crea nuove challenge
     z-index: 3;
 }
 
-.create-challenge-card h2 {
-    font-size: 1.7vw;
+.create-challenge-card h3 {
+    font-size: 1.5vw;
     color: #003049;
     margin-top: 0;
 }
 
-.create-challenge-form {
-    display: flex;
-    flex-direction: column;
+.create-challenge-card label {
+    font-weight: bold;
+    color: #003049;
+    margin-bottom: 5px;
+    display: block;
 }
 
-.challenge-button {
+.create-challenge-card input {
+    padding: 10px;
+    border: 1px solid #669bbc;
+    background-color: #669bbc24;
+    border-radius: 10px;
+    font-size: 1vw;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.create-challenge-card button[type="submit"] {
     background-color: #003049;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
-    font-size: 1.2vw;
+    font-size: 1vw;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.challenge-button:hover {
+.create-challenge-card button[type="submit"]:hover {
     background-color: #669bbc;
 }
 
-.create-challenge-text {
-    font-size: 1.2vw;
-    font-weight: bold;
-    color: #003049;
-    margin-bottom: 10px;
-}
-
-.create-challenge-form input {
-    padding: 10px;
-    border: 1px solid #669bbc;
-    background-color: #669bbc24;
-    border-radius: 10px;
-    font-size: 1.2vw;
-    margin-bottom: 20px;
-}
-
 /*----------------------------------------------------------------
-Stile per la sezione delle tue sfide
-----------------------------------------------------------------*/
+Stile per la sezione delle tue sfide (carousel)
+---------------------------------------------------------------- */
 
+/* Card delle tue challenge */
 .your-challenges-card {
     background-color: white;
     padding: 20px;
@@ -189,9 +220,133 @@ Stile per la sezione delle tue sfide
     z-index: 3;
 }
 
+/* Card delle challenge completate */
 .done-challenges-card {
     background-color: white;
     padding: 20px;
     border-radius: 20px;
     z-index: 3;
 }
+
+.your-challenges-card h3 {
+    font-size: 1.5vw;
+    color: #003049;
+    margin-bottom: 15px;
+}
+
+/* Contenitore con frecce e scorrimento orizzontale */
+.mini-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Frecce per scorrere il carosello */
+.carousel-arrow {
+    background-color: #003049;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2vw;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-arrow:hover {
+    background-color: #669bbc;
+}
+
+/* Contenitore scrollabile delle mini-card */
+.mini-carousel-container {
+    display: flex;
+    gap: 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.mini-carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ogni slide rappresenta una challenge */
+.mini-challenge-slide {
+    min-width: 250px;
+    background-color: #669bbc24;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+/* Titolo della challenge */
+.mini-challenge-slide h4 {
+    margin: 0 0 10px 0;
+    color: #003049;
+    font-size: 1.1vw;
+}
+
+/* Tabella classifica interna */
+.mini-leaderboard {
+    width: 100%;
+    font-size: 0.9vw;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+}
+
+.mini-leaderboard th,
+.mini-leaderboard td {
+    text-align: left;
+    padding: 5px;
+    color: #003049;
+}
+
+.mini-leaderboard th {
+    border-bottom: 1px solid #669bbc;
+}
+
+/* Input per segnalare libro letto */
+.mini-challenge-slide input[type="text"] {
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 10px;
+    border: 1px solid #669bbc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-size: 0.9vw;
+}
+
+/* Pulsanti nella mini-card */
+.mini-challenge-slide button {
+    background-color: #003049;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 10px;
+    font-size: 0.9vw;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mini-challenge-slide button:hover {
+    background-color: #669bbc;
+}
+
+/* Pulsante "Abbandona" nella mini-card */
+.leave-challenge-btn {
+    background-color: #d62828;
+}
+
+.leave-challenge-btn:hover {
+    background-color: #a61b1b;
+}
+
+/* ------------------------------------------------------------- 
+Stile per la gestione delle slide attive nel carosello
+---------------------------------------------------------------- */
+
+.active-slide { display: block !important; }
+.hidden-slide { display: none !important; }

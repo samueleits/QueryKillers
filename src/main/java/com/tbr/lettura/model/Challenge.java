@@ -102,4 +102,13 @@ public class Challenge {
     public void setEnd_date(LocalDate end_date) {
         this.end_date = end_date;
     }
+
+    /**
+     * Imposta il nome della sfida.
+     *
+     * @param name nuovo nome della sfida
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }

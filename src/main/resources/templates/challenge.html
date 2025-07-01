@@ -13,7 +13,7 @@
     <header class="header">
         <div class="header-content-wrapper">
             <div class="logo">
-                <a href="/Home"><h1>LOGO TBR</h1></a>
+                <a href="/Home"><h1><img src="logo" alt="Logo TBR"></h1></a>
             </div>
             <div class="search-bar" style="position:relative;">
                 <i class="fas fa-search search-icon"></i>
@@ -60,63 +60,113 @@
             <section class="hero-section">
                 <h2>Le tue challenge</h2>
             </section>
-            <div class="challenge-page-grid">
-            <div class="challenge-card">
-                <h2>Challenge disponibili</h2>
-                <form method="get" th:action="@{/Challenge}" class="challenge-search-bar">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" name="search" placeholder="Cerca challenge..." th:value="${param.search}">
-                </form>
-            <div class="challenge-list">
-                <ul>
-                    <li th:each="c : ${challenges}">
-                        <span th:text="${c.name}">Nome Challenge</span>
-                        <span th:if="${joinedChallengeIds.contains(c.id)}" style="color: green; font-weight: bold;">già iscritto</span>
-                        <form th:if="${!joinedChallengeIds.contains(c.id)}" th:action="@{/Challenge/join}" method="post" style="display:inline;">
-                            <input type="hidden" name="challengeId" th:value="${c.id}" />
-                            <button type="submit">Unisciti</button>
-                        </form>
-                        <form th:if="${joinedChallengeIds.contains(c.id)}" th:action="@{/Challenge/leave}" method="post" style="display:inline;">
-                            <input type="hidden" name="challengeId" th:value="${c.id}" />
-                            <button type="submit">Abbandona</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-            </div>
-            <div class="right-challenge-container">
-                <div class="create-challenge-card">
-                    <h3>Crea una nuova challenge</h3>
-                    <form th:action="@{/Challenge}" method="post" th:object="${challenge}">
-                        <label for="name">Nome challenge:</label>
-                        <input type="text" id="name" name="name" th:field="*{name}" required>
-                        <br>
-                        <label for="end_date">Data fine:</label>
-                        <input type="date" id="end_date" name="end_date" th:field="*{end_date}" required>
-                        <br>
-                        <button type="submit">Crea</button>
-                    </form>
-                    <!-- Esempio di come potrebbero essere visualizzate le challenge     
-                    <div class="challenge-item">
-                        <h2>Challenge 1</h2>
-                        <p>Descrizione della challenge 1</p>
-                        <button class="join-challenge-button">Unisciti</button>
-                    </div>
-                    <div class="challenge-item">
-                        <h2>Challenge 2</h2>
-                        <p>Descrizione della challenge 2</p>
-                        <button class="join-challenge-button">Unisciti</button>
-                    </div>
-                    -->
-                </div>
-                <div class="your-challenges-card">
-                    
-                </div>
-                <div class="done-challenges-card">
 
+            <div class="challenge-page-grid">
+                <!-- Challenge disponibili -->
+                <div class="challenge-card">
+                    <h2>Challenge disponibili</h2>
+                    <form method="get" th:action="@{/Challenge}" class="challenge-search-bar">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" name="search" placeholder="Cerca challenge..." th:value="${param.search}">
+                    </form>
+
+                    <div class="challenge-list" th:if="${challenges != null}">
+                        <ul>
+                            <li th:each="c : ${challenges}">
+                                <div class="challenge-item">
+                                    <div class="challenge-title">
+                                        <span th:text="${c.name}">Nome Challenge</span>
+                                        <span th:if="${joinedChallengeIds.contains(c.id)}" class="badge joined">già iscritto</span>
+                                    </div>
+                                    <div class="challenge-actions">
+                                        <form th:if="${!joinedChallengeIds.contains(c.id)}" th:action="@{/Challenge/join}" method="post">
+                                            <input type="hidden" name="challengeId" th:value="${c.id}" />
+                                            <button type="submit" class="btn join">Unisciti</button>
+                                        </form>
+                                        <form th:if="${joinedChallengeIds.contains(c.id)}" th:action="@{/Challenge/leave}" method="post">
+                                            <input type="hidden" name="challengeId" th:value="${c.id}" />
+                                            <button type="submit" class="btn leave">Abbandona</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p th:if="${challenges == null or #lists.isEmpty(challenges)}" class="no-challenge-msg">
+                        Nessuna challenge disponibile al momento.
+                    </p>
+                </div>
+
+                <!-- Colonna destra -->
+                <div class="right-challenge-container">
+                    <!-- Creazione nuova challenge -->
+                    <div class="create-challenge-card">
+                        <h3>Crea una nuova challenge</h3>
+                        <form th:action="@{/Challenge}" method="post" th:object="${challenge}">
+                            <label for="name">Nome challenge:</label>
+                            <input type="text" id="name" th:field="*{name}" required>
+                            <br>
+                            <label for="end_date">Data fine:</label>
+                            <input type="date" id="end_date" th:field="*{end_date}" required>
+                            <br>
+                            <button type="submit">Crea</button>
+                        </form>
+                    </div>
+                </div>
+
+
+                    <!-- Le tue challenge (Mini-carousel) -->
+                    <div class="your-challenges-card">
+                    <h3>Le tue Challenge</h3>
+                    <div th:if="${#lists.isEmpty(userChallenges)}">
+                        <p>Nessuna challenge a cui partecipi.</p>
+                    </div>
+                    <div th:if="${!#lists.isEmpty(userChallenges)}" class="mini-carousel-wrapper">
+    <button class="carousel-arrow" id="prevChallengeBtn">&lt;</button>
+    <div class="mini-carousel-container" id="userChallengesCarousel">
+        <div class="mini-challenge-slide"
+            th:each="uc, iterStat : ${userChallenges}"
+            th:attr="data-index=${iterStat.index}"
+            th:classappend="${iterStat.index == 0} ? 'active-slide' : 'hidden-slide'">
+                    <h4 th:text="${uc.challenge.name}">Nome Challenge</h4>
+
+                    <table class="mini-leaderboard">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Utente</th>
+                                <th>Punti</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="entry, stat : ${leaderboardMap[uc.challenge.id]}">
+                                <td th:text="${stat.index + 1}">1</td>
+                                <td th:text="${entry.user.username}">Utente</td>
+                                <td th:text="${entry.score}">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <form th:action="@{/challenge/mark-read}" method="post">
+                        <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
+                        <input type="text" name="bookTitle" placeholder="Libro letto..." required />
+                        <button type="submit">Segna come letto</button>
+                    </form>
+
+                    <form th:action="@{/Challenge/leave}" method="post">
+                        <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
+                        <button type="submit" class="leave-challenge-btn">Abbandona</button>
+                    </form>
                 </div>
             </div>
-        </div>
+    <button class="carousel-arrow" id="nextChallengeBtn">&gt;</button>
+</div>
+                    <!-- Placeholder per future sezioni -->
+                    <div class="done-challenges-card"></div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <footer class="footer">
@@ -138,12 +188,9 @@
     <script src="/js/main.js"></script>
     <script src="/js/home.js"></script>
     <script src="/js/layout.js"></script>
+    <script src="/js/challenge.js"></script>
     <script th:inline="javascript">
         window.allLibriData = /*[[${libri}]]*/ [];
     </script>
-    <script src="/js/autocomplete-script.js"></script>
-
-
-
 </body>
 </html>
