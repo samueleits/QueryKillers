@@ -183,6 +183,16 @@ public class UserMVC {
         return "login";
     }
 
+    /**
+     * Gestisce il login dell'utente.
+     * Se l'email non esiste o la password è errata, mostra un messaggio di errore.
+     * Altrimenti, reindirizza alla pagina principale.
+     * 
+     * @param user l'oggetto User contenente le credenziali di accesso
+     * @param model il modello che contiene eventuali messaggi di errore
+     * @return la view "redirect:/Home" o "login" in caso di errore
+     */
+
     @PostMapping("/login")
         public String loginUser(@ModelAttribute("user") Users user, Model model) {
             Users dbUser = userService.findByEmail(user.getEmail());
@@ -199,6 +209,8 @@ public class UserMVC {
             return "redirect:/Home";
         }
 
+        
+
     @PostMapping("/profile")
         public String updateUserProfile(@ModelAttribute("user") Users user, Model model) {
             // Recupera il vero utente dal DB (per sicurezza)
@@ -214,9 +226,6 @@ public class UserMVC {
             return "profile";
         }
 
-    
-
-   
 
     /**
      * Rimuove un libro dalla libreria dell'utente.
@@ -250,6 +259,14 @@ public class UserMVC {
         }
         return "redirect:/profile";
     }
+
+    /**
+     * Segna un libro come non letto.
+     *
+     * @param libroUserId l'ID della relazione Libro-User da aggiornare
+     * @param principal l'utente autenticato
+     * @return la redirect alla pagina del profilo
+     */
 
     @PostMapping("/profile/mark-as-unread")
     public String markAsUnread(@RequestParam("libroUserId") int libroUserId, Principal principal) {

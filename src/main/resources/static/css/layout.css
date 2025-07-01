@@ -58,7 +58,7 @@ Stili per l'header e il footer
 /* Stile per l'header del sito, comune a tutte le pagine */
 .header {
     background-color: #780000;
-    padding: 15px 0;
+    padding: 8px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: fixed; /* Rende l'header fisso */
     top: 0;
@@ -612,4 +612,22 @@ Stili per il footer
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.logo-img {
+    height: 90px;      /* scegli la dimensione che vuoi */
+    max-height: 90px;  /* limita la crescita */
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Impedisce che il contenitore diventi troppo alto */
+.logo h1 {
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
 }
