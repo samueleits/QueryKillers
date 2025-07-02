@@ -206,18 +206,8 @@ Stili per l'header e il footer
     color: #780000;
     height: 3em;
     width: 3em;
-    text-align: center;
-    line-height: 3em; /* Centra verticalmente il testo */
     border-radius: 50%;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1em;
-    transition: background-color 0.3s, color 0.3s; /* Transizione per hover */
     cursor: pointer;
-}
-
-.user-actions .profile-icon:hover {
-    background-color: #fdf0d5b4;
 }
 
 /* Profile Menu Container */

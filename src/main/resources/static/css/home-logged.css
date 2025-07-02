@@ -9,13 +9,59 @@ Modifiche per lo sfondo, il main content e le sezioni specifiche dell'homepage q
   padding: 10px;
   text-decoration: none;
   color: inherit;
+  max-height: 8.5vw;
 }
 
-.profile-section h1,
-.profile-section h2,
-.profile-section h4 {
-  margin: 10px;
+.profile-section h1{
+  position: relative;
   color: #003049;
+  font-size: 2vw;
+  margin-top: 0;
+  padding-left: 5px;
+}
+
+.profile-section h2{
+  color: #003049;
+  font-size: 5vw;
+  text-align: left;
+  margin-top: 0;
+}
+
+.profile-section h6{
+  position: absolute;
+  left: 6vw;
+  bottom: -1.8vw;
+  color: #669bbc;
+  font-size: 1vw;
+}
+
+.profile-section h4 {
+  position: absolute;
+  color: #669bbc;
+  font-size: 1.2vw;
+  font-weight: lighter;
+  top: 1.2vw;
+  padding-left: 8px;
+}
+
+.home-profile-avatar-container {    
+  position: absolute;
+  width: 8vw;
+  height: 8vw;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #669bbc;
+  right: 2%;
+  z-index: 3;
+  background-color: white;
+}
+
+/* L'immagine stessa dell'avatar */
+.home-profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 

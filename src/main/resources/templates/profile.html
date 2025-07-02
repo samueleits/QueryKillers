@@ -30,12 +30,13 @@
                 <div class="language-dropdown">
                     <span class="current-language" data-lang="it">Italiano - IT <i class="fas fa-caret-down"></i></span>
                     <div class="language-options">
-                        <a href="#" data-lang="en">English - EN</a>
-                        <a href="#" data-lang="es">Italiano - IT</a>
+                        <a href="#" data-lang="it">Italiano - IT</a>
                     </div>
                 </div>
                 <div class="profile-menu-container">
-                    <div class="profile-icon profile-menu-toggle">AB</div>
+                    <div class="profile-icon profile-menu-toggle">
+                        <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar utente" class="profile-icon">
+                    </div>
                     <div class="hamburger-menu-content">
                         <a href="/profile" class="menu-item"><i class="fas fa-user-circle"></i> Il mio profilo</a>
                         <a href="/Challenge" class="menu-item"><i class="fa-solid fa-medal"></i> Le mie challenge</a>
@@ -68,7 +69,6 @@
                     <div class="user-details">
                         <h3 th:text="${user.username}">Username</h3>
                         <h2>Email: <span th:text="${user.email}">email@example.com</span></h2>
-                        <h2>Password: **********</h2>
                     </div>
                 </div>
 
@@ -139,7 +139,6 @@
 
             <!-- Libreria personale DENTRO main-background-container -->
             <div class="personal-library-section">
-                <h2>Libreria personale</h2>
                 <div class="library-column">
                     <h3>Libri letti</h3>
                     <div th:if="${#lists.isEmpty(libriLetti)}">Nessun libro letto.</div>
@@ -206,7 +205,6 @@
     </footer>
 
     <script src="/js/main.js"></script>
-    <script src="/js/layout.js"></script>
     <script th:inline="javascript">
         window.allLibriData = /*[[${libri}]]*/ [];
     </script>

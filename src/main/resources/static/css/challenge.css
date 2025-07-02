@@ -6,9 +6,9 @@ Stile per la pagina delle sfide
 /* Griglia della pagina (contiene le card) */
 .challenge-page-grid {
     display: grid;
-    grid-template-columns: 60% 1fr;
+    grid-template-columns: 50% 1fr;
     gap: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 /* Contenitore di destra */
@@ -19,7 +19,7 @@ Stile per la pagina delle sfide
 }
 
 /* --------------------------------------------------------------
-Stile per la sezione delle sfide disponibili
+Stile per la sezione delle challenge disponibili
 ---------------------------------------------------------------- */
 
 /* Card principale per le sfide */
@@ -177,6 +177,7 @@ Stile per la sezione crea nuove challenge
 }
 
 .create-challenge-card label {
+    font-size: 1vw;
     font-weight: bold;
     color: #003049;
     margin-bottom: 5px;
@@ -190,7 +191,7 @@ Stile per la sezione crea nuove challenge
     border-radius: 10px;
     font-size: 1vw;
     margin-bottom: 20px;
-    width: 100%;
+    width: 50%;
 }
 
 .create-challenge-card button[type="submit"] {
@@ -229,9 +230,9 @@ Stile per la sezione delle tue sfide (carousel)
 }
 
 .your-challenges-card h3 {
+    margin-top: 0;
     font-size: 1.5vw;
     color: #003049;
-    margin-bottom: 15px;
 }
 
 /* Contenitore con frecce e scorrimento orizzontale */
@@ -329,6 +330,8 @@ Stile per la sezione delle tue sfide (carousel)
     font-size: 0.9vw;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .mini-challenge-slide button:hover {

@@ -30,17 +30,18 @@
                 <div class="language-dropdown">
                     <span class="current-language" data-lang="it">Italiano - IT <i class="fas fa-caret-down"></i></span>
                     <div class="language-options">
-                        <a href="#" data-lang="en">English - EN</a>
-                        <a href="#" data-lang="es">Italiano - IT</a>
+                        <a href="#" data-lang="it">Italiano - IT</a>
                     </div>
-                    <div class="profile-menu-container">
-                        <div class="profile-icon profile-menu-toggle">AB</div>
-                        <div class="hamburger-menu-content">
-                            <a href="/profile" class="menu-item"><i class="fas fa-user-circle"></i> Il mio profilo</a>
-                            <a href="/Challenge" class="menu-item"><i class="fa-solid fa-medal"></i> Le mie challenge</a>
-                            <a href="/libri-tutti" class="menu-item"><i class="fas fa-book"></i> Tutti i libri</a>
-                            <a href="" class="menu-item logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                        </div>
+                </div>
+                <div class="profile-menu-container">
+                    <div class="profile-icon profile-menu-toggle">
+                        <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar utente" class="profile-icon">
+                    </div>
+                    <div class="hamburger-menu-content">
+                        <a href="/profile" class="menu-item"><i class="fas fa-user-circle"></i> Il mio profilo</a>
+                        <a href="/Challenge" class="menu-item"><i class="fa-solid fa-medal"></i> Le mie challenge</a>
+                        <a href="/libri-tutti" class="menu-item"><i class="fas fa-book"></i> Tutti i libri</a>
+                        <a href="" class="menu-item logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
             </div>
@@ -49,9 +50,13 @@
 
     <div class="main-background-container">
         <main class="main-content-wrapper">
-            <section class="hero-section">
-                <h2>Le tue challenge</h2>
-            </section>
+            <div class="main-hero-grid">
+                <div class="single-line-hero-title">
+                    Le tue challenge
+                </div>
+                <div class="hero-card">
+                </div>
+            </div>
 
             <div class="challenge-page-grid">
                 <!-- Challenge disponibili -->
@@ -102,60 +107,61 @@
                             <label for="end_date">Data fine:</label>
                             <input type="date" id="end_date" th:field="*{end_date}" required>
                             <br>
-                            <button type="submit">Crea</button>
+                            <button type="submit">Crea challenge</button>
                         </form>
                     </div>
-                </div>
+                
 
 
                     <!-- Le tue challenge (Mini-carousel) -->
                     <div class="your-challenges-card">
-                    <h3>Le tue Challenge</h3>
-                    <div th:if="${#lists.isEmpty(userChallenges)}">
-                        <p>Nessuna challenge a cui partecipi.</p>
+                        <h3>Le tue Challenge</h3>
+                        <div th:if="${#lists.isEmpty(userChallenges)}">
+                            <p>Nessuna challenge a cui partecipi.</p>
+                        </div>
+                        <div th:if="${!#lists.isEmpty(userChallenges)}" class="mini-carousel-wrapper">
+                            <button class="carousel-arrow" id="prevChallengeBtn">&lt;</button>
+                            <div class="mini-carousel-container" id="userChallengesCarousel">
+                                <div class="mini-challenge-slide"
+                                    th:each="uc, iterStat : ${userChallenges}"
+                                    th:attr="data-index=${iterStat.index}"
+                                    th:classappend="${iterStat.index == 0} ? 'active-slide' : 'hidden-slide'">
+                                    <h4 th:text="${uc.challenge.name}">Nome Challenge</h4>
+
+                                    <table class="mini-leaderboard">
+                                        <thead>
+                                            <tr>
+                                                <th>Pos</th>
+                                                <th>Utente</th>
+                                                <th>Punti</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="entry, stat : ${leaderboardMap[uc.challenge.id]}">
+                                                <td th:text="${stat.index + 1}">1</td>
+                                                <td th:text="${entry.user.username}">Utente</td>
+                                                <td th:text="${entry.score}">0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <form th:action="@{/challenge/mark-read}" method="post">
+                                        <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
+                                        <input type="text" name="bookTitle" placeholder="Libro letto..." required />
+                                        <button type="submit">Segna come letto</button>
+                                    </form>
+
+                                    <form th:action="@{/Challenge/leave}" method="post">
+                                        <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
+                                        <button type="submit" class="leave-challenge-btn">Abbandona</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <button class="carousel-arrow" id="nextChallengeBtn">&gt;</button>
+                        </div>
+                        <!-- Placeholder per future sezioni -->
+                        <div class="done-challenges-card"></div>
                     </div>
-                    <div th:if="${!#lists.isEmpty(userChallenges)}" class="mini-carousel-wrapper">
-    <button class="carousel-arrow" id="prevChallengeBtn">&lt;</button>
-    <div class="mini-carousel-container" id="userChallengesCarousel">
-        <div class="mini-challenge-slide"
-            th:each="uc, iterStat : ${userChallenges}"
-            th:attr="data-index=${iterStat.index}"
-            th:classappend="${iterStat.index == 0} ? 'active-slide' : 'hidden-slide'">
-                    <h4 th:text="${uc.challenge.name}">Nome Challenge</h4>
-
-                    <table class="mini-leaderboard">
-                        <thead>
-                            <tr>
-                                <th>Pos</th>
-                                <th>Utente</th>
-                                <th>Punti</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="entry, stat : ${leaderboardMap[uc.challenge.id]}">
-                                <td th:text="${stat.index + 1}">1</td>
-                                <td th:text="${entry.user.username}">Utente</td>
-                                <td th:text="${entry.score}">0</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <form th:action="@{/challenge/mark-read}" method="post">
-                        <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
-                        <input type="text" name="bookTitle" placeholder="Libro letto..." required />
-                        <button type="submit">Segna come letto</button>
-                    </form>
-
-                    <form th:action="@{/Challenge/leave}" method="post">
-                        <input type="hidden" name="challengeId" th:value="${uc.challenge.id}" />
-                        <button type="submit" class="leave-challenge-btn">Abbandona</button>
-                    </form>
-                </div>
-            </div>
-    <button class="carousel-arrow" id="nextChallengeBtn">&gt;</button>
-</div>
-                    <!-- Placeholder per future sezioni -->
-                    <div class="done-challenges-card"></div>
                 </div>
             </div>
         </main>
@@ -178,8 +184,6 @@
     </footer>
 
     <script src="/js/main.js"></script>
-    <script src="/js/home.js"></script>
-    <script src="/js/layout.js"></script>
     <script src="/js/challenge.js"></script>
     <script th:inline="javascript">
         window.allLibriData = /*[[${libri}]]*/ [];

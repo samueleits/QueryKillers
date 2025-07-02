@@ -2,110 +2,55 @@
 Responsive Design
 ------------------------------------------------------*/
 
-/* Tablet e schermi più piccoli di desktop */
+/* Tablet e schermi più piccoli di desktop (max-width: 992px) */
 @media (max-width: 992px) {
-    .books-grid,
-    .categories-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Riduci dimensione min per 3-4 colonne */
-    }
-
-    .subheader-item .circle-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-    }
-    .subheader-item span {
-        font-size: 13px;
-    }
-
-    /* ***************************************************
-       MODIFICHE PER IL LAYOUT HEADER RESPONSIVE (TABLET)
-       Impilato: Logo in alto, poi Search, poi Azioni Utente
-       *************************************************** */
+    /* Header */
     .header-content-wrapper {
-        flex-wrap: wrap; /* Permette agli elementi di andare a capo */
-        justify-content: center; /* Centra gli elementi quando vanno a capo */
-        padding-top: 5px;
-        padding-bottom: 5px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 20px;
+        min-height: auto;
     }
 
     .logo {
-        order: 1; /* Logo in alto */
-        width: 100%; /* Occupano tutta la larghezza per centrarsi */
-        text-align: center; /* Centra il testo */
-        margin-bottom: 10px; /* Spazio sotto il logo */
-    }
-
-
-    .user-actions {
-        order: 3; /* Azioni utente in basso */
-        width: 100%; /* Occupano tutta la larghezza per centrarsi */
-        justify-content: center; /* Centra lingua e login */
-        margin-top: 15px; /* Spazio tra search bar e user actions */
-    }
-    /* Manteniamo il margin-right tra lingua e login */
-    .language-dropdown {
-        margin-right: 15px;
-        margin-bottom: 0;
+        display: none; /* Nascondi il logo TBR su tablet e schermi più piccoli */
     }
 
     .search-bar {
-        max-width: 100%;
-        justify-content: flex-start; /* Allinea a sinistra gli elementi interni */
-        padding: 10px 15px;
+        order: 1; /* Barra di ricerca a sinistra */
+        width: 65%;
+        max-width: 450px;
+        margin-top: 0;
+        margin-bottom: 0;
+        flex-basis: auto;
+        text-align: left;
+        padding: 8px 15px;
     }
-    .search-bar input {
-        font-size: 14px;
-    }
-}
-
-/* Smartphone in modalità landscape (orizzontale) e tablet più piccoli */
-@media (max-width: 768px) {
-    .header-content-wrapper {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-
-    .logo {
-        order: 1;
+    .search-bar form {
         width: 100%;
-        text-align: center;
-        margin: 10px 0; /* Margine sopra/sotto */
-    }
-
-    .search-bar {
-        max-width: 100%;
-        justify-content: flex-start; /* Allinea a sinistra gli elementi interni */
-        padding: 10px 15px;
+        display: flex;
+        justify-content: flex-start;
     }
     .search-bar input {
-        font-size: 14px;
+        max-width: none;
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 0.95em;
+    }
+    .search-bar .search-icon {
+        font-size: 0.9em;
+        margin-right: 8px;
     }
 
     .user-actions {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        margin: 10px 0;
-        margin-top: 15px; /* Spazio sopra le azioni utente */
-    }
-    .language-dropdown {
-        margin-right: 15px;
+        order: 2; /* Azioni utente a destra */
+        width: auto;
+        justify-content: flex-end;
         margin-bottom: 0;
-    }
-
-    /* Subheader mobile */
-    .subheader-content-wrapper {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px 10px;
-        padding: 10px 0;
-    }
-    .subheader-item {
-        flex-basis: 30%;
-        max-width: 120px;
+        flex-shrink: 0;
+        gap: 15px;
     }
     .subheader-item .circle-icon {
         width: 40px;
@@ -113,149 +58,288 @@ Responsive Design
         font-size: 18px;
     }
     .subheader-item span {
-        font-size: 13px;
+        font-size: 12px;
     }
 
+    /* Contenitori del contenuto principale */
+    .main-background-container,
+    .homepage-background-container {
+        width: 90vw;
+        padding: 20px;
+        min-height: unset;
+    }
+
+    /* Griglie (Libri e Categorie) */
     .books-grid,
     .categories-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 2 o 3 colonne su schermi medi */
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: 15px;
     }
 
-    .footer-content-wrapper {
-        flex-direction: column;
+    /* Homepage Loggata - Sezione Profilo */
+    .profile-section {
+        max-height: unset;
+        padding: 10px;
+    }
+    .profile-section h1, .profile-section h2, .profile-section h4, .profile-section h6 {
+        font-size: unset;
+        position: static;
         text-align: center;
+        padding-left: 0;
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+    .profile-section h1 { font-size: 1.5em; }
+    .profile-section h2 { font-size: 2em; }
+    .profile-section h4 { font-size: 0.9em; }
+    .profile-section h6 { font-size: 0.7em; }
+
+    /* Griglia del Profilo */
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .profile-card {
+        padding: 15px;
+    }
+    .user-info-card {
+        padding-top: 120px;
+    }
+    .profile-avatar-container {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 10px auto;
+        border-width: 2px;
     }
 
-    .footer-content-wrapper .logo,
-    .footer-content-wrapper .copyright,
-    .footer-content-wrapper .social-icons {
-        margin-bottom: 10px;
+    /* Pagina Libri Tutti */
+    #filter-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    #filter-bar .filter-group {
+        width: 95%;
+        margin-bottom: 0;
     }
 }
 
-/* Smartphone in modalità portrait (verticale) */
-@media (max-width: 480px) {
-    .header {
-        padding: 10px 0;
+/* Smartphone Landscape e Tablet più piccoli (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Header */
+    .header-content-wrapper {
+        padding: 5px 10px;
     }
-    .header-content-wrapper,
-    .main-content-wrapper,
-    .footer-content-wrapper {
-        padding: 0 10px; /* Riduci il padding generale sui lati */
-    }
-    .subheader-content-wrapper {
-        padding: 0 10px;
-        flex-wrap: wrap; /* Assicura che vada a capo se non c'è spazio */
-    }
-
-    /* ***************************************************
-       MODIFICHE PER IL LAYOUT HEADER RESPONSIVE (SMARTPHONE)
-       Logo in alto, poi Azioni Utente (impilate), poi Search
-       Questo è un layout comune per ottimizzare lo spazio.
-       *************************************************** */
-    .logo h1 {
-        font-size: 20px;
-    }
-
-    .user-actions {
-        order: 3; /* Azioni utente sotto la search bar */
-        flex-direction: column; /* Impila lingua e login */
-        align-items: center; /* Centra gli elementi impilati */
-        margin-bottom: 10px;
-        margin-top: 10px; /* Spazio sopra le azioni utente */
-    }
-    .language-dropdown {
-        margin-right: 0; /* Rimuovi margin-right tra lingua e login quando impilati */
-        margin-bottom: 10px; /* Spazio tra lingua e login */
-    }
-    .user-actions .login-button {
-        font-size: 14px;
-        padding: 6px 12px;
-    }
-
     .search-bar {
-        padding: 8px 12px; /* Ancora meno padding per la barra di ricerca */
+        width: 60%;
+        padding: 6px 10px;
     }
     .search-bar input {
-        font-size: 13px;
+        font-size: 0.85em;
     }
-    .search-bar .search-icon {
-        font-size: 16px;
-    }
-
-    /* Subheader due colonne */
-    .subheader {
-        padding: 8px 0; /* Riduci padding verticale della sottobarra */
-    }
-    .subheader-content-wrapper {
-        gap: 10px 5px; /* Riduci il gap, eventualmente a 10px o 5px per schermi molto piccoli */
-    }
-    .subheader-item {
-        flex-basis: 48%; /* Due elementi per riga, con un piccolo gap */
-        max-width: 140px; /* Limita la larghezza */
-    }
-    .subheader-item .circle-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-    }
-    .subheader-item span {
-        font-size: 10px;
-        white-space: nowrap; /* Evita che il testo vada a capo, preferendo l'overflow */
-        overflow: hidden;
-        text-overflow: ellipsis; /* Aggiunge "..." se il testo è troppo lungo */
-        max-width: 100%; /* Assicura che l'ellipsis funzioni */
+    .user-actions {
+        gap: 10px;
     }
 
-    /* Sezioni dei libri e delle categorie */
-    .books-section, .categories-section {
-        padding: 15px; /* Riduci padding delle sezioni */
-        margin-bottom: 20px; /* Riduci margine inferiore */
+    .homepage-background-container {
+        width: 95vw;
+        min-height: auto;
+        padding: 15px;
+        margin: 10px auto;
+        border-radius: 6px;
     }
-    .section-header h3 {
-        font-size: 20px;
-    }
-    .section-header .view-all {
-        font-size: 14px;
-    }
-
-    .books-grid,
-    .categories-grid {
-        grid-template-columns: 1fr; /* Una colonna su schermi molto piccoli */
-        gap: 15px;
+    .hero-section h2 {
+        font-size: 2em;
+        padding: 20px 15px;
     }
     .book-card img {
         width: 100px;
         height: 150px;
     }
+
+    /* Sezioni dei libri e delle categorie */
+    .books-section, .categories-section {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .section-header h3 {
+        font-size: 18px;
+    }
+    .section-header .view-all {
+        font-size: 13px;
+    }
+
+    /* Pagina Challenge */
+    .challenge-page-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .challenge-card h2 {
+        font-size: 1.3em;
+    }
+    .mini-challenge-slide button,
+    .mini-challenge-slide input[type="text"] {
+        font-size: 0.85em;
+        padding: 7px 9px;
+    }
+    .challenge-progress-bar {
+        height: 20px;
+    }
+}
+
+/* Smartphone Portrait (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Header */
+    .header-content-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 5px 8px;
+        gap: 5px;
+        min-height: auto;
+    }
+    .logo {
+        display: none;
+    }
+
+    .search-bar {
+        order: 1;
+        width: 60%;
+        padding: 4px 6px;
+        flex-grow: 1;
+        min-width: 120px;
+    }
+    .search-bar input {
+        font-size: 0.65em;
+        padding: 4px 6px;
+    }
+    .search-bar .search-icon {
+        font-size: 0.7em;
+        margin-right: 5px;
+    }
+
+    .user-actions {
+        order: 2;
+        width: auto;
+        justify-content: flex-end;
+        gap: 5px;
+        flex-shrink: 0;
+    }
+    .language-dropdown, .user-profile-icon {
+        flex-shrink: 1;
+        white-space: nowrap;
+    }
+    .current-language, .user-profile-icon a {
+        padding: 2px 4px;
+        font-size: 0.6em;
+    }
+
+    /* Contenitori del contenuto principale */
+    .main-background-container,
+    .homepage-background-container {
+        width: 98vw;
+        padding: 8px;
+        margin: 8px auto;
+        border-radius: 4px;
+    }
+    .hero-section h2 {
+        font-size: 1.5em;
+        padding: 15px;
+    }
+
+    /* Griglie (Libri e Categorie) */
+    .books-grid,
+    .categories-grid {
+        gap: 10px;
+    }
+    .book-card img {
+        width: 80px;
+        height: 120px;
+    }
     .book-info .book-title {
-        font-size: 1em;
+        font-size: 0.9em;
     }
     .book-info .book-author {
-        font-size: 0.85em;
+        font-size: 0.75em;
     }
     .category-card {
-        height: 100px;
-        font-size: 1.2em;
+        height: 80px;
+        font-size: 1em;
     }
 
+    /* Pagina di Login */
+    .auth-container {
+        padding: 15px;
+    }
+    .form-toggle button {
+        font-size: 0.8em;
+        padding: 8px 12px;
+    }
+    .input-group label,
+    .info-message {
+        font-size: 0.8em;
+    }
+    .submit-button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    /* Pagina Challenge */
+    .challenge-card {
+        padding: 10px;
+    }
+    .challenge-card h2 {
+        font-size: 1.1em;
+    }
+    .mini-challenge-slide button,
+    .mini-challenge-slide input[type="text"] {
+        font-size: 0.75em;
+        padding: 5px 7px;
+    }
+    .challenge-search-bar {
+        padding: 8px 10px;
+    }
+    .challenge-search-bar input {
+        font-size: 0.8em;
+    }
+    .challenge-summary p,
+    .challenge-description p {
+        font-size: 0.8em;
+    }
+    .mini-leaderboard {
+        font-size: 0.7em;
+    }
+    .challenge-rules-list li {
+        font-size: 0.8em;
+    }
+
+    /* Pagina del Profilo */
+    .profile-header-image {
+        padding-bottom: 20%;
+    }
+    .book-card img {
+        width: 80px;
+        height: 120px;
+    }
+    .book-card h4 {
+        font-size: 0.9em;
+    }
+    .book-card p {
+        font-size: 0.75em;
+    }
+
+    /* Footer */
     .footer-content-wrapper {
-        flex-direction: column;
-        text-align: center;
+        padding: 10px;
+    }
+    .copyright p {
+        font-size: 0.7em;
     }
 
-    .footer-content-wrapper .social-icons a {
-        font-size: 18px;
-        margin: 0 8px;
+    /* Regolazioni globali per schermi più piccoli */
+    body {
+        padding-top: 45px;
     }
-}
-
-/* Orientamento orizzontale per smartphone (es. iPhone SE in landscape) */
-@media (max-width: 667px) and (orientation: landscape) {
-    .subheader-item {
-        flex-basis: 20%; /* 4-5 elementi per riga */
+    .subheader {
+        padding: 6px 0;
     }
 }
-
-

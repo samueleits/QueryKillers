@@ -51,12 +51,11 @@ body {
 }
 
 .form-toggle button.active {
-    background-color: #c70000;
+    background-color: #c1121f;
     color: white;
 }
 
 .global-error-banner {
-    background: #c70000;
     color: #fff;
     padding: 16px 0;
     text-align: center;
@@ -102,7 +101,7 @@ body {
 
 .auth-form h2 {
     font-size: 28px;
-    color: #333;
+    color: #003049;
     margin-bottom: 25px;
 }
 
@@ -115,7 +114,7 @@ body {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #444;
+    color: #669bbc;
     font-size: 14px;
 }
 
@@ -133,14 +132,14 @@ body {
 .input-group input[type="text"]:focus,
 .input-group input[type="email"]:focus,
 .input-group input[type="password"]:focus {
-    border-color: #c70000;
+    border-color: #669bbc;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(199, 0, 0, 0.2);
+    box-shadow: 0 0 0 2px #669bbc4d;
 }
 
 /* Pulsante di submit */
 .submit-button {
-    background-color: #c70000;
+    background-color: #780000;
     color: white;
     padding: 15px 25px;
     border: none;
@@ -155,58 +154,4 @@ body {
 
 .submit-button:hover {
     background-color: #a00000;
-}
-
-/* Link "Hai dimenticato la password?" */
-.forgot-password {
-    display: block;
-    margin-top: 15px;
-    color: #c70000;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s;
-}
-
-.forgot-password:hover {
-    color: #a00000;
-    text-decoration: underline;
-}
-
-/* Media Queries per la responsività */
-
-/* Smartphone */
-@media (max-width: 480px) {
-    .auth-container {
-        padding: 25px;
-        margin: 15px;
-        width: calc(100% - 30px); /* Per dare un po' di margine sui lati */
-    }
-
-    .form-toggle button {
-        padding: 12px 15px;
-        font-size: 14px;
-    }
-
-    .auth-form h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    .input-group label {
-        font-size: 13px;
-    }
-
-    .input-group input {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    .submit-button {
-        padding: 12px 20px;
-        font-size: 16px;
-    }
-
-    .forgot-password {
-        font-size: 13px;
-    }
 }

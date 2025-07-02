@@ -4,6 +4,7 @@
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 24px;
     margin-top: 24px;
+    margin-bottom: 50px;
 }
 
 .book-card {
@@ -69,7 +70,7 @@
     background: #003049;
 }
 
-/* Modale filtri (puoi personalizzare se vuoi) */
+/* Modale filtri */
 #filterModal .modal-content {
     border-radius: 16px;
 }
@@ -119,4 +120,68 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/*------------------------------------------------
+Stili per i filtri
+--------------------------------------------------*/
+
+/* Stile del bottone "filtra avanzato o aggiungi alla libreria" */
+.btn-primary{
+    background-color: #003049;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover{
+    background-color: #669bbc;
+}
+
+.modal-body{
+    color: #003049;
+    margin-bottom: 20px;
+}
+
+.modal-header button{
+    background-color: #003049;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-header button:hover{
+    background-color: #669bbc;
+}
+
+.modal-footer button{
+    background-color: #003049;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-footer button:hover{
+    background-color: #669bbc;
+}
+
+.form-control{
+    padding: 10px;
+    border: 1px solid #669bbc;
+    background-color: #669bbc24;
+    border-radius: 10px;
+    font-size: 1vw;
+    margin-bottom: 20px;
 }

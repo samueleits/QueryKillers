@@ -54,8 +54,16 @@
                 </form>
             </div>
         <div class="user-actions">
+            <div class="language-dropdown">
+                    <span class="current-language" data-lang="it">Italiano - IT <i class="fas fa-caret-down"></i></span>
+                    <div class="language-options">
+                        <a href="#" data-lang="it">Italiano - IT</a>
+                    </div>
+                </div>
             <div class="profile-menu-container">
-                    <div class="profile-icon profile-menu-toggle">AB</div>
+                    <div class="profile-icon profile-menu-toggle">
+                        <img th:src="@{'/img/animali/' + ${animalImg}}" alt="Avatar utente" class="profile-icon">
+                    </div>
                     <div class="hamburger-menu-content">
                         <a href="/profile" class="menu-item"><i class="fas fa-user-circle"></i> Il mio profilo</a>
                         <a href="/Challenge" class="menu-item"><i class="fa-solid fa-medal"></i> Le mie challenge</a>
@@ -67,76 +75,62 @@
     </div>
 </header>
 
-<div class="subheader">
-    <div class="subheader-content-wrapper">
-        <a href="#" class="subheader-item"><div class="circle-icon"><i class="fas fa-fire"></i></div><span>Novità</span></a>
-        <a href="#" class="subheader-item"><div class="circle-icon"><i class="fas fa-star"></i></div><span>Bestseller</span></a>
-        <a href="#" class="subheader-item"><div class="circle-icon"><i class="fas fa-trophy"></i></div><span>Challenge</span></a>
-        <a href="#" class="subheader-item"><div class="circle-icon"><i class="fas fa-list"></i></div><span>Liste</span></a>
-    </div>
-</div>
-
 <div class="main-background-container">
-<main class="main-content-wrapper">
-</footer>
-
-
-<section class="books-section">
-  <div class="section-header">
-    <h3><i class="fas fa-book icon"></i> Tutti i libri</h3>
-    <span class="view-all">Totale: <strong th:text="${libri.size()}">50</strong> libri</span>
-  </div>
-  <div class="books-grid">
-        <div class="book-card" th:each="libro : ${libri}">
-            <img th:src="@{${libro.cover}}" th:alt="${libro.title}">
-            <div class="book-info">
-                <h4 class="book-title" th:text="${libro.title}">Titolo</h4>
-                <p class="book-author" th:text="${libro.author}">Autore</p>
-                <p class="book-description" th:text="${libro.description}">Descrizione</p>
-                <form th:action="@{/libri}" method="post">
-                    <input type="hidden" name="bookId" th:value="${libro.id}" />
-                    <button type="submit" class="btn btn-primary">Aggiungi alla libreria</button>
-                </form>
+    <main class="main-content-wrapper">
+        <section class="books-section">
+            <div class="section-header">
+                <h3><i class="fas fa-book icon"></i> Tutti i libri</h3>
+                <h3><span>Totale: <strong th:text="${libri.size()}">50</strong> libri</span></h3>
             </div>
-        </div>
-    </div>
-
-</section>
-<button id="openFilterModalBtn" class="btn btn-primary mt-3">Filtra Avanzato</button>
-<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="filterModalLabel">Filtri di Ricerca Avanzata</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">chiudi</button>
-                </div>
-                <div class="modal-body">
-                    <form id="filterForm">
-                        <input type="hidden" name="genre" th:value="${param.genre}">
-                        <div class="mb-3">
-                            <label for="filterTitle" class="form-label">Titolo:</label>
-                            <input type="text" class="form-control" id="filterTitle">
-                        </div>
-                        <div class="mb-3">
-                            <label for="filterAuthor" class="form-label">Autore:</label>
-                            <input type="text" class="form-control" id="filterAuthor">
-                        </div>
-                        <div class="mb-3">
-                            <label for="filterGenre" class="form-label">Genere:</label>
-                            <input type="text" class="form-control" id="filterGenre">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                    <button type="button" class="btn btn-primary" id="applyFiltersBtn">Applica Filtri</button>
+            <div class="books-grid">
+                <div class="book-card" th:each="libro : ${libri}">
+                    <img th:src="@{${libro.cover}}" th:alt="${libro.title}">
+                    <div class="book-info">
+                        <h4 class="book-title" th:text="${libro.title}">Titolo</h4>
+                        <p class="book-author" th:text="${libro.author}">Autore</p>
+                        <p class="book-description" th:text="${libro.description}">Descrizione</p>
+                        <form th:action="@{/libri}" method="post">
+                            <input type="hidden" name="bookId" th:value="${libro.id}" />
+                            <button type="submit" class="btn btn-primary">Aggiungi alla libreria</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</main>
-</div>
-
+            <button id="openFilterModalBtn" class="btn btn-primary mt-3">Filtra Avanzato</button>
+            <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="filterModalLabel">Filtri di Ricerca Avanzata</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Chiudi</button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="filterForm">
+                                    <input type="hidden" name="genre" th:value="${param.genre}">
+                                    <div class="mb-3">
+                                        <h5><label for="filterTitle" class="form-label">Titolo:</label></h5>
+                                        <input type="text" class="form-control" id="filterTitle">
+                                    </div>
+                                    <div class="mb-3">
+                                        <h5><label for="filterAuthor" class="form-label">Autore:</label></h5>
+                                        <input type="text" class="form-control" id="filterAuthor">
+                                    </div>
+                                    <div class="mb-3">
+                                        <h5><label for="filterGenre" class="form-label">Genere:</label></h5>
+                                        <input type="text" class="form-control" id="filterGenre">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                <button type="button" class="btn btn-primary" id="applyFiltersBtn">Applica Filtri</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 <footer class="footer">
     <div class="footer-content-wrapper">
         <div class="logo"><h1>LOGO TBR</h1></div>
